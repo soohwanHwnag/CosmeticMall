@@ -1,1 +1,1 @@
-# CosmeticMall
+# CosmeticMall Project
