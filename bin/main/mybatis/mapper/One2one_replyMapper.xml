@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- resultType="_int" premitive int -->
+<!-- resultType="int"  Wrapper Class Integer -->    
+    
+<!-- 세미콜론, #, 공백 주의 -->
+<mapper namespace="com.study.springboot.dao.IOne2one_replyDao">
+
+</mapper>
