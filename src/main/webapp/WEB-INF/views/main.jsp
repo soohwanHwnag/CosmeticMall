@@ -8,4 +8,4 @@
   
 <!-- main -->
 
-<h1 id="main">main test</h1>
+<h1 id="main">main</h1>
