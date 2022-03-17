@@ -11,4 +11,6 @@ public class Order_itemDto {
 	private int item_count;
 	private int item_shipping_fee;
 	private int item_order_idx;
+	private String product_name;
+	private String image_filename;
 }

@@ -1,0 +1,108 @@
+.noticeMain{
+    width: 80%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin-top: 50px;
+}
+.pageName{
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 15px 0;
+    border-bottom: 2px solid rgb(224, 224, 224);
+}
+.noticeSearch{
+    width: 80%;
+    height: 100px;
+    border: 1px solid rgb(224, 224, 224);
+    margin-top: 20px;
+    text-align: center;
+    line-height: 100px;
+    vertical-align: middle;
+}
+.noticeSearch span select{
+    width: 80px;
+    height: 30px;
+    border: 1px solid rgb(224, 224, 224);
+}
+.noticeSearch input[type="text"]{
+    width:200px;
+    height: 28px;
+    border: 1px solid rgb(224, 224, 224);
+}
+.noticeSearch input[type="submit"]{
+    width:90px;
+    height: 30px;
+    border: 1px solid rgb(224, 224, 224);
+    background-color: rgb(94, 94, 94);
+    color: white;
+    cursor: pointer;
+}
+.point{
+    padding: 5px 10px;
+    background-color: rgb(94, 94, 94);;
+    color: white;
+}
+.noticeList{
+    margin-top: 20px;
+    width: 80%;
+}
+.noticeList table{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 12px;
+}
+.noticeList tr{
+    height: 35px;
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+.noticeList tr:nth-of-type(1){
+    background-color: rgb(224, 224, 224);
+    height: 35px;
+    border-top: 1px solid rgb(224, 224, 224);
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+.noticeList td:nth-of-type(1){
+   width: 15%;
+}
+.noticeList td:nth-of-type(2){
+    width: 70%;
+ }
+ .noticeList td:nth-of-type(3){
+    width: 15%;
+ }
+.button{
+    width: 80%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+.button button{
+    width: 100px;
+    height: 35px;
+    border: 1px solid rgb(224, 224, 224);
+    background-color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.page{
+    margin-top: 20px;
+}
+.page span{
+    padding: 8px 12px;
+    margin: 3px;
+    background-color: rgb(224, 224, 224);
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+/* .page span::after{
+    content: "";
+    padding: 5px;
+} */
+.page a{
+    color: black;
+    text-decoration: none;
+}

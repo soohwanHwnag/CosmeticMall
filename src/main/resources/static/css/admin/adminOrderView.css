@@ -1,0 +1,244 @@
+.orderViewDetail{
+    width: 80%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+.pageName{
+    width: 786px;
+    margin-top: 50px;
+}
+.orderInfo{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid rgb(224, 224, 224);
+    margin-top: 20px;
+    padding: 7px;
+    color: gray;
+}
+.orderInfo div:nth-of-type(1) span:nth-of-type(1)::after{
+    content: '|';
+    padding: 0 5px;
+}
+.orderInfo button{
+    width: 80px;
+    height: 25px;
+    background-color: rgb(94, 94, 94);
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+.orderMoveSelect{
+	margin-top:10px;
+	text-align:right;
+}
+.orderMoveSelect select{
+	  border: 1px solid rgb(224, 224, 224);
+    padding: 7px;
+    color: rgb(122, 122, 122);
+}
+.deliver{
+    width: 80%;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+    background-color: rgb(224, 224, 224);
+    padding: 7px;
+    border: 2px solid rgb(224, 224, 224);
+}
+.deliver select{
+    width: 80px;
+    height: 30px;
+    border: 1px solid rgb(224, 224, 224);
+}
+.deliver input[type="text"]{
+    width: 300px;
+    height: 28px;
+    border: 1px solid rgb(224, 224, 224);
+}
+.deliver input[type="submit"]{
+    width: 100px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid rgb(224, 224, 224);
+    color: gray;
+    cursor: pointer;
+}
+.deliver span::before{
+    content: '';
+    padding: 0 2px;
+}
+.infoName{
+    font-size: 14px;
+}
+.productInfo{
+    width: 786px;
+    margin-top: 20px;
+}
+.productInfoTable{
+    width: 100%;
+    margin-top: 10px;
+}
+.productInfoTable table{
+    width: 100%;
+    border: 1px solid rgb(224, 224, 224);
+    border-collapse: collapse;
+    font-size: 12px;
+}
+.productInfoTable tr{
+    height: 60px;
+    border: 1px solid rgb(224, 224, 224);
+    text-align: center;
+    padding: 7px;
+}
+.productInfoTable tr:nth-of-type(1){
+    height: 10px;
+    background-color: rgb(224, 224, 224);
+}
+.productInfoTable tr:nth-of-type(1) td{
+    height: 35px;
+    border-color: rgb(224, 224, 224);
+}
+.productInfoTable td{
+    border: 1px solid rgb(224, 224, 224);
+    text-align: center;
+    padding: 2px;
+}
+.productInfoTable td:nth-of-type(1){
+    width: 5%;
+}
+.productInfoTable td:nth-of-type(2){
+    width: 45%;
+}
+.productInfoTable td:nth-of-type(3){
+    width: 7%;
+}
+.memberInfo{
+    width: 786px;
+    margin-top: 20px;
+}
+.memberInfoTable{
+    width: 100%;
+    margin-top: 10px;
+}
+.memberInfoTable table{
+    width: 100%;
+    border: 1px solid rgb(224, 224, 224);
+    border-collapse: collapse;
+    font-size: 12px;
+}
+.memberInfoTable tr{
+    height: 35px;
+    border: 1px solid rgb(224, 224, 224);
+    padding: 7px;
+}
+.memberInfoTable td{
+    border: 1px solid rgb(224, 224, 224);
+    padding: 2px;
+}
+.memberInfoTable td:nth-of-type(1){
+    width: 15%;
+    background-color: rgb(224, 224, 224);
+    border: 1px solid rgb(224, 224, 224);
+    text-align: center;
+    padding: 2px;
+}
+.memberInfoTable td:nth-of-type(2){
+    padding-left: 20px;
+}
+.payMentInfo{
+    width: 786px;
+    margin-top: 20px;
+}
+.payMentInfoTable{
+    width: 100%;
+    margin-top: 10px;
+}
+.payMentInfoTable table{
+    width: 100%;
+    border: 1px solid rgb(224, 224, 224);;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+.payMentInfoTable tr{
+    height: 35px;
+    border: 1px solid rgb(224, 224, 224);;
+    padding: 7px;
+}
+.payMentInfoTable td{
+    border: 1px solid rgb(224, 224, 224);;
+    padding: 2px;
+}
+.payMentInfoTable td:nth-of-type(1){
+    width: 15%;
+    background-color: rgb(224, 224, 224);
+    border: 1px solid rgb(224, 224, 224);
+    text-align: center;
+    padding: 2px;
+}
+.payMentInfoTable td:nth-of-type(2){
+    padding-left: 20px;
+}
+.deliveryInfo{
+    width: 786px;
+    margin-top: 20px;
+}
+.deliveryInfoTable{
+    width: 100%;
+    margin-top: 10px;
+}
+.deliveryInfoTable table{
+    width: 100%;
+    border: 1px solid rgb(224, 224, 224);
+    border-collapse: collapse;
+    font-size: 12px;
+}
+.deliveryInfoTable tr{
+    height: 35px;
+    border: 1px solid rgb(224, 224, 224);
+    padding: 7px;
+}
+.deliveryInfoTable td{
+    border: 1px solid rgb(224, 224, 224);
+    padding: 2px;
+}
+.deliveryInfoTable td:nth-of-type(1){
+    width: 15%;
+    background-color: rgb(224, 224, 224);
+    border: 1px solid rgb(224, 224, 224);
+    text-align: center;
+    padding: 2px;
+}
+.deliveryInfoTable td:nth-of-type(2){
+    padding-left: 20px;
+}
+.button{
+    width: 786px;
+    margin-top: 20px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.button button{
+    width: 100px;
+    height: 35px;
+    border: 1px solid rgb(224, 224, 224);
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.button input{
+    width: 100px;
+    height: 35px;
+    border: 1px solid rgb(224, 224, 224);
+    background-color: white;
+    margin-right: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}

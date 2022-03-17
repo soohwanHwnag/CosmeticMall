@@ -3,11 +3,166 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
-<!-- resultType="_int" premitive int -->
-<!-- resultType="int"  Wrapper Class Integer -->    
-    
-<!-- 세미콜론, #, 공백 주의 -->
-<mapper namespace="com.study.springboot.dao.IMemberDao">
 
-</mapper>
+<mapper namespace="com.study.practice.dao.IMemberDao">     
+	
+	<!-- 검색리스트 수 -->
+	<select id="memberList" resultType="com.study.practice.dto.memberDto">
+	select * from (select rownum as rnum , M.* from
+	(select * from member order by member_joindate desc) M ) where rnum between #{param1} and #{param2}
+	</select>
+	<select id="memberList_total" resultType="com.study.practice.dto.memberDto">
+	select * from (select rownum as rnum , M.* from (select * from member where member_name like 
+	'%'|| #{param1} || '%' or member_email like '%' || #{param1} || '%' order by member_joindate desc) M ) 
+	where rnum between #{param2} and #{param3}
+	</select>
+	<select id="memberList_name" resultType="com.study.practice.dto.memberDto">
+	select * from(select rownum as rnum , M.* from (select * from member where member_name like '%'|| #{param1} || '%' 
+	order by member_joindate desc) M )
+	where rnum between #{param2} and #{param3}
+	</select>
+	<select id="memberList_email" resultType="com.study.practice.dto.memberDto">
+	select * from (select rownum as rnum , M.* from (select * from member where member_email like '%' || #{param1} || '%'
+	order by member_joindate desc) M )
+	where rnum between #{param2} and #{param3}
+	</select>
+	<select id="memberList_totaldate" resultType="com.study.practice.dto.memberDto">
+	select * from (select rownum as rnum , M.* from (select * from member where member_joindate  between #{param1} and #{param2} and member_email_YN=#{param3}
+	order by member_joindate desc) M )
+	where rnum between #{param4} and #{param5}
+	</select>
+	<select id="memberList_member" resultType="com.study.practice.dto.memberDto">
+	select * from (select rownum as rnum , M.* from (select * from member where member_joindate between #{param1} and #{param2} 
+	and member_email_YN=#{param3} and member_grade='일반회원' order by member_joindate desc) M )
+	where rnum between #{param4} and #{param5}
+	</select>
+	<select id="memberList_admin" resultType="com.study.practice.dto.memberDto">
+	select * from (select rownum as rnum , M.* from (select * from member where member_joindate between #{param1} and #{param2} and member_email_YN=#{param3}
+	 and member_grade='관리자' order by member_joindate desc) M )
+	where rnum between #{param4} and #{param5}
+	</select>
+	<select id="memberList_totalAmount" resultType="com.study.practice.dto.memberDto">
+	select * from (select rownum as rnum , M.* from (select * from member where member_amount between #{param1} and #{param2} and member_email_YN=#{param3}
+	order by member_joindate desc) M )
+	where rnum between #{param4} and #{param5} 
+	</select>
+	<select id="memberList_memberAmount" resultType="com.study.practice.dto.memberDto">
+	select * from (select rownum as rnum , M.* from (select * from member where member_amount between #{param1} and #{param2} and member_email_YN=#{param3} and member_grade='일반회원'
+	order by member_joindate desc) M ) 
+	where rnum between #{param4} and #{param5}
+	</select>
+	<select id="memberList_adminAmount" resultType="com.study.practice.dto.memberDto">
+	select * from (select rownum as rnum , M.* from (select * from member where member_amount between #{param1} and #{param2} and member_email_YN=#{param3} and member_grade='관리자'
+	order by member_joindate desc) M )
+	where rnum between #{param4} and #{param5}
+	</select>
+	
+	<select id="memberList_totalEmail_yn" resultType="com.study.practice.dto.memberDto">
+	select * from (select rownum as rnum , M.* from (select * from member where member_email_YN=#{param1}
+	order by member_joindate desc) M)
+	where rnum between #{param2} and #{param3} 
+	</select>
+	<select id="memberList_memberEmail_yn" resultType="com.study.practice.dto.memberDto">
+	select * from (select rownum as rnum , M.* from (select * from member where member_email_YN=#{param1} and member_grade='일반회원'
+	order by member_joindate desc) M )
+	where rnum between #{param2} and #{param3}
+	</select>
+	<select id="memberList_adminEmail_yn" resultType="com.study.practice.dto.memberDto">
+	select * from (select rownum as rnum , M.* from (select * from member where member_email_YN=#{param1} and member_grade='관리자'
+	order by member_joindate desc) M )
+	where rnum between #{param2} and #{param3}
+	</select>
+	
+	<select id="memberList_totalBoth" resultType="com.study.practice.dto.memberDto">
+	select * from (select rownum as rnum , M.* from (select * from member where member_joindate between #{param1} and #{param2} 
+	and member_amount between #{param3} and #{param4} and member_email_YN=#{param5} order by member_joindate desc) M )
+	where rnum between #{param6} and #{param7}
+	</select>
+	<select id="memberList_memberBoth" resultType="com.study.practice.dto.memberDto">
+	select * from (select rownum as rnum , M.* from (select * from member where member_joindate between #{param1} and #{param2}
+    and member_amount between #{param3} and #{param4} and member_email_YN=#{param5} and member_grade='일반회원' order by member_joindate desc) M )
+	where rnum between #{param6} and #{param7}
+	</select>
+	<select id="memberList_adminBoth" resultType="com.study.practice.dto.memberDto">
+	select * from (select rownum as rnum , M.* from (select * from member where member_joindate between #{param1} and #{param2} 
+	and member_amount between #{param3} and #{param4} and member_email_YN=#{param5} and member_grade='관리자' order by member_joindate desc) M )
+	where rnum between #{param6} and #{param7}
+	</select>
+	
+	<!-- 검색 수 -->
+	<select id="count_search" resultType="_int">
+	select count(*) from member 
+	</select>
+	<select id="count_search_value_t" resultType="_int">
+	select count(*) from member where member_name like '%'|| #{param1} || '%' or member_email like '%' || #{param1} || '%'
+	</select>
+	<select id="count_search_value_n" resultType="_int">
+	select count(*) from member where member_name like '%'|| #{param1} || '%'
+	</select>
+	<select id="count_search_value_e" resultType="_int">
+	select count(*) from member where member_email like '%' || #{param1} || '%'
+	</select>
+	<select id="count_search_date_t" resultType="_int">
+	select count(*) from member where member_joindate  between #{param1} and #{param2} and member_email_YN=#{param3} 
+	</select>
+	<select id="count_search_date_m" resultType="_int">
+	select count(*) from member where member_joindate between #{param1} and #{param2} and member_email_YN=#{param3} and member_grade='일반회원'
+	</select>
+	<select id="count_search_date_a" resultType="_int">
+	select count(*) from member where member_joindate between #{param1} and #{param2} and member_email_YN=#{param3} and member_grade='관리자'
+	</select>
+	<select id="count_search_amount_t" resultType="_int">
+	select count(*) from member where member_amount between #{param1} and #{param2} and member_email_YN=#{param3} 
+	</select>
+	<select id="count_search_amount_m" resultType="_int">
+	select count(*) from member where member_amount between #{param1} and #{param2} and member_email_YN=#{param3} and member_grade='일반회원'
+	</select>
+	<select id="count_search_amount_a" resultType="_int">
+	select count(*) from member where member_amount between #{param1} and #{param2} and member_email_YN=#{param3} and member_grade='관리자'
+	</select>
+	<select id="count_search_email_yn_t" resultType="_int">
+	select count(*) from member where member_email_YN=#{param1} 
+	</select>
+	<select id="count_search_email_yn_m" resultType="_int">
+	select count(*) from member where member_email_YN=#{param1} and member_grade='일반회원'
+	</select>
+	<select id="count_search_email_yn_a" resultType="_int">
+	select count(*) from member where member_email_YN=#{param1} and member_grade='관리자'
+	</select>
+	<select id="count_search_both_t" resultType="_int">
+	select count(*) from member where member_joindate between #{param1} and #{param2} and member_amount between #{param3} and #{param4} and member_email_YN=#{param5} 
+	</select>
+	<select id="count_search_both_m" resultType="_int">
+	select count(*) from member where member_joindate between #{param1} and #{param2} and member_amount between #{param3} and #{param4} and member_email_YN=#{param5} 
+     and member_grade='일반회원'
+	</select>
+	<select id="count_search_both_a" resultType="_int">
+	select count(*) from member where member_joindate between #{param1} and #{param2} and member_amount between #{param3} and #{param4} and member_email_YN=#{param5} 
+    and member_grade='관리자'
+	</select>
+	
+	
+   <!-- 상세보기 dto -->
+	<select id="dto" resultType="com.study.practice.dto.memberDto">
+	select * from member where member_idx=#{param1}
+	</select>
+	<!-- 관리자 수 -->
+	<select id="count_admin" resultType="_int">
+	select count(*) from member where member_grade='관리자'
+	</select>
+	<!-- 일반회원 수 -->
+	<select id="count_member" resultType="_int">
+	select count(*) from member where member_grade='일반회원'
+	</select>
+	
+	<!-- 회원 수정 -->
+	<update id="memberModify">
+	UPDATE member SET member_email_YN=#{param2},member_password=#{param3},member_phone=#{param4},member_addr1=#{param5},member_addr2=#{param6},member_addr3=#{param7} WHERE member_idx=#{param1}
+	</update>
+	<!-- 회원 탈퇴 -->
+	<delete id="memberDelete">
+	delete from member where member_idx=#{param1}
+	</delete>
+</mapper>    
+
+

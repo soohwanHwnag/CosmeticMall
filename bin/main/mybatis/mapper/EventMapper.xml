@@ -3,11 +3,68 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
-<!-- resultType="_int" premitive int -->
-<!-- resultType="int"  Wrapper Class Integer -->    
-    
-<!-- 세미콜론, #, 공백 주의 -->
-<mapper namespace="com.study.springboot.dao.IEventDao">
 
-</mapper>
+<mapper namespace="com.study.practice.dao.IEventDao">     
+	
+	<select id="eventList" resultType="com.study.practice.dto.eventDto">
+	select * from (select rownum as rnum, E.* from (select * from event where event_finish=#{param1} order by event_date desc) E ) where rnum between #{param2} and #{param3}
+	</select>
+	
+	<select id="eventList_both_total" resultType="com.study.practice.dto.eventDto">
+	select * from (select rownum as rnum, E.* from (select * from event where event_finish=#{param1} and (event_title like '%'|| #{param4} || '%' or event_slogan like '%' || #{param4} || '%') order by event_date desc) E ) where rnum between #{param2} and #{param3}
+	</select>
+	
+	<select id="eventList_both_title" resultType="com.study.practice.dto.eventDto">
+	select * from (select rownum as rnum, E.* from (select * from event where event_finish=#{param1} and event_title like '%'|| #{param4} || '%' order by event_date desc) where rnum between #{param2} and #{param3}
+	</select>
+	
+	<select id="eventList_both_slogan" resultType="com.study.practice.dto.eventDto">
+	select * from (select rownum as rnum, E.* from (select * from event where event_finish=#{param1} and event_slogan like '%'|| #{param4} || '%' order by event_date desc) E )where rnum between #{param2} and #{param3}
+	</select>
+	
+	
+	<select id="count" resultType="_int">
+	select count(*) from event where event_finish = #{param1}
+	</select>
+	
+	<select id="count_both_total" resultType="_int">
+	select count(*) from event where event_finish = #{param1} and (event_title like '%'|| #{param2} || '%' or event_slogan like '%' || #{param2} || '%')
+	</select>
+	
+	<select id="count_both_title" resultType="_int">
+	select count(*) from event where event_finish = #{param1} and event_title like '%'|| #{param2} || '%'
+	</select>
+	
+	<select id="count_both_slogan" resultType="_int">
+	select count(*) from event where event_finish = #{param1} and event_slogan like '%'|| #{param2} || '%'
+	</select>
+	
+	<insert id="eventJoinAction">
+	INSERT INTO event (event_idx, event_title, event_slogan, event_start_date, event_end_date,
+                    event_banner_filename, event_detail_filename, event_member_idx)
+            VALUES (event_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4},
+                    #{param6}, #{param5}, #{param7})
+	</insert>
+	
+	<update id="eventListMove">
+	UPDATE event SET event_finish='n' WHERE event_idx=#{param1}
+	</update>
+	
+	<delete id="eventListDelete">
+	delete from event where event_idx=#{param1}
+	</delete>
+	
+	<select id="dto" resultType="com.study.practice.dto.eventDto">
+	select * from event where event_idx=#{param1}
+	</select>
+	
+	<update id="eventModifyAction">
+	UPDATE event SET event_title=#{param2},event_slogan=#{param3},event_start_date=#{param4},event_end_date=#{param5},event_banner_filename=#{param6},event_detail_filename=#{param7} WHERE event_idx=#{param1}
+	</update>
+	
+	<delete id="eventDeleteAction">
+	delete from event where event_idx=#{param1}
+	</delete>
+</mapper>    
+
+

@@ -31,5 +31,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="src/main/webapp/lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="libs/cos.jar"/>
 	<classpathentry kind="output" path="bin/default"/>
 </classpath>

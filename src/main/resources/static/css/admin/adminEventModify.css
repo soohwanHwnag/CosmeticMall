@@ -1,0 +1,117 @@
+.eventMain{
+    width: 80%;
+    margin-top: 50px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+.pageName{
+    width: 80%;
+    padding: 15px 0;
+    border-bottom: 2px solid rgb(224, 224, 224);;
+}
+.formWarp{
+    margin-top: 40px;
+}
+.eventDate span:nth-of-type(1){
+    font-size: 14px;
+    padding: 10px 40px;
+    border-radius: 5px 0 0 5px;
+    background-color: rgb(224, 224, 224);;
+}
+.eventDate span input[type="date"]{
+    width: 140px;
+    height: 33.8px;
+    border: 1.5px solid rgb(224, 224, 224);;
+    opacity: 60%;
+}
+.eventDate span:nth-of-type(2){
+   margin-left: 10px;
+}
+.eventTitle{
+    margin-top: 20px;
+}
+.eventTitle span:nth-of-type(1){
+    font-size: 14px;
+    padding: 10px 40px;
+    border-radius: 5px 0 0 5px;
+    background-color: rgb(224, 224, 224);;
+}
+.eventTitle span input[type="text"]{
+    width: 560px;
+    height: 33.8px;
+    margin-left: -5px;
+    padding-left: 20px;
+    border: 1.5px solid rgb(224, 224, 224);;
+    opacity: 60%;
+}
+.eventSlogan{
+    margin-top: 20px;
+}
+.eventSlogan span:nth-of-type(1){
+    font-size: 14px;
+    padding: 10px 34px;
+    border-radius: 5px 0 0 5px;
+    background-color: rgb(224, 224, 224);;
+}
+.eventSlogan span input[type="text"]{
+    width: 560px;
+    height: 33.8px;
+    margin-left: -5px;
+    padding-left: 20px;
+    border: 1.5px solid rgb(224, 224, 224);;
+    opacity: 60%;
+}
+.eventContent{
+    margin-top: 20px;
+}
+.eventFile{
+    margin-top: 20px;
+}
+.eventFile span:nth-of-type(1){
+    font-size: 14px;
+    padding: 10px 40px;
+    border-radius: 5px 0 0 5px;
+    background-color: rgb(224, 224, 224);;
+}
+.eventFile .fileName{
+    width: 450px;
+    height: 32px;
+    padding-left: 20px;
+}
+.eventFile .fileName2{
+    width: 450px;
+    height: 32px;
+    padding-left: 20px;
+}
+.eventFile label{
+    background-color: rgb(224, 224, 224);;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 9.5px 25px;
+}
+.eventFile input[type="file"]{
+    display: none;
+
+}
+.button{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.button button{
+    background-color: white;
+    width: 100px;
+    height: 35px;
+    border: 1px solid rgb(224, 224, 224);;
+    border-radius: 4px;
+}
+.button input{
+    background-color: rgb(224, 224, 224);;
+    width: 100px;
+    height: 35px;
+    border: 1px solid rgb(224, 224, 224);;
+    border-radius: 4px;
+}

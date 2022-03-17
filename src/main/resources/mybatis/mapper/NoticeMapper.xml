@@ -3,11 +3,52 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
-<!-- resultType="_int" premitive int -->
-<!-- resultType="int"  Wrapper Class Integer -->    
-    
-<!-- 세미콜론, #, 공백 주의 -->
-<mapper namespace="com.study.springboot.dao.INoticeDao">
 
-</mapper>
+<mapper namespace="com.study.practice.dao.INoticeDao">     
+	
+	<select id="noticeList" resultType="com.study.practice.dto.noticeDto">
+	select * from (select rownum as rnum, N.* from (select * from notice order by notice_important_YN desc,notice_date desc) N ) where rnum between #{param1} and #{param2}
+	</select>
+	<select id="noticeList_total" resultType="com.study.practice.dto.noticeDto">
+	select * from (select rownum as rnum, N.* from (select * from notice where notice_title like '%' || #{param3} || '%' or notice_content like '%' || #{param3} || '%' order by notice_important_YN desc, notice_date desc) N ) where rnum between #{param1} and #{param2}
+	</select>
+	<select id="noticeList_title" resultType="com.study.practice.dto.noticeDto">
+	select * from (select rownum as rnum, N.* from (select * from notice where notice_title like '%' || #{param3} || '%' order by notice_important_YN desc,notice_date desc) N ) where rnum between #{param1} and #{param2}
+	</select>
+	<select id="noticeList_content" resultType="com.study.practice.dto.noticeDto">
+	select * from (select rownum as rnum, N.* from (select * from notice where notice_content like '%' || #{param3} || '%' orber by notice_important_YN desc, notice_date desc) N ) where rnum between #{param1} and #{param2}
+	</select>
+	
+	<select id="count" resultType="_int">
+	select count(*) from notice
+	</select>
+	<select id="count_total" resultType="_int">
+	select count(*) from notice where notice_title like '%' || #{param1} || '%' or notice_content like '%' || #{param1} || '%'
+	</select>
+	<select id="count_title" resultType="_int">
+	select count(*) from notice where notice_title like '%' || #{param3} || '%'
+	</select>
+	<select id="count_content" resultType="_int">
+	select count(*) from notice where notice_content like '%' || #{param3} || '%' 
+	</select>
+	
+	<select id="dto" resultType="com.study.practice.dto.noticeDto">
+	select A.* , B.member_name from notice A join member B on A.notice_member_idx = B.member_idx where A.notice_idx=#{param1}
+	</select>
+	
+	<insert id="noticeJoin">
+	INSERT INTO notice (notice_idx, notice_title, notice_content, notice_important_YN, notice_member_idx)
+	VALUES (notice_seq.nextval, #{param3}, #{param4}, #{param2}, #{param1})
+	
+	</insert>
+	
+	<update id="noticeModify">
+	UPDATE notice SET notice_important_YN=#{param2},notice_title=#{param3},notice_content=#{param4} WHERE notice_idx=#{param1}
+	</update>
+	
+	<delete id="noticeDelete">
+	delete from notice where notice_idx=#{param1}
+	</delete> 
+</mapper>    
+
+

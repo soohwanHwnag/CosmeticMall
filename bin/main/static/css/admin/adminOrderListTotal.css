@@ -1,0 +1,153 @@
+.orderMain{
+    width: 80%;
+   display: flex;
+   flex-flow:  column nowrap;
+   align-items: center;
+   margin-top: 50px;
+}
+.pageName{
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 15px 0;
+    border-bottom: 2px solid rgb(224, 224, 224);
+}
+.search{
+    margin-top: 20px;
+    border: 1px solid rgb(224, 224, 224);;
+   padding: 20px 100px;
+}
+.searchDiv1, .searchDiv2{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+}
+.searchDiv1 input{
+    width: 170px;
+    height: 30px;
+    opacity: 50%;
+}
+.searchDiv1 span:nth-of-type(3),
+.searchDiv1 span:nth-of-type(4){
+    margin-left: 5px;
+}
+.searchDiv1 span:nth-of-type(2){
+    margin-top: 8px;
+    margin-left: 5px;
+}
+.searchDiv1 button{
+    background-color: white;
+    border: 1px solid rgb(224, 224, 224);
+    padding: 5px;
+    margin-left: 4px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+.searchDiv1 button:focus{
+    background-color: rgb(94, 94, 94);
+    color: white;
+}
+.searchDiv2 input[type="submit"]{
+    cursor: pointer;
+}
+.searchDiv2{
+    margin-top: 20px;
+}
+.searchDiv2 select{
+    width: 100px;
+    height: 33.8px;
+    opacity: 50%;
+}
+.searchDiv2 span:nth-of-type(2) input{
+    margin-left: 10px;
+    width: 350px;
+    height: 30px;
+    opacity: 50%;
+}
+.searchDiv2 span:nth-of-type(3) input{
+    background-color: white;
+    border: 1px solid rgb(146, 145, 145);
+    margin-left: 10px;
+    width: 100px;
+    height: 33.8px;
+    opacity: 50%;
+    
+}
+.orderCategory{
+    margin: 0 auto;
+    margin-top: 30px;
+}
+.orderCategory table{
+    border: 1px solid rgb(224, 224, 224);;
+    border-collapse: collapse;
+}
+.orderCategory table td{
+    font-size: 13px;
+    padding: 4px 40px;
+    border: 1px solid rgb(224, 224, 224);
+    cursor: pointer;
+}
+.orderCategory table td.on {
+    background-color: rgb(224, 224, 224);
+}
+
+.orderList{
+    margin-top: 20px;
+}
+.orderList table{
+    width: 776px;
+    border-collapse: collapse;
+}
+.orderList tr{
+    height:35px;
+    border-bottom: 2px solid rgb(224, 224, 224);;
+}
+.orderList tr:nth-of-type(1){
+    height: 35px;
+    background-color: rgb(224, 224, 224);
+    border-top: 2px solid rgb(224, 224, 224);
+}
+.orderList table td{
+    font-size: 13px;
+    text-align: center;
+}
+.orderMove{
+    width: 80%;
+    margin-top: 20px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+.orderMove select{
+    width: 100px;
+    height: 33.8px;
+    border: 1px solid rgb(224, 224, 224);
+}
+.orderMove input{
+    background-color: white;
+    border: 1px solid rgb(224, 224, 224);
+    width: 100px;
+    height: 35px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.page{
+    margin-top: 20px;
+}
+.page span{
+    padding: 8px 12px;
+    margin: 3px;
+    background-color: rgb(224, 224, 224);
+    border-radius: 5px;
+    text-align: center;
+}
+/* .page span::after{
+    content: "";
+    padding: 5px;
+} */
+.page a{
+    color: black;
+    text-decoration: none;
+}
+
+
