@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-   <link rel="stylesheet" href="/css/adminNoticeModify.css">
+   <link rel="stylesheet" href="/css/admin/adminNoticeModify.css">
 <<script>
 
 
@@ -10,7 +10,7 @@
       function clickEvent(){
        
        if(confirm("취소 하시겠습니까?")){
-        window.location.href='adminEvent1.html';
+        window.location.href='/admin/board/noticeModify';
        }else{
         return false;
        }
@@ -54,7 +54,7 @@
                    
                     <div class="button">
                         <div>
-                            <button type="button" onclick="window.location.href='/notice/noticeList'">목록</button>
+                            <button type="button" onclick="window.location.href='/admin/board/noticeList'">목록</button>
                         </div>
                         <div>
                             <input type="submit" value="수정">

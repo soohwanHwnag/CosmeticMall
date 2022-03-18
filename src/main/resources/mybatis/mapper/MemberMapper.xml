@@ -4,86 +4,86 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.study.practice.dao.IMemberDao">     
+<mapper namespace="com.study.springboot.dao.IMemberDao">     
 	
 	<!-- 검색리스트 수 -->
-	<select id="memberList" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList" resultType="com.study.springboot.dto.MemberDto">
 	select * from (select rownum as rnum , M.* from
 	(select * from member order by member_joindate desc) M ) where rnum between #{param1} and #{param2}
 	</select>
-	<select id="memberList_total" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList_total" resultType="com.study.springboot.dto.MemberDto">
 	select * from (select rownum as rnum , M.* from (select * from member where member_name like 
 	'%'|| #{param1} || '%' or member_email like '%' || #{param1} || '%' order by member_joindate desc) M ) 
 	where rnum between #{param2} and #{param3}
 	</select>
-	<select id="memberList_name" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList_name" resultType="com.study.springboot.dto.MemberDto">
 	select * from(select rownum as rnum , M.* from (select * from member where member_name like '%'|| #{param1} || '%' 
 	order by member_joindate desc) M )
 	where rnum between #{param2} and #{param3}
 	</select>
-	<select id="memberList_email" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList_email" resultType="com.study.springboot.dto.MemberDto">
 	select * from (select rownum as rnum , M.* from (select * from member where member_email like '%' || #{param1} || '%'
 	order by member_joindate desc) M )
 	where rnum between #{param2} and #{param3}
 	</select>
-	<select id="memberList_totaldate" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList_totaldate" resultType="com.study.springboot.dto.MemberDto">
 	select * from (select rownum as rnum , M.* from (select * from member where member_joindate  between #{param1} and #{param2} and member_email_YN=#{param3}
 	order by member_joindate desc) M )
 	where rnum between #{param4} and #{param5}
 	</select>
-	<select id="memberList_member" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList_member" resultType="com.study.springboot.dto.MemberDto">
 	select * from (select rownum as rnum , M.* from (select * from member where member_joindate between #{param1} and #{param2} 
 	and member_email_YN=#{param3} and member_grade='일반회원' order by member_joindate desc) M )
 	where rnum between #{param4} and #{param5}
 	</select>
-	<select id="memberList_admin" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList_admin" resultType="com.study.springboot.dto.MemberDto">
 	select * from (select rownum as rnum , M.* from (select * from member where member_joindate between #{param1} and #{param2} and member_email_YN=#{param3}
 	 and member_grade='관리자' order by member_joindate desc) M )
 	where rnum between #{param4} and #{param5}
 	</select>
-	<select id="memberList_totalAmount" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList_totalAmount" resultType="com.study.springboot.dto.MemberDto">
 	select * from (select rownum as rnum , M.* from (select * from member where member_amount between #{param1} and #{param2} and member_email_YN=#{param3}
 	order by member_joindate desc) M )
 	where rnum between #{param4} and #{param5} 
 	</select>
-	<select id="memberList_memberAmount" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList_memberAmount" resultType="com.study.springboot.dto.MemberDto">
 	select * from (select rownum as rnum , M.* from (select * from member where member_amount between #{param1} and #{param2} and member_email_YN=#{param3} and member_grade='일반회원'
 	order by member_joindate desc) M ) 
 	where rnum between #{param4} and #{param5}
 	</select>
-	<select id="memberList_adminAmount" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList_adminAmount" resultType="com.study.springboot.dto.MemberDto">
 	select * from (select rownum as rnum , M.* from (select * from member where member_amount between #{param1} and #{param2} and member_email_YN=#{param3} and member_grade='관리자'
 	order by member_joindate desc) M )
 	where rnum between #{param4} and #{param5}
 	</select>
 	
-	<select id="memberList_totalEmail_yn" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList_totalEmail_yn" resultType="com.study.springboot.dto.MemberDto">
 	select * from (select rownum as rnum , M.* from (select * from member where member_email_YN=#{param1}
 	order by member_joindate desc) M)
 	where rnum between #{param2} and #{param3} 
 	</select>
-	<select id="memberList_memberEmail_yn" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList_memberEmail_yn" resultType="com.study.springboot.dto.MemberDto">
 	select * from (select rownum as rnum , M.* from (select * from member where member_email_YN=#{param1} and member_grade='일반회원'
 	order by member_joindate desc) M )
 	where rnum between #{param2} and #{param3}
 	</select>
-	<select id="memberList_adminEmail_yn" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList_adminEmail_yn" resultType="com.study.springboot.dto.MemberDto">
 	select * from (select rownum as rnum , M.* from (select * from member where member_email_YN=#{param1} and member_grade='관리자'
 	order by member_joindate desc) M )
 	where rnum between #{param2} and #{param3}
 	</select>
 	
-	<select id="memberList_totalBoth" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList_totalBoth" resultType="com.study.springboot.dto.MemberDto">
 	select * from (select rownum as rnum , M.* from (select * from member where member_joindate between #{param1} and #{param2} 
 	and member_amount between #{param3} and #{param4} and member_email_YN=#{param5} order by member_joindate desc) M )
 	where rnum between #{param6} and #{param7}
 	</select>
-	<select id="memberList_memberBoth" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList_memberBoth" resultType="com.study.springboot.dto.MemberDto">
 	select * from (select rownum as rnum , M.* from (select * from member where member_joindate between #{param1} and #{param2}
     and member_amount between #{param3} and #{param4} and member_email_YN=#{param5} and member_grade='일반회원' order by member_joindate desc) M )
 	where rnum between #{param6} and #{param7}
 	</select>
-	<select id="memberList_adminBoth" resultType="com.study.practice.dto.memberDto">
+	<select id="memberList_adminBoth" resultType="com.study.springboot.dto.MemberDto">
 	select * from (select rownum as rnum , M.* from (select * from member where member_joindate between #{param1} and #{param2} 
 	and member_amount between #{param3} and #{param4} and member_email_YN=#{param5} and member_grade='관리자' order by member_joindate desc) M )
 	where rnum between #{param6} and #{param7}
@@ -143,7 +143,7 @@
 	
 	
    <!-- 상세보기 dto -->
-	<select id="dto" resultType="com.study.practice.dto.memberDto">
+	<select id="dto" resultType="com.study.springboot.dto.MemberDto">
 	select * from member where member_idx=#{param1}
 	</select>
 	<!-- 관리자 수 -->

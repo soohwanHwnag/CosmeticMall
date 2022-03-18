@@ -9,5 +9,12 @@
     
 <!-- 세미콜론, #, 공백 주의 -->
 <mapper namespace="com.study.springboot.dao.IFaqDao">
-
+	
+	<select id="faq_list" resultType="com.study.springboot.dto.FaqDto">
+	select * from faq where faq_category=#{param1}
+	</select>
+	
+	<select id="faq_list_v" resultType="com.study.springboot.dto.FaqDto">
+	select * from faq where faq_category=#{param1} and faq_title like '%' || #{param2} || '%' or faq_content like '%' || #{param2} || '%'
+	</select>
 </mapper>

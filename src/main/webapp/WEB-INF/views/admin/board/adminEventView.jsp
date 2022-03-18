@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    <link rel="stylesheet" href="/css/adminEventView.css">
+    <link rel="stylesheet" href="/css/admin/adminEventView.css">
 
         <!-- 이벤트 상세보기 시작 -->
         <div class="eventMain">
@@ -24,12 +24,12 @@
        <!-- 버튼 시작 -->
        <div class="button">
         <div>
-            <a href="/event/list/continue"><button>목록</button></a>
+            <a href="/admin/board/eventlist/continue"><button>목록</button></a>
         </div>
         <div>
         <form action="eventDeleteAction" method="post" id="eventDeleteAction">
         <input type="hidden" name="event_idx" value="${dto.event_idx}">
-            <button type="button" onclick="window.location.href='/event/adminEventModify?event_idx=${dto.event_idx}'">수정</button>
+            <button type="button" onclick="window.location.href='/admin/board/adminEventModify?event_idx=${dto.event_idx}'">수정</button>
             <button onclick="return clickEvent();">삭제</button>
            	</form>
         </div>

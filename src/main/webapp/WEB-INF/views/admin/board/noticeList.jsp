@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    <link rel="stylesheet" href="/css/adminNoticeList.css">
+    <link rel="stylesheet" href="/css/admin/adminNoticeList.css">
         <!-- 이벤트 시작 -->
         <div class="noticeMain">
         <div class="pageName">
@@ -41,7 +41,7 @@
                     <td>날짜</td>
                 </tr>
                <c:forEach var="list" items="${noticeList}" varStatus="status">
-                <tr onclick="window.location.href='/notice/noticeView?notice_idx=${list.notice_idx}'" style="cursor:pointer;">
+                <tr onclick="window.location.href='/admin/board/noticeView?notice_idx=${list.notice_idx}'" style="cursor:pointer;">
                     <td>
                     <c:if test="${list.notice_important_YN eq 'Y' }">
                         <span class="point">공지</span>
@@ -66,33 +66,33 @@
         <!-- 이벤트 리스트 끝 -->
         <!-- 버튼 시작 -->
         <div class="button">
-            <a href="/notice/noticeJoin"><button>등록</button></a>
+            <a href="/admin/board/noticeJoin"><button>등록</button></a>
         </div>
         <!-- 버튼 끝 -->
          <!-- 페이징 시작 -->
          <c:if test="${empty category && empty value}">
          <div class="page">
             <c:if test="${nowpage != 1}">
-              <span ><a href="/event/list/continue?page=&page=${nowpage -1}}"><</a></span>
+              <span ><a href="/admin/board/noticeList?page=&page=${nowpage -1}"><</a></span>
               </c:if>
               <c:forEach var="i" begin="${block_start}" end="${block_end}">
-               <span><a href="/event/list/continue?page=${i}">${i}</a></span>
+               <span><a href="/admin/board/noticeList?page=${i}">${i}</a></span>
               </c:forEach>
               <c:if test="${nowpage < block_total}">
-              <span><a href="/event/list/continue?page=&page=${nowpage +1}}">></a></span>
+              <span><a href="/admin/board/noticeList?page=&page=${nowpage +1}}">></a></span>
               </c:if>
         </div>
         </c:if>
          <c:if test="${not empty category && not empty value}">
          <div class="page">
            <c:if test="${nowpage != 1}">
-              <span><a href="/event/list/continue?eventSearchCategory=${category}&eventSearchValue=${value}&page=${nowpage -1}">1</a></span>
+              <span><a href="/admin/board/noticeList?eventSearchCategory=${category}&eventSearchValue=${value}&page=${nowpage -1}">1</a></span>
               </c:if>
               <c:forEach var="i" begin="${block_start}" end="${block_end}">
-              <span><a href="/event/list/continue?eventSearchCategory=${category}&eventSearchValue=${value}&page=${i}">${i}</a></span>
+              <span><a href="/admin/board/noticeList?eventSearchCategory=${category}&eventSearchValue=${value}&page=${i}">${i}</a></span>
               </c:forEach>
               <c:if test="${nowpage < block_total}">
-              <span><a href="/event/list/continue?eventSearchCategory=${category}&eventSearchValue=${value}&page=${nowpage +1}">1</a></span>
+              <span><a href="/admin/board/noticeList?eventSearchCategory=${category}&eventSearchValue=${value}&page=${nowpage +1}">1</a></span>
               </c:if>
         </div>
         </c:if>

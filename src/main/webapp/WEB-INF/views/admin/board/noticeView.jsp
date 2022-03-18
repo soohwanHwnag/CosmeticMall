@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-     <link rel="stylesheet" href="/css/adminNoticeView.css">
+     <link rel="stylesheet" href="/css/admin/adminNoticeView.css">
     <script>
         //   confirm
       function clickEvent(){
@@ -34,13 +34,13 @@
        <!-- 버튼 시작 -->
        <div class="button">
         <div>
-            <a href="/notice/noticeList"><button>목록</button></a>
+            <a href="/admin/board/noticeList"><button>목록</button></a>
         </div>
         <form action="noticeDelete" id="noticeDelete" method="post" onsubmit="return clickEvent()";>
             <input type="hidden" name="notice_idx" value="${dto.notice_idx}">
          </form>
         <div>
-            <button onclick="window.location.href='/notice/noticeModify?notice_idx=${dto.notice_idx}'">수정</button>
+            <button onclick="window.location.href='/admin/board/noticeModify?notice_idx=${dto.notice_idx}'">수정</button>
             <button type="submit" form="noticeDelete">삭제</button>
         </div>
          

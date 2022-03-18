@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-    <link rel="stylesheet" href="/css/adminMemberList.css">
+    <link rel="stylesheet" href="/css/admin/adminMemberList.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
@@ -149,7 +149,7 @@
               <c:forEach var="list" items="${memberList }" varStatus="status">
               <tr>
                 <td><input type="checkbox" name="RowCheck" value="${list.member_idx}"></td>
-                <td onclick="window.location.href='/member/memberView?member_idx=${list.member_idx}'">
+                <td onclick="window.location.href='/admin/member/memberView?member_idx=${list.member_idx}'">
                 <c:if test="${not empty nowpage}">
                 ${status.count+((nowpage-1)*10)}
                 </c:if>
@@ -157,19 +157,19 @@
                 ${status.count}
                 </c:if>
                 </td>
-                <td onclick="window.location.href='/member/memberView?member_idx=${list.member_idx}'">
+                <td onclick="window.location.href='/admin/member/memberView?member_idx=${list.member_idx}'">
                 ${list.member_name}
                 </td>
-                <td onclick="window.location.href='/member/memberView?member_idx=${list.member_idx}'">
+                <td onclick="window.location.href='/admin/member/memberView?member_idx=${list.member_idx}'">
                 ${list.member_email}
                 </td><!-- 카테고리 : 2차 옵션명으로 -->
-                <td onclick="window.location.href='/member/memberView?member_idx=${list.member_idx}'">
+                <td onclick="window.location.href='/admin/member/memberView?member_idx=${list.member_idx}'">
                 ${list.member_grade}
                 </td>
-                <td onclick="window.location.href='/member/memberView?member_idx=${list.member_idx}'">
+                <td onclick="window.location.href='/admin/member/memberView?member_idx=${list.member_idx}'">
 				<fmt:formatNumber value="${list.member_amount}"/>원
                 </td>
-                <td onclick="window.location.href='/member/memberView?member_idx=${list.member_idx}'">${list.member_email_YN}
+                <td onclick="window.location.href='/admin/member/memberView?member_idx=${list.member_idx}'">${list.member_email_YN}
                 </td>
               </tr>
               </c:forEach>
@@ -185,13 +185,13 @@
              <c:if test="${empty categgory && empty value && empty joindate_start && empty joindate_end && empty amount_start && empty amount_end && empty detail_select && empty email_yn}">
             <div class="page">
             <c:if test="${nowpage != 1}">
-              <span ><a href="/member/memberList?page=${nowpage -1}"><</a></span>
+              <span ><a href="/admin/member/memberList?page=${nowpage -1}"><</a></span>
               </c:if>
               <c:forEach var="i" begin="${block_start}" end="${block_end}">
-               <span><a href="/member/memberList?page=${i}">${i}</a></span>
+               <span><a href="/admin/member/memberList?page=${i}">${i}</a></span>
               </c:forEach>
               <c:if test="${nowpage < block_total}">
-              <span><a href="/member/memberList?page=${nowpage + 1}">></a></span>
+              <span><a href="/admin/member/memberList?page=${nowpage + 1}">></a></span>
               </c:if>
                </div>
               </c:if>
@@ -199,13 +199,13 @@
               <c:if test="${not empty value && not empty category && empty joindate_start && empty joindate_end && empty amount_start && empty amount_end && empty detail_select && empty email_yn}">
             <div class="page">
             <c:if test="${nowpage != 1}">
-              <span ><a href="/member/memberList?memberSearchSelect=${category}&memberSearchValue=${value}&page=${nowpage -1}"><</a></span>
+              <span ><a href="/admin/member/memberList?memberSearchSelect=${category}&memberSearchValue=${value}&page=${nowpage -1}"><</a></span>
               </c:if>
               <c:forEach var="i" begin="${block_start}" end="${block_end}">
-               <span><a href="/member/memberList?memberSearchSelect=${category}&memberSearchValue=${value}&page=${i}">${i}</a></span>
+               <span><a href="/admin/member/memberList?memberSearchSelect=${category}&memberSearchValue=${value}&page=${i}">${i}</a></span>
               </c:forEach>
               <c:if test="${nowpage < block_total}">
-              <span><a href="/member/memberList?memberSearchSelect=${category}&memberSearchValue=${value}&page=${nowpage + 1}">></a></span>
+              <span><a href="/admin/member/memberList?memberSearchSelect=${category}&memberSearchValue=${value}&page=${nowpage + 1}">></a></span>
               </c:if>
               </div>
               </c:if>
@@ -214,13 +214,13 @@
               <c:if test="${empty value && empty category && not empty joindate_start && not empty joindate_end && empty amount_start && empty amount_end && not empty detail_select && not empty email_yn}">
             <div class="page">
             <c:if test="${nowpage != 1}">
-              <span ><a href="/member/memberList?member_joindate_start=${joindate_start}&member_joindate_end=${joindate_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage -1}"><</a></span>
+              <span ><a href="/admin/member/memberList?member_joindate_start=${joindate_start}&member_joindate_end=${joindate_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage -1}"><</a></span>
               </c:if>
               <c:forEach var="i" begin="${block_start}" end="${block_end}">
-               <span><a href="/member/memberList?member_joindate_start=${joindate_start}&member_joindate_end=${joindate_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${i}">${i}</a></span>
+               <span><a href="/admin/member/memberList?member_joindate_start=${joindate_start}&member_joindate_end=${joindate_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${i}">${i}</a></span>
               </c:forEach>
               <c:if test="${nowpage < block_total}">
-              <span><a href="/member/memberList?member_joindate_start=${joindate_start}&member_joindate_end=${joindate_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage + 1}">></a></span>
+              <span><a href="/admin/member/memberList?member_joindate_start=${joindate_start}&member_joindate_end=${joindate_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage + 1}">></a></span>
               </c:if>
                </div>
               </c:if>
@@ -228,13 +228,13 @@
               <c:if test="${empty value && empty category && empty joindate_start && empty joindate_end && not empty amount_start && not empty amount_end && not empty detail_select && not empty email_yn}">
             <div class="page">
             <c:if test="${nowpage != 1}">
-              <span ><a href="/member/memberList?memberList?member_amount_start=${amount_start}&member_amount_end=${amount_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage -1}"><</a></span>
+              <span ><a href="/admin/member/memberList?memberList?member_amount_start=${amount_start}&member_amount_end=${amount_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage -1}"><</a></span>
               </c:if>
               <c:forEach var="i" begin="${block_start}" end="${block_end}">
-               <span><a href="/member/memberList?memberList?member_amount_start=${amount_start}&member_amount_end=${amount_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${i}">${i}</a></span>
+               <span><a href="/admin/member/memberList?memberList?member_amount_start=${amount_start}&member_amount_end=${amount_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${i}">${i}</a></span>
               </c:forEach>
               <c:if test="${block_end < block_total}">
-              <span><a href="/member/memberList?memberList?member_amount_start=${amount_start}&member_amount_end=${amount_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage + 1}">></a></span>
+              <span><a href="/admin/member/memberList?memberList?member_amount_start=${amount_start}&member_amount_end=${amount_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage + 1}">></a></span>
               </c:if>
                </div>
               </c:if>
@@ -242,13 +242,13 @@
               <c:if test="${empty value && empty category && not empty joindate_start && not empty joindate_end && not empty amount_start && not empty amount_end && not empty detail_select && not empty email_yn}">
             <div class="page">
             <c:if test="${nowpage != 1}">
-              <span ><a href="/member/memberList?memberList?member_joindate_start=${joindate_start}&member_joindate_end=${joindate_end}&member_amount_start=${amount_start}&member_amount_end=${amount_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage -1}"><</a></span>
+              <span ><a href="/admin/member/memberList?memberList?member_joindate_start=${joindate_start}&member_joindate_end=${joindate_end}&member_amount_start=${amount_start}&member_amount_end=${amount_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage -1}"><</a></span>
               </c:if>
               <c:forEach var="i" begin="${block_start}" end="${block_end}">
-               <span><a href="/member/memberList?memberList?member_joindate_start=${joindate_start}&member_joindate_end=${joindate_end}&member_amount_start=${amount_start}&member_amount_end=${amount_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${i}">${i}</a></span>
+               <span><a href="/admin/member/memberList?memberList?member_joindate_start=${joindate_start}&member_joindate_end=${joindate_end}&member_amount_start=${amount_start}&member_amount_end=${amount_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${i}">${i}</a></span>
               </c:forEach>
               <c:if test="${nowpage < block_total}">
-              <span><a href="/member/memberList?member_joindate_start=${joindate_start}&member_joindate_end=${joindate_end}&memberList?member_amount_start=${amount_start}&member_amount_end=${amount_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage + 1}">></a></span>
+              <span><a href="/admin/member/memberList?member_joindate_start=${joindate_start}&member_joindate_end=${joindate_end}&memberList?member_amount_start=${amount_start}&member_amount_end=${amount_end}&member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage + 1}">></a></span>
               </c:if>
                </div>
               </c:if>
@@ -256,13 +256,13 @@
                <c:if test="${empty value && empty category && empty joindate_start && empty joindate_end && empty amount_start && empty amount_end && not empty detail_select && not empty email_yn}">
             <div class="page">
             <c:if test="${nowpage != 1}">
-              <span ><a href="/member/memberList?member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage -1}"><</a></span>
+              <span ><a href="/admin/member/memberList?member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage -1}"><</a></span>
               </c:if>
               <c:forEach var="i" begin="${block_start}" end="${block_end}">
-               <span><a href="/member/memberList?member_detail_select=${detail_select}&email_YN=${email_yn}&page=${i}">${i}</a></span>
+               <span><a href="/admin/member/memberList?member_detail_select=${detail_select}&email_YN=${email_yn}&page=${i}">${i}</a></span>
               </c:forEach>
               <c:if test="${nowpage < block_total}">
-              <span><a href="/member/memberList?member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage + 1}">></a></span>
+              <span><a href="/admin/member/memberList?member_detail_select=${detail_select}&email_YN=${email_yn}&page=${nowpage + 1}">></a></span>
               </c:if>
                </div>
               </c:if>

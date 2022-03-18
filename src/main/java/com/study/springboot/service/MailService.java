@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.study.springboot.dao.IMailDao;
 
-@Service
+
 public class MailService {
-	@Autowired
+	
 	private IMailDao mailDao;
 }

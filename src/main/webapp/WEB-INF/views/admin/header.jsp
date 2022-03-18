@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>관리자페이지</title>
-    <link rel="stylesheet" href="/css/adminCommon.css">
+    <link rel="stylesheet" href="/css/admin/adminCommon.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -64,16 +64,16 @@
             <div class="one2one">
                 <h3 class="gnb">문의 관리</h3>
                 <div class="sub">
-                    <div><a href="">> 자주하는 질문</a></div>
+                    <div><a href="/admin/inquiry/faqEvent">> 자주하는 질문</a></div>
                     <div><a href="">> 1:1 문의 리스트</a></div>
                 </div>
             </div>
             <div class="board">
                 <h3 class="gnb">게시판 관리</h3>
                 <div class="sub">
-                    <div><a href="/admin/notice/noticeList">> 공지사항 리스트</a></div>
-                    <div><a href="/admin/notice/noticeJoin">> 공지사항 등록</a></div>
-                    <div><a href="/admin/event/list/continue">> 이벤트 리스트</a></div>
+                    <div><a href="/admin/board/noticeList">> 공지사항 리스트</a></div>
+                    <div><a href="/admin/board/noticeJoin">> 공지사항 등록</a></div>
+                    <div><a href="/admin/board/eventlist/continue">> 이벤트 리스트</a></div>
                     <div><a href="">> 통계</a></div>
                 </div>
             </div>

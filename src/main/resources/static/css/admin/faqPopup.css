@@ -1,0 +1,43 @@
+ * {
+      margin: 0 auto;
+      padding: 0 auto;
+   }
+   h4 {
+      margin-top: 10px;
+   }
+   #wrap {
+      width: 700px;
+   }
+   .myhr {
+      border: 0;
+      height: 3px;
+      background: #ccc;
+   }
+
+   .btn1 {
+      margin-top: 10px;
+      float: right;   
+      width: 100px;
+      height: 35px;
+      font-size:20px;
+      font-family: 'noto sans';
+      color: rgb(31, 29, 29);
+      text-align: center;
+      border: solid 2px #e0e0e0;
+      border-radius: 4px;
+      cursor:pointer;
+   }
+   .btn2 {
+      margin-top: 10px;
+      margin-right: 10px;
+      float: right;   
+      width: 100px;
+      height: 35px;
+      font-size:20px;
+      font-family: 'noto sans';
+      color: rgb(31, 29, 29);
+      text-align: center;
+      border: solid 2px #e0e0e0;
+      border-radius: 4px;
+      cursor:pointer;
+   }

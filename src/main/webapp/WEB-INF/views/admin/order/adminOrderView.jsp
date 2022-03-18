@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    <link rel="stylesheet" href="/css/adminOrderView.css">
+    <link rel="stylesheet" href="/css/admin/adminOrderView.css">
     <!-- 상세보기 시작 -->
     <div class="orderViewDetail">
         <!-- 페이지 이름 시작 -->
@@ -173,7 +173,7 @@
         <!-- 버튼 시작-->
         <div class="button">
             <div>
-                <button type="button" onclick="window.location.href='/order/list/total'">목록</button>
+                <button type="button" onclick="window.location.href='/admin/order/list/total'">목록</button>
             </div>
             <div>
                 <span>

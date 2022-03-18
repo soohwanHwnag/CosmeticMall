@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.study.springboot.dao.IProductDao;
 
-@Service
+
 public class ProductService {
-	@Autowired
+
 	private IProductDao productDao;
 }

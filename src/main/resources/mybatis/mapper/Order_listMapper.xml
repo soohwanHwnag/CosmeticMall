@@ -4,50 +4,50 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.study.practice.dao.IOrderListDao">     
+<mapper namespace="com.study.springboot.dao.IOrder_listDao">     
 	
-	<select id="orderList" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where order_status not in('주문취소','주문취소완료') order by order_date desc ) A ) where rnum between #{param1} and #{param2}
 	</select>
 	
-	<select id="orderList_date" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_date" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where order_date between to_date(#{param1}) and to_date(#{param2})+0.99999
     and order_status not in('주문취소','주문취소완료') order by order_date desc) A ) where rnum between #{param3} and #{param4}
 	</select>
 	
-	<select id="orderList_value_total" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_value_total" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where order_number like '%'|| #{param1} || '%' or product_name like '%' || #{param1} || '%' or member_name like '%' || #{param1} || '%'
     and order_status not in('주문취소','주문취소완료') order by order_date desc) A ) where rnum between #{param2} and #{param3}
 	</select>
 	
-	<select id="orderList_value_order_number" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_value_order_number" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where order_number like '%'|| #{param1} || '%'
     and order_status not in('주문취소','주문취소완료') order by order_date desc) A ) where rnum between #{param2} and #{param3} 
 	</select>
 	
-	<select id="orderList_value_product_name" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_value_product_name" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where product_name like '%'|| #{param1} || '%' 
     and order_status not in('주문취소','주문취소완료')order by order_date desc) A ) where rnum between #{param2} and #{param3}
 	</select>
 	
-	<select id="orderList_value_member_name" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_value_member_name" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where member_name like '%'|| #{param1} || '%'
     and order_status not in('주문취소','주문취소완료') order by order_date desc) A ) where rnum between #{param2} and #{param3}
 	</select>
 	
-	<select id="orderList_both_total" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_both_total" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where (order_number like '%'|| #{param3} || '%' or product_name like '%' || #{param3} || '%' or member_name like '%' || #{param3} || '%')
@@ -55,21 +55,21 @@
     and order_status not in('주문취소','주문취소완료') order by order_date desc) A ) where rnum between #{param4} and #{param5}
 	</select>
 	
-	<select id="orderList_both_order_number" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_both_order_number" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum,  A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where order_number like '%'|| #{param3} || '%' and order_date between to_date(#{param1}) and to_date(#{param2})+0.99999
     and order_status not in('주문취소','주문취소완료') order by order_date desc) A ) where rnum between #{param4} and #{param5}
 	</select>
 	
-	<select id="orderList_both_product_name" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_both_product_name" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where product_name like '%'|| #{param3} || '%' and order_date between to_date(#{param1}) and to_date(#{param2})+0.99999
     and order_status not in('주문취소','주문취소완료')order by order_date desc) A ) where rnum between #{param4} and #{param5}
 	</select>
 	
-	<select id="orderList_both_member_name" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_both_member_name" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where member_name like '%'|| #{param3} || '%' and order_date between to_date(#{param1}) and to_date(#{param2})+0.99999
@@ -141,15 +141,15 @@
 	UPDATE order_list SET order_status=#{param2} WHERE order_idx=#{param1}
 	</update>
 	
-	<select id="orderListDto" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderListDto" resultType="com.study.springboot.dto.Order_listDto">
 	select * from order_list where order_idx=#{param1}
 	</select>
 	
-	<select id="memberDto" resultType="com.study.practice.dto.memberDto">
+	<select id="memberDto" resultType="com.study.springboot.dto.MemberDto">
 	select * from member where member_idx=#{param1}
 	</select>
 	
-	<select id="itemList" resultType="com.study.practice.dto.order_itemDto">
+	<select id="itemList" resultType="com.study.springboot.dto.Order_itemDto">
 	select A.* ,B.product_name, C.image_filename from order_item A join product B on A.item_product_idx = B.product_idx
 	join (select B.image_filename,B.image_product_idx from product A join product_image B on A.product_idx = B.image_product_idx) C
 	 on B.product_idx = C.image_product_idx  where A.item_order_idx= ${param1}
@@ -165,48 +165,48 @@
 	</insert>
 	
 	
-	<select id="orderList1" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList1" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum,  A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where order_status=#{param3} order by order_date desc) A ) where rnum between #{param1} and #{param2}
 	</select>
 	
-	<select id="orderList_date1" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_date1" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where order_date between to_date(#{param1}) and to_date(#{param2})+0.99999
     and order_status =#{param5} order by order_date desc) A ) where rnum between #{param3} and #{param4}
 	</select>
 	
-	<select id="orderList_value_total1" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_value_total1" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where order_number like '%'|| #{param1} || '%' or product_name like '%' || #{param1} || '%' or member_name like '%' || #{param1} || '%'
     and order_status=#{param4} order by order_date desc) A ) where rnum between #{param2} and #{param3}
 	</select>
 	
-	<select id="orderList_value_order_number1" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_value_order_number1" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where order_number like '%'|| #{param1} || '%'
     and order_status=#{param4} order by order_date desc) A ) where rnum between #{param2} and #{param3} 
 	</select>
 	
-	<select id="orderList_value_product_name1" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_value_product_name1" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where product_name like '%'|| #{param1} || '%' 
     and order_status=#{param4} order by order_date desc) A ) where rnum between #{param2} and #{param3}
 	</select>
 	
-	<select id="orderList_value_member_name1" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_value_member_name1" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where member_name like '%'|| #{param1} || '%'
     and order_status=#{param4} order by order_date desc) A ) where rnum between #{param2} and #{param3}
 	</select>
 	
-	<select id="orderList_both_total1" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_both_total1" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where (order_number like '%'|| #{param3} || '%' or product_name like '%' || #{param3} || '%' or member_name like '%' || #{param3} || '%')
@@ -214,21 +214,21 @@
     and order_status=#{param6} order by order_date desc) A ) where rnum between #{param4} and #{param5}
 	</select>
 	
-	<select id="orderList_both_order_number1" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_both_order_number1" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where order_number like '%'|| #{param3} || '%' and order_date between to_date(#{param1}) and to_date(#{param2})+0.99999
     and order_status=#{param6} order by order_date desc) A ) where rnum between #{param4} and #{param5}
 	</select>
 	
-	<select id="orderList_both_product_name1" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_both_product_name1" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where product_name like '%'|| #{param3} || '%' and order_date between to_date(#{param1}) and to_date(#{param2})+0.99999
     and order_status =#{param6} order by order_date desc) A ) where rnum between #{param4} and #{param5}
 	</select>
 	
-	<select id="orderList_both_member_name1" resultType="com.study.practice.dto.orderListDto">
+	<select id="orderList_both_member_name1" resultType="com.study.springboot.dto.Order_listDto">
 	select * from (select rownum as rnum, A.* from (select A.*, B.member_name,c.product_name from order_list A join member B on A.order_member_idx = B.member_idx
 	 join (select A.item_order_idx, B.product_name from order_item A join product B on A.item_product_idx =B.product_idx) C
     on A.order_idx = C.item_order_idx where member_name like '%'|| #{param3} || '%' and order_date between to_date(#{param1}) and to_date(#{param2})+0.99999

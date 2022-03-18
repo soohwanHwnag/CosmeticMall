@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    <link rel="stylesheet" href="/css/adminOrderListShipping.css">
+    <link rel="stylesheet" href="/css/admin/adminOrderListShipping.css">
 
      
         <!-- 주문메인 -->
@@ -68,12 +68,12 @@
             <div class="orderCategory">
                 <table>
                     <tr>
-                        <td class="order_btn" onclick="window.location.href='/order/list/total'">전체</td>
-                        <td onclick="window.location.href='/order/list/waiting'">입금대기</td>
-                        <td onclick="window.location.href='/order/list/payCompletion'">결제완료</td>
-                        <td onclick="window.location.href='/order/list/deliveryReady'">배송준비중</td>
-                        <td onclick="window.location.href='/order/list/shipping'">배송중</td>
-                        <td onclick="window.location.href='/order/list/deliveryCompletion'">배송완료</td>
+                        <td class="order_btn" onclick="window.location.href='/admin/order/list/total'">전체</td>
+                        <td onclick="window.location.href='/admin/order/list/waiting'">입금대기</td>
+                        <td onclick="window.location.href='/admin/order/list/payCompletion'">결제완료</td>
+                        <td onclick="window.location.href='/admin/order/list/deliveryReady'">배송준비중</td>
+                        <td onclick="window.location.href='/admin/order/list/shipping'">배송중</td>
+                        <td onclick="window.location.href='/admin/order/list/deliveryCompletion'">배송완료</td>
                     </tr>
                 </table>
             </div>
@@ -102,22 +102,22 @@
                         <td>
                          <fmt:formatDate value="${list.order_date}" pattern="yyyy-MM-dd"/> <br><fmt:formatDate value="${list.order_date}" pattern="hh:mm:ss"/>
                         </td>
-                        <td onclick="window.location.href='/order/adminOrderView?order_idx=${list.order_idx}&order_member_idx=${list.order_member_idx}'">
+                        <td onclick="window.location.href='/admin/order/adminOrderView?order_idx=${list.order_idx}&order_member_idx=${list.order_member_idx}'">
                         ${list.order_number}
                         </td>
-                        <td onclick="window.location.href='/order/adminOrderView?order_idx=${list.order_idx}&order_member_idx=${list.order_member_idx}'">
+                        <td onclick="window.location.href='/admin/order/adminOrderView?order_idx=${list.order_idx}&order_member_idx=${list.order_member_idx}'">
                         ${list.product_name}
                         </td>
-                        <td onclick="window.location.href='/order/adminOrderView?order_idx=${list.order_idx}&order_member_idx=${list.order_member_idx}'">
+                        <td onclick="window.location.href='/admin/order/adminOrderView?order_idx=${list.order_idx}&order_member_idx=${list.order_member_idx}'">
                         ${list.member_name}
                         </td>
-                        <td onclick="window.location.href='/order/adminOrderView?order_idx=${list.order_idx}&order_member_idx=${list.order_member_idx}'">
+                        <td onclick="window.location.href='/admin/order/adminOrderView?order_idx=${list.order_idx}&order_member_idx=${list.order_member_idx}'">
                         ${list.order_payment_method}
                         </td>
-                        <td onclick="window.location.href='/order/adminOrderView?order_idx=${list.order_idx}'">
+                        <td onclick="window.location.href='/admin/order/adminOrderView?order_idx=${list.order_idx}'">
                         ${list.order_payment_amount}
                         </td>
-                        <td onclick="window.location.href='/order/adminOrderView?order_idx=${list.order_idx}'">
+                        <td onclick="window.location.href='/admin/order/adminOrderView?order_idx=${list.order_idx}'">
                         ${list.order_status}
                         </td>
                     </tr>
@@ -146,52 +146,52 @@
          <c:if test="${empty category && empty value && empty orderDateEnd && empty orderDateStart}">
         <div class="page">
             <c:if test="${nowpage != 1}">
-              <span ><a href="/order/list/shipping?page=${nowpage -1}}"><</a></span>
+              <span ><a href="/admin/order/list/shipping?page=${nowpage -1}"><</a></span>
               </c:if>
               <c:forEach var="i" begin="${block_start}" end="${block_end}">
-               <span><a href="/order/list/shipping?page=${i}">${i}</a></span>
+               <span><a href="/admin/order/list/shipping?page=${i}">${i}</a></span>
               </c:forEach>
               <c:if test="${nowpage < block_total}">
-              <span><a href="/order/list/shipping?page=${nowpage +1}">></a></span>
+              <span><a href="/admin/order/list/shipping?page=${nowpage +1}">></a></span>
               </c:if>
         </div>
         </c:if>
          <c:if test="${not empty category && empty value && not empty orderDateEnd && not empty orderDateStart}">
          <div class="page">
            <c:if test="${nowpage != 1}">
-              <span><a href="/order/list/shipping?orderDateStart=${orderDateStart}&orderDateEnd=${orderDateEnd}&orderListCategory=${category}&page=${nowpage -1}"><</a></span>
+              <span><a href="/admin/order/list/shipping?orderDateStart=${orderDateStart}&orderDateEnd=${orderDateEnd}&orderListCategory=${category}&page=${nowpage -1}"><</a></span>
               </c:if>
               <c:forEach var="i" begin="${block_start}" end="${block_end}">
-              <span><a href="/order/list/shipping?orderDateStart=${orderDateStart}&orderDateEnd=${orderDateEnd}&orderListCategory=${category}&page=${i}">${i}</a></span>
+              <span><a href="/admin/order/list/shipping?orderDateStart=${orderDateStart}&orderDateEnd=${orderDateEnd}&orderListCategory=${category}&page=${i}">${i}</a></span>
               </c:forEach>
               <c:if test="${nowpage < block_total}">
-              <span><a href="/order/list/shipping?orderDateStart=${orderDateStart}&orderDateEnd=${orderDateEnd}&orderListCategory=${category}&page=${nowpage +1}">></a></span>
+              <span><a href="/admin/order/list/shipping?orderDateStart=${orderDateStart}&orderDateEnd=${orderDateEnd}&orderListCategory=${category}&page=${nowpage +1}">></a></span>
               </c:if>
         </div>
         </c:if>
         <c:if test="${not empty category && not empty value && empty orderDateEnd && empty orderDateStart}">
          <div class="page">
            <c:if test="${nowpage != 1}">
-              <span><a href="/order/list/shipping?&orderListCategory=${category}&orderValue=${value}&page=${nowpage -1}"><</a></span>
+              <span><a href="/admin/order/list/shipping?&orderListCategory=${category}&orderValue=${value}&page=${nowpage -1}"><</a></span>
               </c:if>
               <c:forEach var="i" begin="${block_start}" end="${block_end}">
-              <span><a href="/order/list/shipping?&orderListCategory=${category}&orderValue=${value}&page=${i}">${i}</a></span>
+              <span><a href="/admin/order/list/shipping?&orderListCategory=${category}&orderValue=${value}&page=${i}">${i}</a></span>
               </c:forEach>
               <c:if test="${nowpage < block_total}">
-              <span><a href="/order/list/shipping?&orderListCategory=${category}&orderValue=${value}&page=${nowpage +1}">></a></span>
+              <span><a href="/admin/order/list/shipping?&orderListCategory=${category}&orderValue=${value}&page=${nowpage +1}">></a></span>
               </c:if>
         </div>
         </c:if>
          <c:if test="${not empty category && not empty value && not empty orderDateEnd && not empty orderDateStart}">
          <div class="page">
            <c:if test="${nowpage != 1}">
-              <span><a href="/order/list/shipping?orderDateStart=${orderDateStart}&orderDateEnd=${orderDateEnd}&orderListCategory=${category}&orderValue=${value}&page=${nowpage -1}"><</a></span>
+              <span><a href="/admin/order/list/shipping?orderDateStart=${orderDateStart}&orderDateEnd=${orderDateEnd}&orderListCategory=${category}&orderValue=${value}&page=${nowpage -1}"><</a></span>
               </c:if>
               <c:forEach var="i" begin="${block_start}" end="${block_end}">
-              <span><a href="/order/list/shipping?orderDateStart=${orderDateStart}&orderDateEnd=${orderDateEnd}&orderListCategory=${category}&orderValue=${value}&page=${i}">${i}</a></span>
+              <span><a href="/admin/order/list/shipping?orderDateStart=${orderDateStart}&orderDateEnd=${orderDateEnd}&orderListCategory=${category}&orderValue=${value}&page=${i}">${i}</a></span>
               </c:forEach>
               <c:if test="${nowpage < block_total}">
-              <span><a href="/order/list/shipping?orderDateStart=${orderDateStart}&orderDateEnd=${orderDateEnd}&orderListCategory=${category}&orderValue=${value}&page=${nowpage +1}">></a></span>
+              <span><a href="/admin/order/list/shipping?orderDateStart=${orderDateStart}&orderDateEnd=${orderDateEnd}&orderListCategory=${category}&orderValue=${value}&page=${nowpage +1}">></a></span>
               </c:if>
         </div>
         </c:if>

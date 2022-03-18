@@ -5,8 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.study.springboot.dao.IReturnDao;
 
-@Service
 public class ReturnService {
-	@Autowired
+	
 	private IReturnDao returnDao;
 }

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    <link rel="stylesheet" href="/css/adminEventListFinish.css">
+    <link rel="stylesheet" href="/css/admin/adminEventListFinish.css">
 
         <!-- 이벤트 시작 -->
         <div class="eventMain">
@@ -37,8 +37,8 @@
          <div class="eventCategory">
             <table>
                 <tr>
-                    <td onclick="window.location.href='/event/list/continue'">진행중인 이벤트</td>
-                    <td class="event_btn" onclick="window.location.href='/event/list/finish'">종료된 이벤트</td>
+                    <td onclick="window.location.href='/admin/board/eventlist/continue'">진행중인 이벤트</td>
+                    <td class="event_btn" onclick="window.location.href='/admin/board/eventlist/finish'">종료된 이벤트</td>
                 </tr>
             </table>
         </div>
@@ -64,14 +64,14 @@
                     <td>   
 				        <input type="checkbox" name="RowCheck" value="${list.event_idx}" >      
                     </td>
-                    <td onclick="window.location.href='/event/adminEventView?event_idx=${list.event_idx}'">
+                    <td onclick="window.location.href='/admin/board/adminEventView?event_idx=${list.event_idx}'">
                     <fmt:formatDate value="${list.event_start_date}" pattern="yyyy-MM-dd"/> 
                     ~ <fmt:formatDate value="${list.event_end_date}" pattern="yyyy-MM-dd"/>
                     </td>
-                     <td onclick="window.location.href='/event/adminEventView?event_idx=${list.event_idx}'">
+                     <td onclick="window.location.href='/admin/board/adminEventView?event_idx=${list.event_idx}'">
                     ${list.event_title}
                     </td>
-                     <td onclick="window.location.href='/event/adminEventView?event_idx=${list.event_idx}'">
+                     <td onclick="window.location.href='/admin/board/adminEventView?event_idx=${list.event_idx}'">
                     ${list.event_slogan}
                     </td>
                 </tr>
@@ -83,7 +83,7 @@
         <div class="button">
             <button onclick="clickEvent(); return false;">선택 항목 삭제</button>
              </form>
-            <a href="/event/adminEventJoin"><button>등록</button></a>
+            <a href="/admin/board/adminEventJoin"><button>등록</button></a>
         </div>
         <!-- 버튼 끝 -->
              <!-- 진행중인 이벤트 리스트 끝-->
@@ -91,26 +91,26 @@
          <c:if test="${empty category && empty value}">
          <div class="page">
             <c:if test="${nowpage != 1}">
-              <span ><a href="/event/list/finish?page=&page=${nowpage -1}}"><</a></span>
+              <span ><a href="/admin/board/eventlist/finish?page=&page=${nowpage -1}"><</a></span>
               </c:if>
               <c:forEach var="i" begin="${block_start}" end="${block_end}">
-               <span><a href="/event/list/finish?page=${i}">${i}</a></span>
+               <span><a href="/admin/board/eventlist/finish?page=${i}">${i}</a></span>
               </c:forEach>
               <c:if test="${nowpage < block_total}">
-              <span><a href="/event/list/finish?page=&page=${nowpage +1}}">></a></span>
+              <span><a href="/admin/board/eventlist/finish?page=&page=${nowpage +1}}">></a></span>
               </c:if>
         </div>
         </c:if>
          <c:if test="${not empty category && not empty value}">
          <div class="page">
            <c:if test="${nowpage != 1}">
-              <span><a href="/event/list/finish?eventSearchCategory=${category}&eventSearchValue=${value}&page=${nowpage -1}">1</a></span>
+              <span><a href="/admin/board/eventlist/finish?eventSearchCategory=${category}&eventSearchValue=${value}&page=${nowpage -1}">1</a></span>
               </c:if>
               <c:forEach var="i" begin="${block_start}" end="${block_end}">
-              <span><a href="/event/list/finish?eventSearchCategory=${category}&eventSearchValue=${value}&page=${i}">${i}</a></span>
+              <span><a href="/admin/board/eventlist/finish?eventSearchCategory=${category}&eventSearchValue=${value}&page=${i}">${i}</a></span>
               </c:forEach>
               <c:if test="${nowpage < block_total}">
-              <span><a href="/event/list/finish?eventSearchCategory=${category}&eventSearchValue=${value}&page=${nowpage +1}">1</a></span>
+              <span><a href="/admin/board/eventlist/finish?eventSearchCategory=${category}&eventSearchValue=${value}&page=${nowpage +1}">1</a></span>
               </c:if>
         </div>
         </c:if>
