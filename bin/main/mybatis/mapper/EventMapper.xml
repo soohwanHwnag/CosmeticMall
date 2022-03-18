@@ -4,21 +4,21 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.study.practice.dao.IEventDao">     
+<mapper namespace="com.study.springboot.dao.IEventDao">     
 	
-	<select id="eventList" resultType="com.study.practice.dto.eventDto">
+	<select id="eventList" resultType="com.study.springboot.dto.EventDto">
 	select * from (select rownum as rnum, E.* from (select * from event where event_finish=#{param1} order by event_date desc) E ) where rnum between #{param2} and #{param3}
 	</select>
 	
-	<select id="eventList_both_total" resultType="com.study.practice.dto.eventDto">
+	<select id="eventList_both_total" resultType="com.study.springboot.dto.EventDto">
 	select * from (select rownum as rnum, E.* from (select * from event where event_finish=#{param1} and (event_title like '%'|| #{param4} || '%' or event_slogan like '%' || #{param4} || '%') order by event_date desc) E ) where rnum between #{param2} and #{param3}
 	</select>
 	
-	<select id="eventList_both_title" resultType="com.study.practice.dto.eventDto">
+	<select id="eventList_both_title" resultType="com.study.springboot.dto.EventDto">
 	select * from (select rownum as rnum, E.* from (select * from event where event_finish=#{param1} and event_title like '%'|| #{param4} || '%' order by event_date desc) where rnum between #{param2} and #{param3}
 	</select>
 	
-	<select id="eventList_both_slogan" resultType="com.study.practice.dto.eventDto">
+	<select id="eventList_both_slogan" resultType="com.study.springboot.dto.EventDto">
 	select * from (select rownum as rnum, E.* from (select * from event where event_finish=#{param1} and event_slogan like '%'|| #{param4} || '%' order by event_date desc) E )where rnum between #{param2} and #{param3}
 	</select>
 	
@@ -54,7 +54,7 @@
 	delete from event where event_idx=#{param1}
 	</delete>
 	
-	<select id="dto" resultType="com.study.practice.dto.eventDto">
+	<select id="dto" resultType="com.study.springboot.dto.EventDto">
 	select * from event where event_idx=#{param1}
 	</select>
 	
