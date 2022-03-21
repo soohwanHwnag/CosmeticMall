@@ -22,4 +22,24 @@ public class FaqService {
 		List<FaqDto> faq_event_list= faqDao.faq_list_v(faqCategory,value);
 		return faq_event_list;
 	}
+	
+	public int faq_write(String select,String title,String content,String member_idx) {
+		int result =faqDao.faq_write(select,title,content,member_idx);
+		return result;
+	}
+	
+	public int faq_update(String select,String title,String content,String member_idx,String faq_idx) {
+		int result =faqDao.faq_update(select,title,content,member_idx,faq_idx);
+		return result;
+	}
+	
+	public int faq_delete(String faq_idx) {
+		int result =faqDao.faq_delete(faq_idx);
+		return result;
+	}
+	
+	public FaqDto dto(String faq_idx) {
+		FaqDto dto = faqDao.dto(faq_idx);
+		return dto;
+	}
 }

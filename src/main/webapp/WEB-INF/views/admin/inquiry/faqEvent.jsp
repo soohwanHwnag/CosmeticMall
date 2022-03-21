@@ -44,10 +44,13 @@
                     <input type="checkbox" id="Panswer${list.faq_idx}">
                     <label for="Panswer${list.faq_idx}">${list.faq_title}<em></em></label>
                     <div class="label1"><p>${list.faq_content}</p>
+                    <form action="faq_delete" method="post">
+                    <input type="hidden" name="faq_idx" value="${list.faq_idx}"/>
                      <div class="btn1">
-                         <input type="button" value="삭제" class="btn2" style=background-color:white>
-                         <input type="button" value="수정" onclick="showPopup2();"  class="btn3" style=background-color:#e0e0e0>
+                         <input type="submit" value="삭제" class="btn2" style=background-color:white>
+                         <input type="button" value="수정" onclick="window.open('/admin/inquiry/faqEditPopup?faq_idx=${list.faq_idx}', 'FAQ수정', 'width=750, height=600, left=100, top=50');"  class="btn3" style=background-color:#e0e0e0>
                      </div>
+                     </form>
                     </div>   
                  </div>
                  </c:forEach>

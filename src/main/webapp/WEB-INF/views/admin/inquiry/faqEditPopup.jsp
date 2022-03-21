@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <link rel="stylesheet" href="/css/admin/faqPopup.css">
 <!-- include libraries(jQuery, bootstrap) -->
    <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
@@ -36,24 +36,25 @@
       <h4>자주하는 질문/답변 수정</h4>
    <hr class="myhr">
    <form action="updateAction" name="FaqWrite" onsubmit="return checkValue();" >
+    <input type="hidden" name="faq_idx" value="${dto.faq_idx}"/>
       <table>
          <tr>
             <td>
                <select name="faq_select" id="selec" class="faqSelect" style="width:200px;height:21px;">
-                  <option value="" selected>질문 유형 선택</option>
-                  <option value="Product">제품</option>
-                  <option value="OrderShip">주문/배송</option>
-                  <option value="ChangeRefund">교환/환불</option>
-                  <option value="Event">이벤트</option>
+                  <option value="" <c:if test="${empty dto.faq_category}">selected</c:if>>질문 유형 선택</option>
+                  <option value="Product" <c:if test="${dto.faq_category eq 'Product'}">selected</c:if>>제품</option>
+                  <option value="OrderShip" <c:if test="${dto.faq_category eq 'OrderShip'}">selected</c:if>>주문/배송</option>
+                  <option value="ChangeRefund" <c:if test="${dto.faq_category eq 'ChangeRefund'}">selected</c:if>>교환/환불</option>
+                  <option value="Event" <c:if test="${dto.faq_category eq 'Event'}">selected</c:if>>이벤트</option>
                </select>
             </td>
             <td>
-               <input name="minititle" class="noticeTitle" type="title" style="width:500px;" placeholder="제목을 입력해 주세요" >
+               <input name="minititle" class="noticeTitle" type="title" style="width:500px;" placeholder="제목을 입력해 주세요" value="${dto.faq_title }">
             </td>
          </tr>
          <tr>
             <td colspan="2" height="20">
-               <textarea id="editor4" name="editor4"></textarea>
+               <textarea id="editor4" name="editor4">${dto.faq_content}</textarea>
                <script>CKEDITOR.replace('editor4');</script>
                <!-- <script>CKEDITOR.replace('editor4',{filebrowserUploadUrl:'/mine/imageUpload.do'});</script> -->
          </tr>

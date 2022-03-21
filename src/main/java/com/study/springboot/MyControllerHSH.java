@@ -20,6 +20,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.study.springboot.dto.EventDto;
 import com.study.springboot.dto.FaqDto;
+import com.study.springboot.dto.MailDto;
 import com.study.springboot.dto.MemberDto;
 import com.study.springboot.dto.NoticeDto;
 import com.study.springboot.dto.Order_cancelDto;
@@ -28,6 +29,7 @@ import com.study.springboot.dto.Order_listDto;
 import com.study.springboot.service.EventService;
 import com.study.springboot.service.FaqService;
 import com.study.springboot.service.FileUploadService;
+import com.study.springboot.service.MailService;
 import com.study.springboot.service.MemberService;
 import com.study.springboot.service.NoticeService;
 import com.study.springboot.service.Order_cancelService;
@@ -52,6 +54,8 @@ public class MyControllerHSH {
 	Order_cancelService ordercancellistservice;
 	@Autowired
 	FaqService faqservice;
+	@Autowired
+	MailService mailservice;
 
 	@RequestMapping("/")
 	public String root() {
@@ -1139,6 +1143,14 @@ public class MyControllerHSH {
 			return "admin/index";		//"admin/member/mailList.jsp" 디스패치
 		} 
 		
+		@RequestMapping("/admin/member/mail")
+		  public String execMail(MailDto mailDto,
+				  					Model model) {
+	        mailservice.mailSend(mailDto);
+	        model.addAttribute("mainPage", "member/mailList.jsp");
+	        return "admin/index";
+	    }
+		
 		//FAQ 교환/환불
 		@RequestMapping("/admin/inquiry/faqChangeRefund")
 		public String adminfaqChangeRefund(@RequestParam(value="page",required=false) String page,
@@ -1178,9 +1190,11 @@ public class MyControllerHSH {
 		
 		//FAQ 질문 수정
 		@RequestMapping("/admin/inquiry/faqEditPopup")
-		public String adminfaqEditPopup(Model model) {
+		public String adminfaqEditPopup(@RequestParam("faq_idx") String faq_idx,
+										Model model) {
 			System.out.println("Dispatch : admin/inquiry/faqEditPopup.jsp");
-			
+			FaqDto dto = faqservice.dto(faq_idx);
+			model.addAttribute("dto", dto);
 			model.addAttribute("faqEditPopup", "faqEditPopup.jsp");
 			
 			return "admin/inquiry/faqEditPopup";		//"admin/inquiry/faqEditPopup.jsp" 디스패치
@@ -1227,7 +1241,33 @@ public class MyControllerHSH {
 			public String adminfaqOrderShip(@RequestParam(value="page",required=false) String page,
 											@RequestParam(value="faq_value",required=false) String value,
 											Model model) {
+				System.out.println("Dispatch : admin/inquiry/faqOrderShip.jsp");	
+				if (page == null) {
+					page = "1";
+					}
+					int page_number = Integer.parseInt(page);
+					int page_size = 10;
+					int page_start = (page_number - 1) * page_size + 1;
+					int page_end = page_number * page_size;
+					int block_size = 5;
+					int block_group = (int)Math.ceil((double)page_number/block_size);
+					int block_start = (block_group -1) * block_size +1;
+					int block_end = block_group * block_size;
+					int block_total =1;
 				
+				String faqCategory = "OrderShip";
+				List<FaqDto> faq_list = null;
+				if(StringUtils.hasText(value)) {
+					faq_list=faqservice.faq_list_v(faqCategory,value);
+				}else {
+					faq_list=faqservice.faq_list(faqCategory);
+				}
+				model.addAttribute("value", value);
+				model.addAttribute("nowpage", page_number);
+				 model.addAttribute("block_total", block_total);
+				model.addAttribute("block_start", block_start);
+				model.addAttribute("block_end", block_end);
+				model.addAttribute("faq_list", faq_list);
 				model.addAttribute("mainPage", "inquiry/faqOrderShip.jsp");
 				
 				return "admin/index";		//"admin/inquiry/faqOrderShip.jsp" 디스패치
@@ -1279,6 +1319,57 @@ public class MyControllerHSH {
 				
 				return "admin/inquiry/faqWritePopup";		//"admin/inquiry/faqWritePopup.jsp" 디스패치
 			} 
+			
+			@RequestMapping("/admin/inquiry/writeAction")
+			@ResponseBody
+			public String writeAction(@RequestParam("faq_select") String select,
+										@RequestParam("minititle") String title,
+										@RequestParam("editor4") String content,
+										Model model) {
+				//관리자 아이디 맴버 인덱스 섹션값 추가
+				int member_idx = 1;
+				int result = faqservice.faq_write(select,title,content,String.valueOf(member_idx));
+				if(result == 1) {
+					return "<script>alert('faq가 등록되었습니다');window.close();</script>";
+				}else {
+					return "<script>alert('faq가  등록실패되었습니다');history.back(-1);</script>";
+				}
+				
+			} 
+			
+			@RequestMapping("/admin/inquiry/updateAction")
+			@ResponseBody
+			public String updateAction(@RequestParam("faq_idx") String faq_idx,
+										@RequestParam("faq_select") String select,
+										@RequestParam("minititle") String title,
+										@RequestParam("editor4") String content,
+										Model model) {
+				//관리자 아이디 맴버 인덱스 섹션값 추가
+				int member_idx = 1;
+				int result = faqservice.faq_update(select,title,content,String.valueOf(member_idx),faq_idx);
+				if(result == 1) {
+					return "<script>alert('faq가 수정되었습니다');window.close();</script>";
+				}else {
+					return "<script>alert('faq가  수정실패되었습니다');history.back(-1);</script>";
+				}
+				
+			} 
+			
+			@RequestMapping("/admin/inquiry/faq_delete")
+			@ResponseBody
+			public String faq_delete(@RequestParam("faq_idx") String faq_idx,
+										Model model) {
+				FaqDto dto = faqservice.dto(faq_idx);
+				String faq_category = dto.getFaq_category();
+				int result = faqservice.faq_delete(faq_idx);
+				if(result == 1) {
+					return "<script>alert('faq가 삭제되었습니다');window.location.href='/admin/inquiry/faq"+faq_category+"';</script>";
+				}else {
+					return "<script>alert('faq가 삭제실패되었습니다');history.back(-1);</script>";
+				}
+				
+			} 
+
 
 		
 
