@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.wrap{
+    width: 1200px;
+    height: auto;
+    margin:0 auto;
+    display: flex;
+    flex-flow: row wrap;
+}
+.header{
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    height: 100px;
+    border-bottom: 1px solid lightgray;
+    justify-content: space-between;
+    align-items: center;
+}
+.header a{
+    text-decoration: none;
+    color: black;
+}
+.logo a{
+    margin-left: 40px;
+    font-size: 50px;
+}
+.admin a{
+    margin-left: 200px;
+    font-size: 20px;
+}
+.btn span a{
+    margin-right: 40px;
+}
+div.nav{
+  width: 15%;
+  /* height: 800px; */
+  background-color: lightgray;
+  display: flex;
+  flex-flow: column nowrap;
+  padding-left: 50px;
+  /* padding-top: 50px; */
+  padding-top:10px;
+}
+.nav > div {
+    margin-top: 20px;
+}
+.nav div a {
+    text-decoration: none;
+    color: black;
+}
+.nav h3{
+color: black;
+cursor: pointer;
+}
+.nav div div{
+    margin-top: 10px;
+}
+.nav div div:nth-of-type(2){
+    margin-top: 5px;
+}
+.nav div div:nth-of-type(3){
+    margin-top: 5px;
+}
+.nav div div:nth-of-type(4){
+    margin-top: 5px;
+}
+
+/* 통계 */
+.center{
+  text-align:center;
+}
+.tabnav, .stat_search, .tab_content{
+  width:80%;
+  margin:0 auto;
+}
+.tabnav{
+  display:flex;
+  justify-content:center;
+}
+.tabnav li{
+  width:150px;
+  height:35px;
+  line-height:35px;
+  text-align:center;
+  border:1px solid #bebebe;
+}
+.tabnav li.current{
+  background-color:#5e5e5e;
+}
+.stat_search{
+  display:flex;
+  justify-content:space-between;
+}
+.tab_content div{
+  display:none;
+}
+.tab_content .current{
+  display:block;
+}

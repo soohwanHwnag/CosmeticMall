@@ -51,4 +51,10 @@ public interface IMemberDao {
 	public MemberDto dto(String member_idx);
 	
 	public int memberModify(String member_idx,String email_yn,String member_password,String tel,String addr1,String addr2,String addr3);
+	
+	public int login (String id, String pw);
+	
+	public MemberDto memberC(String id);
+	
+	public int memberJoin(String member_name, String member_email, String member_password,String member_phone,String member_email_YN);
 }

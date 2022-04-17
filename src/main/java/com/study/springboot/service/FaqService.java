@@ -14,13 +14,43 @@ public class FaqService {
 	@Autowired
 	private IFaqDao faqDao;
 	
-	public List<FaqDto> faq_list(String faqCategory){
-		List<FaqDto> faq_event_list= faqDao.faq_list(faqCategory);
+	public List<FaqDto> faq_list_t(String start, String end){
+		List<FaqDto> faq_event_list= faqDao.faq_list_t(start, end);
 		return faq_event_list;
 	}
-	public List<FaqDto> faq_list_v(String faqCategory,String value){
-		List<FaqDto> faq_event_list= faqDao.faq_list_v(faqCategory,value);
+	
+	public List<FaqDto> faq_list_t_v(String value,String start, String end){
+		List<FaqDto> faq_event_list= faqDao.faq_list_t_v(value,start, end);
 		return faq_event_list;
+	}
+	
+	public List<FaqDto> faq_list(String faqCategory,String start, String end){
+		List<FaqDto> faq_event_list= faqDao.faq_list(faqCategory,start, end);
+		return faq_event_list;
+	}
+	public List<FaqDto> faq_list_v(String faqCategory,String value,String start, String end){
+		List<FaqDto> faq_event_list= faqDao.faq_list_v(faqCategory,value,start, end);
+		return faq_event_list;
+	}
+	
+	public int count_t_v(String value) {
+		int count_t_v = faqDao.count_t_v(value);
+		return count_t_v;
+	}
+	
+	public int count_t() {
+		int count_t = faqDao.count_t();
+		return count_t;
+	}
+	
+	public int count_v(String faqCategory,String value) {
+		int count_v = faqDao.count_v(faqCategory,value);
+		return count_v;
+	}
+	
+	public int count(String faqCategory) {
+		int count = faqDao.count(faqCategory);
+		return count;
 	}
 	
 	public int faq_write(String select,String title,String content,String member_idx) {

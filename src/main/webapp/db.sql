@@ -83,6 +83,8 @@ CREATE TABLE product(
     product_display         varchar2(10),
     product_hit             number(5) DEFAULT 0,
     product_add_date        DATE DEFAULT sysdate
+product_filename      varchar2(100),
+product_filename_detail      varchar2(100),
 );
 
 DROP SEQUENCE product_seq;
@@ -395,7 +397,7 @@ CREATE TABLE one2one(
     one2one_title           varchar2(100),
     one2one_content         varchar2(4000),
     one2one_date            DATE DEFAULT sysdate,
-    one2one_reply_YN        varchar2(1),
+    one2one_reply_YN        varchar2(20) DEFAULT '미답변' ,
     one2one_member_idx      number(5) NOT NULL
 );
 
@@ -477,6 +479,7 @@ CREATE TABLE event(
     event_date              DATE DEFAULT sysdate,
     event_hit               number(5) DEFAULT 0,
     event_member_idx        number(5) NOT NULL
+    event_finish DEFAULT 'Y'
 );
 
 DROP SEQUENCE event_seq;

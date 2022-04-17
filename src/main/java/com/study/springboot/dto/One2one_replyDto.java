@@ -13,4 +13,5 @@ public class One2one_replyDto {
 	private Date reply_date; 
 	private int reply_member_idx;
 	private int reply_one2one_idx; 
+	private String member_name; 
 }

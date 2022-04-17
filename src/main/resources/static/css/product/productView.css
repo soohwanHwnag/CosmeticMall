@@ -1,0 +1,277 @@
+@charset "UTF-8";
+
+/* 임의 레이아웃 */
+header{
+	height:200px;
+	border-bottom:2px solid #ccc;
+	text-align:center;
+}
+footer{
+	height:300px;
+	border-top:2px solid #ccc;
+	text-align:center;
+}
+main{
+	width:100%;
+}
+.wrap{
+	width:1200px;
+	margin:0 auto;
+}
+.productView_wrap{
+	/* width:710px; */
+	width:750px;
+	margin:0 auto;
+}
+
+/* 상품 조회 */
+.productView_top{
+	display:flex;	
+	justify-content:space-between;
+	margin-top:60px;
+}
+.productView_image{
+	width:330px;
+	height:330px;
+	
+	line-height:330px;
+	text-align:center;
+}
+.productView_image img{
+	width:100%;
+}
+.productView_right{
+	width:300px;
+}
+.productView_text h3{
+	padding:20px 0;
+	border-bottom:2px solid #bebebe;
+	margin-bottom:10px;
+}
+.productView_text ul li{
+	display:flex;
+	margin-bottom:10px;
+}
+.productView_text ul li:nth-child(5){
+	padding-top:10px;
+	margin-bottom:20px;
+	border-top:1px solid #333;
+	justify-content:space-between;
+}
+.productView_text ul li .text_title{
+	width:120px;
+}
+.stock_count input{
+	float:left;
+}
+.stock_count .count_btn{
+	width:20px;
+	background-color:#fff;
+	box-sizing:border-box;
+	border:1px solid #bebebe;
+}
+.stock_count .count_num{
+	width:60px;
+	box-sizing:border-box;
+	border-top:1px solid #bebebe;
+	border-bottom:1px solid #bebebe;
+	border-left:none;
+	border-right:none;
+	text-align:center;
+}
+.productView_btn{
+	display:flex;
+	justify-content:space-between;
+}
+.productView_btn button{
+	width:145px;
+	height:40px;
+	font-size:14px;
+	border-radius:5px;
+}
+.whiteBtn{
+	background-color:#fff;
+	border:1px solid #bebebe;
+}
+.grayBtn{
+	background-color:#5e5e5e;
+	border:none;
+	color:#fff;
+}
+
+/* 로케이션 */
+.productView_location{
+	margin:40px 0;
+}
+.productView_location ul{
+	width:600px;
+	margin:0 auto;	
+	display:flex;
+}
+.productView_location ul li a{
+	display:block;
+	font-size:14px;
+	width:200px;
+	height:30px;
+	text-align:center;
+	line-height:30px;
+	border:1px solid #bebebe;
+	box-sizing:border-box;
+}
+.productView_location ul li a.current{
+	font-weight:bold;
+}
+
+/* 상세 이미지, 정보 */
+.productView_detail{
+	height:500px;
+
+}
+.productView_detail img{
+	width:100%;
+	height:100%;
+}
+input[type="text"] {
+	border: none;
+}
+/* 리뷰(닫힌 상태+기본 틀) */
+.productView_review .review{
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:space-between;
+	padding:30px 0;
+	border-bottom:2px solid #bebebe;
+}
+.productView_review h3,
+.productView_notice h3{
+	padding-top:0;
+	padding-bottom:10px;
+	border-bottom:2px solid #bebebe;
+}
+.review_left{
+	width:100px;
+	margin-left:15px;
+}
+.star_rating{
+	height:16px;
+}
+.star_rating span{
+	float:left;
+	margin-right:3px;
+}
+.checked{
+	color:orange;
+}
+.review_date{
+	display:block;
+	margin:5px 0;
+}
+.review_center{
+	width:500px;
+}
+.review_center p{
+	width:500px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.review_right{
+	width:70px;
+	margin-right:15px;
+}
+.review_right .review_image{
+	width:70px;
+	height:70px;
+	text-align:center;
+	line-height:70px;
+	background-color:#bebebe;
+}
+.openBtn{
+	margin-left:140px;
+	padding-top:10px;
+	padding-right:20px;
+	background:#fff;
+	border:none;
+	background:url("../../img/admin/down-arrow.png") 40px 12px /16px 16px no-repeat;
+}
+
+/* 리뷰 펼치기 */
+.review_open{
+	background:#eee;
+	position:relative;
+}
+.review_open .review_center{
+	margin-right:105px;
+}
+.review_open .review_center p{
+	width:500px;
+	white-space:normal;
+	text-overflow:none;
+}
+.review_open .review_right{
+	width:initial;
+	float:left;
+	margin:10px 0 0 140px;
+}
+.review_open .review_right .review_image{
+	display:flex;
+	width:100%;
+	height:120px;
+	background-color:#eee;
+}
+.review_open .review_right .review_image div{
+	width:120px;
+	height:120px;
+	text-align:center;
+	line-height:120px;
+	background-color:#fff;
+	margin-right:10px;
+}
+.review_open .openBtn{
+	margin-left:0;
+	margin-right:20px;
+	height:30px;
+	background:url("../../img/admin/up-arrow.png") 28px 12px /16px 16px no-repeat;
+}
+.review_pagination{
+	margin-top:10px;
+}
+
+/* 안내사항(배송/교환/환불) */
+.productView_notice h3{
+	margin-bottom:20px;
+}
+.productView_notice ul li{
+	list-style:disc;
+	margin-left:50px;
+}
+.productView_notice ul li:nth-child(4){
+	margin-bottom:25px;
+}
+.productView_notice ul li:nth-child(5){
+	margin-bottom:100px;
+}
+.productView_notice ul li ul li{
+	list-style:none;
+	margin-left:25px;
+}
+.productView_notice ul li ul li:before{
+	content:"-";
+	padding-right:10px;
+}
+
+/* 페이징(추후 공용으로 빼기) */
+.page{
+	margin-bottom:80px;
+}
+.pagination{
+	width:280px;
+	margin:0 auto;
+	display:flex;
+	justify-content:space-between;
+}
+.pagination li{
+	padding:10px;
+}
+ 
+ 

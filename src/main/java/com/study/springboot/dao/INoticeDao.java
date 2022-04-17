@@ -26,5 +26,7 @@ public interface INoticeDao {
 	public int noticeModify(String notice_idx,String important_yn,String notice_title, String notice_content);
 	
 	public int noticeDelete(String notice_idx);
+	
+	public int update_hit(String notice_idx);
 
 }

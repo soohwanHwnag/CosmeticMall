@@ -1,0 +1,142 @@
+@charset "utf-8";
+.faqMain{
+    margin-top: 50px;
+}
+h2 {
+    text-align: center;
+    padding-bottom: 40px;
+}
+.mainCategory {
+    text-align: center;
+    padding-bottom: 40px;
+}
+.mainCategory span a {
+    color: #333;
+    font-size: 18px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.mainCategory span a{
+    text-decoration: none;
+}
+.mainCategory span:nth-child(1) a,
+.mainCategory span:nth-child(3) a
+{
+    color: rgb(224, 224, 224);
+}
+.mainCategory span:nth-child(1) {
+    border-right: 1px solid rgb(224, 224, 224);
+}
+.mainCategory span:nth-child(2) {
+    border-right: 1px solid rgb(224, 224, 224);
+}
+.faqSearch{
+    width: 80%;
+    display: flex;
+    flex-flow: row nowrap;
+    border: 1px solid rgb(224, 224, 224);
+    padding: 20px 50px;
+}
+
+.faqSearch input{
+    width: 300px;
+    height: 35px;
+}
+.faqSearch div:nth-child(1) button{
+    background-color: rgb(94, 94, 94);
+    color: white;
+    width: 100px;
+    height: 35px;
+    border: none;
+    margin-left: 5px;
+}
+.faqSearch div:nth-child(1){
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   margin-right: 30px;
+}
+.faqSearch div:nth-child(2){
+   margin-left: 20px;
+ }
+ .faqSearch div:nth-child(2) button{
+    background-color: white;
+    width: 100px;
+    height: 35px;
+    border: 1px solid rgb(224, 224, 224);
+  }
+  .faqCategory{
+      text-align: center;
+      padding: 20px 0;
+  }
+  .faqCategory span a{
+      color:  rgb(224, 224, 224);
+      text-decoration: none;
+      margin-left: 40px;
+      margin-right: 40px;
+  }
+  .faqCategory span:nth-of-type(5) a{
+    color:  #333;
+
+}
+  .faqCategory span::after{
+    content: "|";
+    color: rgb(224, 224, 224);
+}
+.faqCategory span:nth-of-type(5)::after{
+    content: "";
+}
+table {
+    margin-top: 20px;
+    width: 80%;
+    text-align: center;
+    border-collapse: collapse;
+}
+table tr{
+    height: 35px;
+    border-bottom: 1px solid #333;
+}
+table tr:nth-of-type(1){
+    height: 35px;
+    background-color: rgb(224, 224, 224);
+    border-bottom: 1px solid  rgb(224, 224, 224);
+}
+table td:nth-of-type(1){
+    width: 20%;
+}
+table td:nth-of-type(3){
+    width: 5%;
+}
+.subtitle td:nth-of-type(3){
+    background: url('/img/down-arrow.png') no-repeat;
+    background-position: 1px;
+}
+
+.subcontent{
+    display: none;
+}
+.subcontent td{
+    text-align: center;
+}
+.page{
+    clear: both;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .page span{
+    padding: 8px 12px;
+    margin: 3px;
+    background-color: rgb(224, 224, 224);
+    border-radius: 5px;
+    text-align: center;
+  }
+  /* .page span::after{
+    content: "";
+    padding: 5px;
+  } */
+  .page a{
+    color: black;
+    text-decoration: none;
+  }

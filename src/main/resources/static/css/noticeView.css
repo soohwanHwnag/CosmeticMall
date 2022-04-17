@@ -1,0 +1,77 @@
+@charset "utf-8";
+.eventMain{
+    margin-top: 50px;
+}
+h2 {
+    text-align: center;
+    padding-bottom: 40px;
+}
+.noticeCategory {
+    text-align: center;
+    padding-bottom: 40px;
+}
+.noticeCategory span a {
+    color: #333;
+    font-size: 18px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.noticeCategory span a{
+    text-decoration: none;
+}
+.noticeCategory span:nth-child(2) a,
+.noticeCategory span:nth-child(3) a
+{
+    color: rgb(224, 224, 224);
+}
+.noticeCategory span:nth-child(1) {
+    border-right: 1px solid rgb(224, 224, 224);
+}
+.noticeCategory span:nth-child(2) {
+    border-right: 1px solid rgb(224, 224, 224);
+}
+.delivery {
+    display: block;
+    content: "";
+    clear: both;
+}
+h3 {
+    margin-left: 30px;
+}
+.deliverysub {
+    width: 100%;
+    height: 40px;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    line-height: 40px;
+}
+.deliverysub span {
+    margin-left: 30px;
+    font-weight: bold;
+}
+.deliverysub .date {
+    color: silver;
+    font-weight: normal;
+}
+.hite {
+    float: right;
+    margin-right: 10px;
+}
+.delivery p {
+    padding-left: 30px;
+    margin-top: 30px;
+    line-height: 30px;
+}
+.delivery hr {
+    border-color: #000;
+}
+.noticeBtn{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end
+}
+button {
+    width: 100px;
+    height: 35px;
+    border: none;
+}

@@ -28,8 +28,8 @@
             <div class="logo"><a href="">자담</a></div>
             <div class="admin"><a href="">admin</a></div>
             <div class="btn">
-                <span><a href="">사용자 페이지 가기</a></span>
-                <span><a href="logout">로그아웃</a></span>
+                <span><a href="/main">사용자 페이지 가기</a></span>
+                <span><a href="/admin/logout">로그아웃</a></span>
             </div>
         </div>
         <div class="nav">
@@ -43,8 +43,8 @@
             <div class="product">
                 <h3 class="gnb">상품 관리</h3>
                 <div class="sub">
-                    <div><a href="">> 상품리스트</a></div>
-                    <div><a href="">> 상품등록</a></div>
+                    <div><a href="/admin/product/product_list">> 상품리스트</a></div>
+                    <div><a href="/admin/product/product_add">> 상품등록</a></div>
                 </div>
             </div>
             <div class="order"> 

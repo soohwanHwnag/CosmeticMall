@@ -1,0 +1,82 @@
+@charset "utf-8";
+.one2oneMain{
+    margin-top: 50px;
+}
+h2 {
+    text-align: center;
+    padding-bottom: 40px;
+}
+.one2oneCategory {
+    text-align: center;
+    padding-bottom: 40px;
+}
+.one2oneCategory span a {
+    color: #333;
+    font-size: 18px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.one2oneCategory span a{
+    text-decoration: none;
+}
+.one2oneCategory span:nth-child(1) a,
+.one2oneCategory span:nth-child(2) a
+{
+    color: rgb(224, 224, 224);
+}
+.one2oneCategory span:nth-child(1) {
+    border-right: 1px solid rgb(224, 224, 224);
+}
+.one2oneCategory span:nth-child(2) {
+    border-right: 1px solid rgb(224, 224, 224);
+}
+.one2oneJoin{
+    width: 80%;
+}
+.joinTitle{
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    font-size: 16px;
+}
+.joinSection1{
+    margin-top: 30px;
+    width: 80%;
+}
+.joinSection1 select{
+    width: 20%;
+    height: 35px;
+}
+.joinSection1 input{
+    width: 78%;
+    height: 35px;
+    margin-left: 5px;
+}
+.joinSection2{
+    margin-top: 30px;
+    width: 80%;
+}
+#editor{
+    width: 100%;
+}
+.joinBtn{
+    width: 80%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: flex-end;
+}
+.joinBtn button:nth-of-type(1){
+    width: 100px;
+    height: 35px;
+    background-color: rgb(224, 224, 224);
+    border: 1px solid rgb(224, 224, 224);
+    border-radius: 4px;
+    margin-right: 10px;
+}
+.joinBtn button:nth-of-type(2){
+    width: 100px;
+    height: 35px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 4px;
+}

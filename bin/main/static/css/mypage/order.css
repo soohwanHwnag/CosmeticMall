@@ -1,0 +1,442 @@
+@charset "UTF-8";
+
+/* 임의 레이아웃 */
+header{
+	height:200px;
+	border-bottom:2px solid #ccc;
+	text-align:center;
+}
+footer{
+	height:300px;
+	border-top:2px solid #ccc;
+	text-align:center;
+}
+main{
+	width:100%;
+}
+.wrap{
+	width:1200px;
+	margin:0 auto;
+	display:flex;
+}
+
+/* mypage - order 공용 */
+.side_bar{
+	width:200px;
+	background-color:#ccc;
+}
+.side_bar h3{
+	margin-top:200px;
+	padding:0;
+	font-size:20px;
+}
+.side_bar h3,
+.side_bar ul{
+	margin-left:40px;
+}
+.side_bar ul li{
+	margin-bottom:10px;
+}
+.side_bar ul li a{
+	padding-left:15px;
+}
+.side_bar ul .current a{
+	padding-left:5px;
+}
+.main_section{
+	width:920px;
+	margin:0 auto;
+}
+h3{
+	margin-bottom:10px;
+}
+h3.main_title{
+	font-size:24px;
+	margin-top:10px;
+}
+table{
+	width:100%;
+	border-spacing:0;
+	text-align:center;
+	border-top:2px solid #bebebe;
+}
+.table_head{
+	height:35px;
+	background-color:#fff;
+}
+.table_head th{
+	border-bottom:2px solid #bebebe;
+	font-weight:normal;
+}
+.orderBtn{
+	display:flex;
+	justify-content:center;
+	margin-bottom:60px;
+}
+.orderBtn button{
+	width:145px;
+	height:40px;
+	border-radius:5px;
+}
+.whiteBtn{
+	background-color:#fff;
+	border:1px solid #bebebe;
+	margin-right:20px;
+}
+.grayBtn{
+	background-color:#5e5e5e;
+	border:none;
+	color:#fff;
+}
+.lightgrayBtn{
+	background-color:#ededed;
+	border:none;
+}
+
+/* mypage - orderList */
+.search_form{
+	width:100%;
+	height:130px;
+	display:flex;
+	background-color:#ededed;
+	border-top:2px solid #5e5e5e;
+	border-bottom:2px solid #5e5e5e;
+	margin-bottom:30px; 
+}
+.search_form h3{
+	width:180px;
+	text-align:center;
+	line-height:130px;
+	padding:0;
+	margin:0;
+	border-right:1px solid #ccc;
+}
+.search_form .search{
+	margin-left:20px;
+	box-sizing:border-box;
+	padding:10px 0;
+	display:flex;
+	flex-direction:column;
+	justify-content:space-between;
+}
+.search_form .search ul{
+	display:flex;
+}
+.search_form .search ul li{
+	margin-right:10px;
+}
+.search_form .search ul li button{
+	height:25px;
+	padding:0 5px;
+}
+.search_form .search input,
+.search_form .search .search_txt button{
+	height:30px;
+	box-sizing:border-box;
+	border-radius:5px;
+	border:1px solid #ccc;
+}
+.search_form .search .search_txt button{
+	width:60px;
+	margin-left:10px;
+}
+.table_body td{
+	height:85px;
+	border-bottom:2px solid #bebebe;
+}
+.table_body td:nth-child(2){
+	display:flex;
+	align-items:center;
+}
+.table_body td .product_img{
+	width:60px;
+	height:60px;
+	line-height:60px;
+	text-align:center;
+	box-sizing:border-box;
+	border:1px solid #ccc;
+	margin-left:10px;
+}
+.table_body td .product_name{
+	margin-left:20px;
+}
+.table_body td button{
+	width:60px;
+	height:25px;
+	border-radius:5px;
+	font-weight:14px;
+}
+.table_body td .lightgrayBtn{
+	margin-top:5px;
+}
+
+/* 페이징 */
+.page{
+	margin-top:20px;
+	margin-bottom:80px;
+}
+.pagination{
+	width:280px;
+	margin:0 auto;
+	display:flex;
+	justify-content:space-between;
+}
+.pagination li{
+	padding:10px;
+}
+
+/* 배송 조회, 리뷰 작성 모달 */
+.shippingModal,
+.reviewModal{
+	position:relative;
+	z-index:1;
+	display:none;
+}
+.shippingModal .modalContent{
+	width:700px;
+	background-color:#ededed;
+	position:fixed;
+	top:30%;
+	left:calc(50% - 350px);
+}
+.shippingModal .modalContent h3{
+	text-align:center;
+	font-size:30px;
+	border-bottom:2px solid #bebebe;
+	margin:0 20px;
+	padding:20px 0;
+}
+.shippingModal .modalContent .shippingForm{
+	margin:30px;
+	width:640px;
+	border-collapse:collapse;
+	border-top:none;
+}
+.shippingModal .modalContent .shippingForm tr{
+	height:30px;
+}
+.shippingModal .modalContent .shippingForm tr th{
+	width:120px;
+	font-weight:normal;
+}
+.shippingModal .modalContent .shippingForm tr th,
+.shippingModal .modalContent .shippingForm tr td{
+	border:1px solid #ccc;
+}
+.shippingModal .modalContent .shippingForm tr td{
+	background-color:#fff;
+	text-align:left;
+	padding-left:20px;
+}
+.shippingModal .closeBtn,
+.reviewModal .closeBtn{
+	position:absolute;
+	top:10px;
+	right:10px;
+	border:none;
+}
+.shippingModal .closeBtn img,
+.reviewModal .closeBtn img{
+	width:24px;
+	height:24px;
+}
+.reviewModal .modalContent{
+	width:500px;
+	background-color:#ededed;
+	position:fixed;
+	top:10%;
+	left:calc(50% - 200px);
+}
+.reviewModal .modalContent .reviewProduct{
+	background-color:#fff;
+}
+.reviewModal .modalContent form{
+	display:block;
+}
+.reviewModal .modalContent h3{
+	font-size:18px;
+	border-bottom:2px solid #bebebe;
+	margin:0 20px;
+	padding:10px 0;
+	background:#fff;
+}
+.reviewModal .modalContent .reviewProduct .reviewProductImg{
+	width:60px;
+	height:60px;
+	line-height:60px;
+	text-align:center;
+	border:1px solid #ccc;
+	display:inline-block;
+	margin:10px 20px;
+}
+.reviewModal .modalContent .starRatingSection,
+.reviewModal .modalContent .reviewSection,
+.reviewModal .modalContent .reviewImgSection{
+	margin:0 20px;
+}
+.reviewModal .modalContent .starRating,
+.reviewModal .modalContent .reviewWrite,
+.reviewModal .modalContent .reviewImgUpload{
+	background-color:#fff;
+	border:2px solid #bebebe;
+}
+.reviewModal .modalContent h4{
+	padding:5px 0;
+}
+.reviewModal .modalContent .quest_txt{
+	text-align:center;
+	font-size:14px;
+	padding:5px 0;
+}
+.reviewModal .modalContent .inputStarRating{
+	display:flex;
+	flex-direction:row-reverse;
+	justify-content:center;
+}
+.reviewModal .modalContent .inputStarRating input{
+	display:none;
+}
+.reviewModal .modalContent .inputStarRating label{
+	width:24px;
+	height:32px;
+	color:#ccc;
+	cursor:pointer;
+}
+.reviewModal .modalContent .inputStarRating :checked ~ label{
+	color:#5e5e5e;
+}
+.reviewModal .modalContent label:hover,
+.reviewModal .modalContent label:hover ~ label{
+	color:#5e5e5e;
+}
+.reviewModal .modalContent .reviewWrite textarea{
+	width:446px;
+	height:200px;
+	padding-left:10px;
+	border:none;
+}
+.reviewModal .modalContent .reviewImgUpload .filebox{
+  width:80%;
+  height:40px;
+  margin:0 auto 10px;
+  border:1px solid #5e5e5e;
+}
+.filebox .upload-name,
+.filebox input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+.filebox label, .filebox .label_btn {
+  display:flex;
+  padding:0 20px;
+  color:#000;
+  cursor:pointer;
+  height:40px;
+  line-height:40px;
+  justify-content:center;
+}
+.filebox label img{
+	width:40px;
+	height:40px;
+}
+.filebox label span{
+	margin-left:10px;
+}
+.reviewModal .modalContent .reviewForm .grayBtn{
+	width:70px;
+	height:25px;
+	border-radius:5px;
+	margin:10px 20px 10px 0;
+	float:right;
+}
+.reviewModal .closeBtn{
+	background-color:#fff;
+}
+.modalBackground { 
+	position:fixed;
+	top:0;
+	left:0; 
+	width:100%; 
+	height:100%; 
+	background:rgba(0, 0, 0, 0.5);
+	z-index:-1; 
+}
+
+/* mypage - orderView*/
+.orderView h3{
+	margin:10px 0;
+}
+.orderView .orderInfo{
+	border:2px solid #bebebe;
+}
+.orderView .orderInfo span{
+	display:inline-block;
+	font-size:18px;
+	padding:10px;
+}
+.orderView .orderInfo span:nth-child(1){
+	padding-right:0;
+}
+.orderView .orderInfo span:nth-child(1):after{
+	content:"|";
+	width:1px;
+	height:8px;
+	margin-left:20px;
+}
+.orderView .orderProductInfo .productInfo{
+	border:2px solid #bebebe;
+}
+.orderView .orderProductInfo .productInfo th,
+.orderView .orderProductInfo .productInfo td{
+	border-right:1px solid #bebebe;
+}
+.orderView .orderProductInfo .productInfo th:nth-child(6),
+.orderView .orderProductInfo .productInfo td:nth-child(6){
+	border-right:none;
+}
+.orderView .orderProductInfo .productInfo .table_body td{
+	border-bottom:none;
+}
+.orderView .paymentInfo table,
+.orderView .shippingInfo table{
+	border:1px solid #bebebe;
+	border-collapse:collapse;
+	font-size:14px;
+}
+.orderView .paymentInfo table tr,
+.orderView .shippingInfo table tr{
+	height:30px;
+}
+.orderView .paymentInfo table th,
+.orderView .shippingInfo table th{
+	width:15%;
+	font-weight:normal;
+	background-color:#ededed;
+	border-bottom:1px solid #bebebe;
+	border-right:1px solid #bebebe;
+}
+.orderView .paymentInfo table td,
+.orderView .shippingInfo table td{
+	border-bottom:1px solid #bebebe;
+	text-align:left;
+	padding-left:20px;
+}
+.orderView .btnSection{
+	margin:10px 0 20px 0;
+	display:flex;	
+}
+.orderView .btnSection button{
+	width:100px;
+	height:35px;
+	border-radius:5px;
+}
+.orderView .btnSection .whiteBtn{
+	margin-right:auto;
+}
+.orderView .btnSection .lightgrayBtn{
+	margin-right:10px;
+}

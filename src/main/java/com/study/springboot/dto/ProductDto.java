@@ -19,5 +19,7 @@ public class ProductDto {
     private String product_display;
     private int product_hit;
     private Date product_add_date;
+    private String product_filename;
+    private String product_filename_detail;
 }
 

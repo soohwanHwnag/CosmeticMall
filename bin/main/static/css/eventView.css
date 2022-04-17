@@ -1,0 +1,36 @@
+@charset "utf-8";
+.eventMain{
+    margin-top: 50px;
+}
+h2 {
+    text-align: center;
+    padding-bottom: 40px;
+}
+.eventView{
+    width: 80%;
+}
+.eventDate span{
+    color: rgb(224, 224, 224);
+}
+.eventTitle{
+    margin-top: 20px;
+}
+.eventImg{
+    text-align: center;
+    border-top: 1px solid rgb(224, 224, 224);
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+.eventImg img{
+    padding: 50px 0;
+    width: 80%;
+}
+.listBtn{
+    margin: 25px 0;
+    text-align: right;
+}
+.listBtn button{
+   width: 100px;
+   height: 35px;
+   background-color: white;
+   border: 1px solid rgb(224, 224, 224);
+}

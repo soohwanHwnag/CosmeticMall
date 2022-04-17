@@ -1,0 +1,108 @@
+@charset "utf-8";
+.one2oneMain{
+    margin-top: 50px;
+}
+h2 {
+    text-align: center;
+    padding-bottom: 40px;
+}
+.one2oneCategory {
+    text-align: center;
+    padding-bottom: 40px;
+}
+.one2oneCategory span a {
+    color: #333;
+    font-size: 18px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.one2oneCategory span a{
+    text-decoration: none;
+}
+.one2oneCategory span:nth-child(1) a,
+.one2oneCategory span:nth-child(2) a
+{
+    color: rgb(224, 224, 224);
+}
+.one2oneCategory span:nth-child(1) {
+    border-right: 1px solid rgb(224, 224, 224);
+}
+.one2oneCategory span:nth-child(2) {
+    border-right: 1px solid rgb(224, 224, 224);
+}
+.one2oneView{
+    width: 80%;
+}
+.costomerQ{
+    margin: none;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+.costomerQv{
+    width: 80%;
+    padding: 20px 0;
+}
+.costomerQv div{
+    text-align: right;
+    padding: 10px 0;
+}
+.costomerQ div:nth-of-type(2) span{
+   padding-left: 10px;
+   padding-right: 10px;
+} 
+.costomerQ div:nth-of-type(2) span:nth-of-type(1){
+    border-right: 2px solid rgb(224, 224, 224);;
+ } 
+
+.costomerQv div button:nth-of-type(1){
+    width: 100px;
+    height: 35px;
+    background-color: rgb(224, 224, 224);
+    border: 1px solid rgb(224, 224, 224);
+    border-radius: 4px;
+}
+.costomerQv div button:nth-of-type(2){
+    width: 100px;
+    height: 35px;
+    background-color: white;
+    border: 1px solid  rgb(224, 224, 224);
+    border-radius: 4px;
+}
+.adminA{
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+.adminAv{
+    padding: 30px 0;
+    border-bottom: 1px solid black;
+}
+.adminA div:nth-of-type(2) span{
+    padding-left: 10px;
+    padding-right: 10px;
+ } 
+ .adminA div:nth-of-type(2) span:nth-of-type(1){
+     border-right: 2px solid rgb(224, 224, 224);;
+  } 
+ 
+ .listBtn{
+     margin-top: 20px;
+     margin-bottom: 50px;
+     width: 80%;
+     text-align: right;
+ }
+ .listBtn button{
+    width: 100px;
+    height: 35px;
+    background-color: white;
+    border: 1px solid rgb(224, 224, 224);
+    border-radius: 4px;
+ }

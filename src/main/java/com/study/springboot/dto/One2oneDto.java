@@ -14,4 +14,5 @@ public class One2oneDto {
 	private Date one2one_date;
 	private String one2one_reply_YN; 
 	private int one2one_member_idx; 
+	private String member_name; 
 }

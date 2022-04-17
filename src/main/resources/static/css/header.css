@@ -1,0 +1,113 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+@import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
+	* {
+		margin: 0 auto;
+		padding: 0;
+	}
+   .jadamlogo { 
+		float: left; 
+		width:100px;
+		height:30px;
+	}
+	    /* 플로팅버튼 */
+		 .toTopScroll {
+      position: fixed;
+      z-index: 1;
+      overflow: hidden;
+      right: 5px;
+      bottom: 5px;
+      background-color: transparent;
+      margin: 0;
+      padding: 0;
+      cursor: pointer;
+    }
+
+	ul li{
+		list-style: none;
+	}
+	a {
+		text-decoration: none;
+		color:#333;
+	}
+
+	#dropdown {
+		font:bold 16px "malgun gothic";
+		width:600px;
+		height:50px;
+		/* background: #ccc; */
+		color:#333333;
+		line-height: 50px; 
+		margin:0 auto;
+		text-align: center;
+	}
+
+	#dropdown > ul > li {
+		float:left;
+		width:140px;
+		position:relative;
+	}
+	#dropdown > ul > li > ul {
+		width:130px;
+		display:none;
+		position: absolute;
+		font-size:14px;
+		background: white;
+		border-radius: 5px;
+	}
+	#dropdown > ul > li:hover > ul {
+		display:block;
+		
+	}
+	#dropdown > ul > li > ul > li:hover {
+		background: white;
+		transition: ease 1s;
+		}
+
+/* .navbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+} */
+	 /* 탑메뉴 */
+    .topMenu span a {
+      text-decoration: none;
+      color: #5a5a5a;
+    }
+    .topMenu span a:link {
+      color: #5a5a5a;
+    }
+    .topMenu span a:hover {
+      color: #5a5a5a;
+    }
+    .top {
+      width: 100%;
+      height: 30px;
+      color: #777777;
+      font-size: 12px;
+      font-weight: normal;
+      text-align: right;
+    }
+    .topMenu {
+      width: 90%;
+      text-align: right;
+      vertical-align: middle;
+      line-height: 30px;
+    }
+    .topMenu span {
+      padding: 5px;
+    }
+     .topMenu a {
+      margin-bottom: 0;
+      text-decoration: none;
+      color: #777777;
+    } 
+
+.tophover {
+   position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+		

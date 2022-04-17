@@ -184,4 +184,23 @@ public class MemberService {
 		int result = memberDao.memberModify(member_idx,email_yn,member_password,tel,addr1,addr2,addr3);
 		return result;
 	}
+	
+	public int login(String id , String pw) {
+		int result= memberDao.login(id,pw);
+		if(result == 1) {
+			result =1;
+		}else {
+			result=0;
+		}
+		return result;
+	}
+	public MemberDto memberC(String id) {
+		MemberDto memberC=memberDao.memberC(id);
+		return memberC;
+	}
+	
+	public int memberJoin(String member_name, String member_email, String member_password,String member_phone,String member_email_YN) {
+		int result = memberDao.memberJoin(member_name,member_email,member_password,member_phone,member_email_YN);
+		return result;
+	}
 }

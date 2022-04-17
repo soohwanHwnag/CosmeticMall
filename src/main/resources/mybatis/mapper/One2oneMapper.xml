@@ -10,4 +10,28 @@
 <!-- 세미콜론, #, 공백 주의 -->
 <mapper namespace="com.study.springboot.dao.IOne2oneDao">
 
+		<select id="o2oList" resultType="com.study.springboot.dto.One2oneDto">
+		select * from (select rownum as rnum , A.* from (select * from one2one order by one2one_date desc) A ) where rnum between #{param1} and #{param2}
+		</select>
+		
+		<select id="count" resultType="_int">
+		select count(*) from one2one
+		</select>
+		
+		<select id="dto" resultType="com.study.springboot.dto.One2oneDto">
+		select A.*, B.member_name from one2one A join member B on A.one2one_member_idx = B.member_idx where one2one_idx = #{param1}
+		</select>
+		
+		<insert id="one2oneJoin">
+			insert into one2one(one2one_idx,one2one_category,one2one_title,one2one_content,one2one_member_idx)
+			 values (one2one_seq.nextval, #{param1}, #{param2}, #{param3}, 1)
+		</insert>
+		
+		<delete id="one2oneDelete">
+		delete from one2one where one2one_idx=#{param1}
+		</delete>
+		
+		<update id="one2oneModifyForm">
+		 update one2one set one2one_category=#{param2}, one2one_title=#{param3}, one2one_content=#{param4} where one2one_idx=#{param1}
+		</update>
 </mapper>

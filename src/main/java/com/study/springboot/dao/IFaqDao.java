@@ -11,9 +11,21 @@ import com.study.springboot.dto.FaqDto;
 //mapper xml파일의 mapper namespace "IFaqDao"와 연결
 public interface IFaqDao {
 
-	public List<FaqDto> faq_list(String faqCategory);
+	public List<FaqDto> faq_list_t(String start, String end);
 	
-	public List<FaqDto> faq_list_v(String faqCategory,String value);
+	public List<FaqDto> faq_list_t_v(String value,String start, String end);
+	
+	public List<FaqDto> faq_list(String faqCategory,String start, String end);
+	
+	public List<FaqDto> faq_list_v(String faqCategory,String value,String start, String end);
+	
+	public int count_t_v(String value);
+	
+	public int count_t();
+	
+    public int count_v(String faqCategory,String value);
+	
+	public int count(String faqCategory);
 	
 	public int faq_write(String select,String title,String content,String member_idx);
 	

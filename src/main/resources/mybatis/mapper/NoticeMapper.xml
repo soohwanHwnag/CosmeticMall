@@ -49,6 +49,10 @@
 	<delete id="noticeDelete">
 	delete from notice where notice_idx=#{param1}
 	</delete> 
+	
+	<update id="update_hit">
+	UPDATE notice SET notice_hit = notice_hit+1 WHERE notice_idx=#{param1}
+	</update>
 </mapper>    
 
 

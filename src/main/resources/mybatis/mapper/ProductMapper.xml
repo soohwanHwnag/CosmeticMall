@@ -10,4 +10,79 @@
 <!-- 세미콜론, #, 공백 주의 -->
 <mapper namespace="com.study.springboot.dao.IProductDao">
 
+	<select id="productList" resultType="com.study.springboot.dto.ProductDto">
+	select * from (select rownum as rnum , A.* from (select * from product order by product_add_date desc) A ) where rnum between #{param1} and #{param2}
+	</select>
+	
+	<select id="productList_v" resultType="com.study.springboot.dto.ProductDto">
+	select * from (select rownum as rnum , A.* from (select * from product where product_name like '%' || #{param1} || '%' order by product_add_date desc) A ) where rnum between #{param2} and #{param3}
+	</select>
+	
+	<select id="productList_c" resultType="com.study.springboot.dto.ProductDto">
+	select * from (select rownum as rnum , A.* from (select * from product where product_category = #{param1} order by product_add_date desc) A ) where rnum between #{param2} and #{param3}
+	</select>
+	
+	<select id="productList_d" resultType="com.study.springboot.dto.ProductDto">
+	select * from (select rownum as rnum , A.* from (select * from product where product_display = #{param1} order by product_add_date desc) A ) where rnum between #{param2} and #{param3}
+	</select>
+	<select id="productList_b" resultType="com.study.springboot.dto.ProductDto">
+	select * from (select rownum as rnum , A.* from (select * from product where product_display = #{param2} and product_category = #{param1} order by product_add_date desc) A ) where rnum between #{param3} and #{param4}
+	</select>
+	
+	<select id="count" resultType="_int">
+	select count(*) from product
+	</select>
+	
+	<select id="count_v" resultType="_int">
+	select count(*) from product where product_name like '%' || #{param1} || '%'
+	</select>
+	
+	<select id="count_c" resultType="_int">
+	select count(*) from product where product_category = #{param1}
+	</select>
+	
+	<select id="count_d" resultType="_int">
+	select count(*) from product where product_display = #{param1}
+	</select>
+	
+	<select id="count_b" resultType="_int">
+	select count(*) from product where product_display = #{param2} and product_category = #{param1}
+	</select>
+	
+	<insert id="productAdd">
+	INSERT INTO product (product_idx, product_category, product_name, product_comment, product_price,
+     product_volume, product_stock, product_shipping_fee,product_filename,product_filename_detail,product_content, product_display)
+    VALUES (product_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4},#{param5}, #{param6}, #{param7}, #{param8}, #{param9},#{param10},'진열')
+	</insert>
+	
+	<select id="dto" resultType="com.study.springboot.dto.ProductDto">
+	select * from product where product_idx = #{param1}
+	</select>
+	
+	<!-- 상품 수정 -->
+	<update id="product_modify" parameterType="map">
+		update product set product_category=#{param2}, product_name=#{param3}, product_comment=#{param4}, product_price=#{param5},
+                   		   product_volume=#{param6}, product_stock=#{param7}, product_shipping_fee=#{param8}, product_content=#{param9},
+                   		   product_display=#{param10} 
+       	where product_idx=#{param1}
+	</update>
+	<!-- 선택 진열 -->
+	<update id="updateDisplay">
+		UPDATE product SET PRODUCT_DISPLAY = '진열' 
+		WHERE PRODUCT_IDX = #{param1}
+	</update>
+	
+	<!-- 선택 숨김 -->
+	<update id="updateHidden">
+		UPDATE product SET PRODUCT_DISPLAY = '숨김' 
+		WHERE PRODUCT_IDX = #{param1}
+	</update>	
+	
+	<!-- 선택 품절 -->
+	<update id="updateSoldOut">
+		UPDATE product SET PRODUCT_DISPLAY = '품절' 
+		WHERE PRODUCT_IDX = #{param1}
+	</update>
+	
+	
 </mapper>

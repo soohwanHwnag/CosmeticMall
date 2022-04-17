@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500;700;900&display=swap');
+   * { 
+      -webkit-user-drag: none;
+      margin: 0 auto;
+      padding: 0 auto;
+      font-family: 'Noto Sans KR', sans-serif;
+      /* border: 1px solid black; */
+   }
+   body {
+      word-break: keep-all;
+      -webkit-text-size-adjust: none;
+   }
+   #wrap {
+         width: 1200px;
+         margin: 0 auto;
+   }
+   #introImg {
+         width: 1200px;
+         height: 400px;
+         -webkit-user-drag: none;
+   }
+   .text {
+	position:absolute;
+	top:250px;
+	left:850px;
+   color:rgb(45, 78, 45);
+   text-align:center;
+   }
+   .text p h1 {
+   background-color: transparent;
+   }
+   .p1 {
+      font-size: 21px;
+      display: block;
+   }
+   .p2 {
+      font-size: 38px;
+      display: block;
+   }
+   .sectionhome {
+      margin-top: 50px;
+   }
+
+   .introbox {
+      position: relative;
+   max-width: 940px;
+   margin: 0 auto;
+   padding: 0 20px;
+   }
+   .introbox .introtit span {
+      display: block;
+   }
+   .introbox .introtit {
+      float: left;
+   margin-right: 96px;
+   font-size: 30px;
+   line-height: 40px;
+   letter-spacing: -1px;
+   }
+   .introbox .introtext {
+   overflow: hidden;
+   font-size: 20px;
+   line-height: 30px;
+   }
+   .inner {
+      position: relative;
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 0 20px;
+   }
+   a:link { color: black; }
+   a:visited { color: black; }
+   a:hover { color: black; }
+   a:active { color: black; }
+   a, a:hover {
+  text-decoration: none;
+}
+
+   .sectionbrand {
+      padding-top: 50px;
+   }   
+
+   .sectionbrand .brandphilo {
+      margin-bottom: 8px;
+      font-size: 22px;
+      color: #354930;
+   }
+   .aboutbrand .brandintro {
+      display: block;
+      position: relative;
+      padding-left: 322px;
+   }
+   .brandimg {
+      position: absolute;
+      top: 3px;
+      left: 0;
+      width: 296px;
+      height: 150px;
+      font-size: 0;
+      line-height: 150px;
+      text-align: center;
+   }
+   .brandintro img {
+      height:150px;
+      width:300px;
+      vertical-align: middle;
+   }
+
+   .brandtext {
+      overflow: hidden;
+      height: 112px;
+      margin-top: 10px;
+      font-size: 16px;
+      color: #333;
+      line-height: 28px;
+      letter-spacing: -0.5px
+   }
+   .aboutbrand .brandtit {
+      display: block;
+      overflow: hidden;
+      margin-right: 110px;
+      font-size: 20px;
+      color: #1e1e1e;
+      line-height: 30px;
+      letter-spacing: -1px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+   }
+   .aboutbrand .brandtext {
+      overflow: hidden;
+      height: 112px;
+      margin-top: 10px;
+      font-size: 16px;
+      color: #333;
+      line-height: 28px;
+      letter-spacing: -0.5px;
+   }
+   ul, ol, li {
+      list-style: none;
+   }
+   .introlist {
+      margin: 70px -13px 0;
+   }
+   .introlist li {
+      float: left;
+      position: relative;
+      width: 33.33%;
+      /* *width: 295px; */
+      padding: 0 13px;
+      box-sizing: border-box;
+   }
+   .introlist::after {
+  display: block;
+  clear: both;
+  content: '';
+}
+   .introlist strong {
+  display: block;
+  font-size: 24px;
+  font-weight: normal;
+  color: #000;
+   }
+   .introlist p {
+  margin-top: 180px;
+  font-size: 16px;
+  color: #333;
+  line-height: 28px;
+}
+.introlist .imgbox {
+position: absolute;
+top: 36px;
+right: 13px;
+left: 13px;
+}
+.introlist .imgbox img {
+   width: 100%;
+}
+img {
+  border: 0;
+  vertical-align: top;
+}
+.brandtext {
+   margin-left: 100px;
+}
+.brandtit {
+   margin-left: 100px;
+}

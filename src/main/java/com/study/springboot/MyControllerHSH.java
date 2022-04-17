@@ -18,28 +18,37 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import com.study.springboot.dao.IProductDao;
 import com.study.springboot.dto.EventDto;
 import com.study.springboot.dto.FaqDto;
 import com.study.springboot.dto.MailDto;
 import com.study.springboot.dto.MemberDto;
 import com.study.springboot.dto.NoticeDto;
+import com.study.springboot.dto.One2oneDto;
+import com.study.springboot.dto.One2one_replyDto;
 import com.study.springboot.dto.Order_cancelDto;
 import com.study.springboot.dto.Order_itemDto;
 import com.study.springboot.dto.Order_listDto;
+import com.study.springboot.dto.ProductDto;
 import com.study.springboot.service.EventService;
 import com.study.springboot.service.FaqService;
 import com.study.springboot.service.FileUploadService;
 import com.study.springboot.service.MailService;
 import com.study.springboot.service.MemberService;
 import com.study.springboot.service.NoticeService;
+import com.study.springboot.service.One2oneService;
+import com.study.springboot.service.One2one_replyService;
 import com.study.springboot.service.Order_cancelService;
 import com.study.springboot.service.Order_listService;
+import com.study.springboot.service.ProductService;
 
 
 
 @Controller
 public class MyControllerHSH {
-
+	
+	@Autowired
+	IProductDao productDao;
 	@Autowired
 	EventService eventservice;
 	@Autowired
@@ -56,17 +65,607 @@ public class MyControllerHSH {
 	FaqService faqservice;
 	@Autowired
 	MailService mailservice;
+	@Autowired
+	One2oneService o2oservice;
+	@Autowired
+	One2one_replyService o2o_replyservice;
+	@Autowired
+	ProductService productservice;
 
 	@RequestMapping("/")
-	public String root() {
-		
-		return "admin/header";
+	public String root(Model model) {
+		model.addAttribute("mainPage","main.jsp");
+		return "index";
 	}
+	@RequestMapping("/main")
+	public String main(Model model) {
+		model.addAttribute("mainPage","main.jsp");
+		return "index";
+	}
+	
+//	이벤트 
+	@RequestMapping("/customer/eventList_Y")
+	public String eventList_Y(@RequestParam(value="page", required=false) String page,
+							Model model) {
+		String event_finish = "y";
+		int count =0;
+		List<EventDto> eventList = null;
+		if (page == null) {
+			page = "1";
+		}
+		int page_number = Integer.parseInt(page);
+		int page_size = 9;
+		int page_start = (page_number - 1) * page_size + 1;
+		int page_end = page_number * page_size;
+		int block_size = 5;
+		int block_group = (int)Math.ceil((double)page_number/block_size);
+		int block_start = (block_group -1) * block_size +1;
+		int block_end = block_group * block_size;
+		int block_total =0;
+		
+			 count = eventservice.count(event_finish);
+			eventList = eventservice.eventList(event_finish, String.valueOf(page_start),
+					String.valueOf(page_end));
+			block_total = (int)Math.ceil((double)count/page_size);
+	
+        if(block_end >= block_total) {
+			block_end = block_total;
+		}
+        
+        model.addAttribute("nowpage", page_number);
+		model.addAttribute("block_total", block_total);
+		model.addAttribute("block_start", block_start);
+		model.addAttribute("block_end", block_end);
+		model.addAttribute("eventList", eventList);
+		model.addAttribute("count", count);
+		model.addAttribute("mainPage", "customer/eventList_Y.jsp");
+		return "index";
+	}
+	
+	@RequestMapping("/customer/eventList_N")
+	public String eventList_N(@RequestParam(value="page", required=false) String page,
+							Model model) {
+		String event_finish = "n";
+		int count =0;
+		List<EventDto> eventList = null;
+		if (page == null) {
+			page = "1";
+		}
+		int page_number = Integer.parseInt(page);
+		int page_size = 9;
+		int page_start = (page_number - 1) * page_size + 1;
+		int page_end = page_number * page_size;
+		int block_size = 5;
+		int block_group = (int)Math.ceil((double)page_number/block_size);
+		int block_start = (block_group -1) * block_size +1;
+		int block_end = block_group * block_size;
+		int block_total =0;
+		
+			 count = eventservice.count(event_finish);
+			eventList = eventservice.eventList(event_finish, String.valueOf(page_start),
+					String.valueOf(page_end));
+			block_total = (int)Math.ceil((double)count/page_size);
+	
+        if(block_end >= block_total) {
+			block_end = block_total;
+		}
+        
+        model.addAttribute("nowpage", page_number);
+		model.addAttribute("block_total", block_total);
+		model.addAttribute("block_start", block_start);
+		model.addAttribute("block_end", block_end);
+		model.addAttribute("eventList", eventList);
+		model.addAttribute("count", count);
+		model.addAttribute("mainPage", "customer/eventList_N.jsp");
+		return "index";
+	}
+	@RequestMapping("/customer/eventView")
+	public String eventView(@RequestParam("event_idx") String event_idx,
+								Model model) {
+		EventDto dto = eventservice.dto(event_idx);
+		model.addAttribute("dto", dto);
+		model.addAttribute("mainPage", "customer/eventView.jsp");
+		return "index";
+	}
+	@RequestMapping("/customer/noticeList")
+	public String noticeListU (@RequestParam(value="page",required=false) String page,
+								Model model) {
+	int count =0;
+	List<NoticeDto> noticeList = null;
+	if (page == null) {
+	page = "1";
+	}
+	int page_number = Integer.parseInt(page);
+	int page_size = 10;
+	int page_start = (page_number - 1) * page_size + 1;
+	int page_end = page_number * page_size;
+	int block_size = 5;
+	int block_group = (int)Math.ceil((double)page_number/block_size);
+	int block_start = (block_group -1) * block_size +1;
+	int block_end = block_group * block_size;
+	int block_total =0;
+	
+	count = noticeservice.count();
+	noticeList = noticeservice.noticeList( String.valueOf(page_start),
+		String.valueOf(page_end));
+	block_total = (int)Math.ceil((double)count/page_size);
+	
+	if(block_end >= block_total) {
+		block_end = block_total;
+	}
+    model.addAttribute("nowpage", page_number);
+	model.addAttribute("block_total", block_total);
+	model.addAttribute("block_start", block_start);
+	model.addAttribute("block_end", block_end);
+	model.addAttribute("count", count);
+	model.addAttribute("noticeList", noticeList);
+	model.addAttribute("mainPage", "customer/noticeList.jsp");
+	return "index";
+}
+	@RequestMapping("/customer/noticeView")
+	public String noticeViewU (@RequestParam("notice_idx") String notice_idx,
+								Model model) {
+	int hit_update = noticeservice.update_hit(notice_idx);
+	NoticeDto dto = noticeservice.dto(notice_idx);
+	model.addAttribute("dto", dto);
+	model.addAttribute("mainPage", "customer/noticeView.jsp");
+	return "index";
+	}
+	
+	@RequestMapping("/customer/faqList/total")
+	public String faqTotal(@RequestParam(value="page",required=false) String page,
+										@RequestParam(value="faq_value",required=false) String value,
+										Model model) {
+		if (page == null) {
+			page = "1";
+			}
+			int page_number = Integer.parseInt(page);
+			int page_size = 10;
+			int page_start = (page_number - 1) * page_size + 1;
+			int page_end = page_number * page_size;
+			int block_size = 5;
+			int block_group = (int)Math.ceil((double)page_number/block_size);
+			int block_start = (block_group -1) * block_size +1;
+			int block_end = block_group * block_size;
+			int block_total =0;
+		    int count=0;
+		List<FaqDto> faq_list_t = null;
+		if(StringUtils.hasText(value)) {
+			faq_list_t=faqservice.faq_list_t_v(value,String.valueOf(page_start),String.valueOf(page_end));
+			count = faqservice.count_t_v(value);
+			block_total = (int)Math.ceil((double)count/page_size);
+		}else {
+			faq_list_t=faqservice.faq_list_t(String.valueOf(page_start),String.valueOf(page_end));
+			count = faqservice.count_t();
+			block_total = (int)Math.ceil((double)count/page_size);
+		}
+		if(block_end >= block_total) {
+			block_end = block_total;
+		}
+		model.addAttribute("value", value);
+		model.addAttribute("nowpage", page_number);
+		 model.addAttribute("block_total", block_total);
+		model.addAttribute("block_start", block_start);
+		model.addAttribute("block_end", block_end);
+		model.addAttribute("faq_list", faq_list_t);
+		model.addAttribute("mainPage", "customer/faqList/total.jsp");
+		
+		return "index";	
+	} 
+	
+	//FAQ 교환/환불
+	@RequestMapping("/customer/faqList/changeRefund")
+	public String faqChangeRefund(@RequestParam(value="page",required=false) String page,
+										@RequestParam(value="faq_value",required=false) String value,
+										Model model) {
+		String faqCategory = "ChangeRefund";
+		if (page == null) {
+			page = "1";
+			}
+			int page_number = Integer.parseInt(page);
+			int page_size = 10;
+			int page_start = (page_number - 1) * page_size + 1;
+			int page_end = page_number * page_size;
+			int block_size = 5;
+			int block_group = (int)Math.ceil((double)page_number/block_size);
+			int block_start = (block_group -1) * block_size +1;
+			int block_end = block_group * block_size;
+			int block_total =0;
+		    int count=0;
+		List<FaqDto> faq_list = null;
+		if(StringUtils.hasText(value)) {
+			faq_list=faqservice.faq_list_v(faqCategory,value,String.valueOf(page_start),String.valueOf(page_end));
+			count = faqservice.count_v(faqCategory,value);
+			block_total = (int)Math.ceil((double)count/page_size);
+		}else {
+			faq_list=faqservice.faq_list(faqCategory,String.valueOf(page_start),String.valueOf(page_end));
+			count = faqservice.count(faqCategory);
+			block_total = (int)Math.ceil((double)count/page_size);
+		}
+		if(block_end >= block_total) {
+			block_end = block_total;
+		}
+		model.addAttribute("value", value);
+		model.addAttribute("nowpage", page_number);
+		 model.addAttribute("block_total", block_total);
+		model.addAttribute("block_start", block_start);
+		model.addAttribute("block_end", block_end);
+		model.addAttribute("faq_list", faq_list);
+		model.addAttribute("mainPage", "customer/faqList/changeRefund.jsp");
+		
+		return "index";	
+	} 
+	
+	//FAQ EVENT
+		@RequestMapping("/customer/faqList/event")
+		public String faqEvent(@RequestParam(value="page",required=false) String page,
+									@RequestParam(value="faq_value",required=false) String value,
+									Model model) {
+			String faqCategory = "Event";
+			if (page == null) {
+				page = "1";
+				}
+				int page_number = Integer.parseInt(page);
+				int page_size = 10;
+				int page_start = (page_number - 1) * page_size + 1;
+				int page_end = page_number * page_size;
+				int block_size = 5;
+				int block_group = (int)Math.ceil((double)page_number/block_size);
+				int block_start = (block_group -1) * block_size +1;
+				int block_end = block_group * block_size;
+				int block_total =0;
+			    int count=0;
+			List<FaqDto> faq_list = null;
+			if(StringUtils.hasText(value)) {
+				faq_list=faqservice.faq_list_v(faqCategory,value,String.valueOf(page_start),String.valueOf(page_end));
+				count = faqservice.count_v(faqCategory,value);
+				block_total = (int)Math.ceil((double)count/page_size);
+			}else {
+				faq_list=faqservice.faq_list(faqCategory,String.valueOf(page_start),String.valueOf(page_end));
+				count = faqservice.count(faqCategory);
+				block_total = (int)Math.ceil((double)count/page_size);
+			}
+			if(block_end >= block_total) {
+				block_end = block_total;
+			}
+			model.addAttribute("value", value);
+			model.addAttribute("nowpage", page_number);
+			 model.addAttribute("block_total", block_total);
+			model.addAttribute("block_start", block_start);
+			model.addAttribute("block_end", block_end);
+			model.addAttribute("faq_list", faq_list);
+			model.addAttribute("mainPage", "customer/faqList/event.jsp");
+			
+			return "index";	
+		} 
+		//FAQ 주문/배송
+		@RequestMapping("/customer/faqList/orderShip")
+		public String faqOrderShip(@RequestParam(value="page",required=false) String page,
+										@RequestParam(value="faq_value",required=false) String value,
+										Model model) {	
+			String faqCategory = "OrderShip";
+			if (page == null) {
+				page = "1";
+				}
+				int page_number = Integer.parseInt(page);
+				int page_size = 10;
+				int page_start = (page_number - 1) * page_size + 1;
+				int page_end = page_number * page_size;
+				int block_size = 5;
+				int block_group = (int)Math.ceil((double)page_number/block_size);
+				int block_start = (block_group -1) * block_size +1;
+				int block_end = block_group * block_size;
+				int block_total =0;
+			    int count=0;
+			List<FaqDto> faq_list = null;
+			if(StringUtils.hasText(value)) {
+				faq_list=faqservice.faq_list_v(faqCategory,value,String.valueOf(page_start),String.valueOf(page_end));
+				count = faqservice.count_v(faqCategory,value);
+				block_total = (int)Math.ceil((double)count/page_size);
+			}else {
+				faq_list=faqservice.faq_list(faqCategory,String.valueOf(page_start),String.valueOf(page_end));
+				count = faqservice.count(faqCategory);
+				block_total = (int)Math.ceil((double)count/page_size);
+			}
+			if(block_end >= block_total) {
+				block_end = block_total;
+			}
+			model.addAttribute("value", value);
+			model.addAttribute("nowpage", page_number);
+			 model.addAttribute("block_total", block_total);
+			model.addAttribute("block_start", block_start);
+			model.addAttribute("block_end", block_end);
+			model.addAttribute("faq_list", faq_list);
+			model.addAttribute("mainPage", "customer/faqList/orderShip.jsp");
+			
+			return "index";	
+		} 
+		
+		//FAQ 제품
+		@RequestMapping("/customer/faqList/product")
+		public String faqProduct(@RequestParam(value="page",required=false) String page,
+									@RequestParam(value="faq_value",required=false) String value,
+									Model model) {
+			String faqCategory = "Product";	
+			if (page == null) {
+				page = "1";
+				}
+				int page_number = Integer.parseInt(page);
+				int page_size = 10;
+				int page_start = (page_number - 1) * page_size + 1;
+				int page_end = page_number * page_size;
+				int block_size = 5;
+				int block_group = (int)Math.ceil((double)page_number/block_size);
+				int block_start = (block_group -1) * block_size +1;
+				int block_end = block_group * block_size;
+				int block_total =0;
+			    int count=0;
+			List<FaqDto> faq_list = null;
+			if(StringUtils.hasText(value)) {
+				faq_list=faqservice.faq_list_v(faqCategory,value,String.valueOf(page_start),String.valueOf(page_end));
+				count = faqservice.count_v(faqCategory,value);
+				block_total = (int)Math.ceil((double)count/page_size);
+			}else {
+				faq_list=faqservice.faq_list(faqCategory,String.valueOf(page_start),String.valueOf(page_end));
+				count = faqservice.count(faqCategory);
+				block_total = (int)Math.ceil((double)count/page_size);
+			}
+			if(block_end >= block_total) {
+				block_end = block_total;
+			}
+			model.addAttribute("value", value);
+			model.addAttribute("nowpage", page_number);
+			 model.addAttribute("block_total", block_total);
+			model.addAttribute("block_start", block_start);
+			model.addAttribute("block_end", block_end);
+			model.addAttribute("faq_list", faq_list);
+			model.addAttribute("mainPage", "customer/faqList/product.jsp");
+			
+			return "index";	
+		} 
+		@RequestMapping("/customer/one2oneList")
+		public String one2oneList(@RequestParam(value="page",required=false) String page,
+				Model model) {
+				if (page == null) {
+				page = "1";
+				}
+				int page_number = Integer.parseInt(page);
+				int page_size = 10;
+				int page_start = (page_number - 1) * page_size + 1;
+				int page_end = page_number * page_size;
+				int block_size = 5;
+				int block_group = (int)Math.ceil((double)page_number/block_size);
+				int block_start = (block_group -1) * block_size +1;
+				int block_end = block_group * block_size;
+				int block_total =0;
+				int count=0;
+				List<One2oneDto> o2oList = o2oservice.o2oList(String.valueOf(page_start),String.valueOf(page_end));
+				count = o2oservice.count();
+				block_total = (int)Math.ceil((double)count/page_size);
+				if(block_end >= block_total) {
+				block_end = block_total;
+				}
+				model.addAttribute("nowpage", page_number);
+				model.addAttribute("block_total", block_total);
+				model.addAttribute("block_start", block_start);
+				model.addAttribute("block_end", block_end);
+				model.addAttribute("one2oneList", o2oList);
+				model.addAttribute("mainPage", "customer/one2oneList.jsp");
+				
+				return "index";	
+			}
+		
+			@RequestMapping("/customer/one2oneWrite")
+			public String one2oneWrite(Model model) {
+				model.addAttribute("mainPage", "customer/one2oneWrite.jsp");
+				return "index";
+			}
+			
+			@RequestMapping("/customer/one2oneModify")
+			public String one2oneModify(@RequestParam("one2one_idx") String one2one_idx,
+											Model model) {
+				One2oneDto dto = o2oservice.dto(one2one_idx);
+				model.addAttribute("dto",dto);
+				model.addAttribute("mainPage", "customer/one2oneModify.jsp");
+				return "index";
+			}
+			@RequestMapping("/customer/one2oneModifyForm")
+			@ResponseBody
+			public String one2oneModifyForm(@RequestParam("one2one_idx") String one2one_idx,
+										@RequestParam("one2one_category") String category,
+										@RequestParam("one2one_title") String title,
+										@RequestParam("editor4") String content,
+										Model model) {
+				int result= o2oservice.one2oneModifyForm(one2one_idx,category,title,content);
+				if (result == 1) {
+					return "<script>alert('수정 되었습니다'); location.href='/customer/one2oneList';</script>";
+				} else {
+					return "<script>alert('수정 실패되었습니다'); history.back(-1);</script>";
+				}
 
+			}
+			
+			@RequestMapping("/customer/one2oneJoin")
+			@ResponseBody
+			public String one2oneJoin(@RequestParam("one2one_category") String category,
+										@RequestParam("one2one_title") String title,
+										@RequestParam("editor4") String content,
+										Model model) {
+				int result= o2oservice.one2oneJoin(category,title,content);
+				if (result == 1) {
+					return "<script>alert('등록 되었습니다'); location.href='/customer/one2oneList';</script>";
+				} else {
+					return "<script>alert('등록 실패되었습니다'); history.back(-1);</script>";
+				}
+
+			}
+			
+			@RequestMapping("/customer/one2oneDelete")
+			@ResponseBody
+			public String one2oneJoin(@RequestParam("one2one_idx") String one2one_idx,
+										Model model) {
+				int result= o2oservice.one2oneDelete(one2one_idx);
+				if (result == 1) {
+					return "<script>alert('삭제 되었습니다'); location.href='/customer/one2oneList';</script>";
+				} else {
+					return "<script>alert('삭제 실패되었습니다'); history.back(-1);</script>";
+				}
+
+			}	
+			@RequestMapping("/customer/one2oneView")
+			public String one2oneView(@RequestParam("one2one_idx") String one2one_idx,
+										Model model) {
+				One2oneDto dto = o2oservice.dto(one2one_idx);
+				One2one_replyDto reply_dto = o2o_replyservice.dto(one2one_idx);
+				
+				model.addAttribute("dto", dto);
+				model.addAttribute("reply_dto", reply_dto);
+				model.addAttribute("mainPage", "customer/one2oneView.jsp");
+				return "index";
+			}
+			@RequestMapping("/login/login")
+			public String login	(Model model) {
+				
+				model.addAttribute("mainPage", "login/login.jsp");
+				return "index";
+			}
+			@RequestMapping("/login/logout")
+			@ResponseBody
+			public String logout(HttpServletRequest req,
+					Model model) {
+				req.getSession().invalidate();
+				model.addAttribute("mainPage", "login/login.jsp");
+				return "<script>alert('로그아웃 되었습니다'); location.href='/main';</script>";
+			}
+			@RequestMapping("/login/loginForm")
+			@ResponseBody
+			public String loginForm(@RequestParam("id") String id,
+									@RequestParam("pw") String pw,
+									Model model,HttpServletRequest req) {
+				int result = memberservice.login(id,pw);
+				if (result == 1) {
+					MemberDto memberC = memberservice.memberC(id);
+					req.getSession().setAttribute("member_idx", memberC.getMember_idx());
+					System.out.println(memberC.getMember_idx());
+					String member_grade = memberC.getMember_grade();
+					System.out.println(member_grade);
+					if(member_grade.equals("관리자")) {
+						return "<script>alert('로그인 되었습니다'); location.href='/admin';</script>";
+					}else {
+						return "<script>alert('로그인 되었습니다'); location.href='/main';</script>";
+					}
+				} else {
+					return "<script>alert('로그인 실패되었습니다'); history.back(-1);</script>";
+				}
+			}
+			@RequestMapping("/join/Join")
+			public String join(Model model) {
+				
+				model.addAttribute("mainPage", "join/Join.jsp");
+				return "index";
+			}
+			@RequestMapping("/join/memberJoin")
+			@ResponseBody
+			public String join(@RequestParam("member_name") String member_name,
+								@RequestParam("member_email") String member_email,
+								@RequestParam("member_password") String member_password,
+								@RequestParam("member_phone") String member_phone,
+								@RequestParam(value="member_email_YN",required=false) String member_email_YN,
+								Model model) {
+				if(member_email_YN==null) {
+					member_email_YN = "N";
+				}
+				int result = memberservice.memberJoin(member_name,member_email,member_password,member_phone,member_email_YN);
+				if (result == 1) {
+					return "<script>alert('회원가입 되었습니다'); location.href='/main';</script>";
+				} else {
+					return "<script>alert('회원가입 실패되었습니다'); history.back(-1);</script>";
+				}
+			}
+			
+			@RequestMapping("/product/productList")
+			public String product(@RequestParam( value="page", required=false) String page,
+									Model model) {
+				if (page == null) {
+					page = "1";
+					}
+					int page_number = Integer.parseInt(page);
+					int page_size = 10;
+					int page_start = (page_number - 1) * page_size + 1;
+					int page_end = page_number * page_size;
+					int block_size = 5;
+					int block_group = (int)Math.ceil((double)page_number/block_size);
+					int block_start = (block_group -1) * block_size +1;
+					int block_end = block_group * block_size;
+					int block_total =0;
+					List<ProductDto> productList = productservice.productList(String.valueOf(page_start),String.valueOf(page_end));
+					int count = productservice.count();
+					block_total = (int)Math.ceil((double)count/page_size);
+					if(block_end >= block_total) {
+						block_end = block_total;
+					}
+					  model.addAttribute("nowpage", page_number);
+						model.addAttribute("block_total", block_total);
+						model.addAttribute("block_start", block_start);
+						model.addAttribute("block_end", block_end);
+						model.addAttribute("product_list", productList);
+						model.addAttribute("count", count);
+				model.addAttribute("mainPage", "product/productList.jsp");
+
+				return "index";
+			}
+			@RequestMapping("/product/productView")
+			public String productView(@RequestParam("product_idx") String product_idx,
+									HttpServletRequest req,
+									Model model) {
+				ProductDto dto = productservice.dto(product_idx);
+				model.addAttribute("dto", dto);
+				model.addAttribute("mainPage", "product/productView.jsp");
+				return "index";
+			}
+			@RequestMapping("/product/cart_add")
+			public String cart_add(
+									HttpServletRequest req,
+									Model model) {
+				model.addAttribute("mainPage", "order/cart.jsp");
+				return "index";
+			}
+			@RequestMapping("/brand/brand")
+			public String brand(Model model) {
+				model.addAttribute("mainPage", "brand/brand.jsp");
+				return "index";
+			}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//   관리자 페이지 컨트롤러
+			
+	@RequestMapping("/admin")
+	public String admin (Model model) {
+	return "/admin/header";
+	}		
 	@RequestMapping("/admin/logout")
-	public String logout(HttpServletRequest req) {
+	@ResponseBody
+	public String adminLogout(HttpServletRequest req,
+							Model model) {
 		req.getSession().invalidate();
-		return "adminCommon";
+		return "<script>alert('로그아웃 되었습니다'); location.href='/main';</script>";
 	}
 	@RequestMapping("/admin/board/eventlist/continue")
 	public String adminEvent1(@RequestParam(value = "page", required = false) String page,
@@ -780,7 +1379,7 @@ public class MyControllerHSH {
 			model.addAttribute("category", category);
 			model.addAttribute("value", value);
 			model.addAttribute("orderCancelList", orderCancelList);
-			model.addAttribute("mainPage", "admin/order/cancel/before.jsp");
+			model.addAttribute("mainPage", "order/cancel/before.jsp");
 			return "admin/index";
 		}
 		@RequestMapping("/admin/order/cancel/after")
@@ -1173,9 +1772,9 @@ public class MyControllerHSH {
 			String faqCategory = "ChangeRefund";
 			List<FaqDto> faq_list = null;
 			if(StringUtils.hasText(value)) {
-				faq_list=faqservice.faq_list_v(faqCategory,value);
+				faq_list=faqservice.faq_list_v(faqCategory,value,String.valueOf(page_start),String.valueOf(page_end));
 			}else {
-				faq_list=faqservice.faq_list(faqCategory);
+				faq_list=faqservice.faq_list(faqCategory,String.valueOf(page_start),String.valueOf(page_end));
 			}
 			model.addAttribute("value", value);
 			model.addAttribute("nowpage", page_number);
@@ -1222,9 +1821,9 @@ public class MyControllerHSH {
 				String faqCategory = "Event";
 				List<FaqDto> faq_list = null;
 				if(StringUtils.hasText(value)) {
-					faq_list=faqservice.faq_list_v(faqCategory,value);
+					faq_list=faqservice.faq_list_v(faqCategory,value,String.valueOf(page_start),String.valueOf(page_end));
 				}else {
-					faq_list=faqservice.faq_list(faqCategory);
+					faq_list=faqservice.faq_list(faqCategory,String.valueOf(page_start),String.valueOf(page_end));
 				}
 				model.addAttribute("value", value);
 				model.addAttribute("nowpage", page_number);
@@ -1258,9 +1857,9 @@ public class MyControllerHSH {
 				String faqCategory = "OrderShip";
 				List<FaqDto> faq_list = null;
 				if(StringUtils.hasText(value)) {
-					faq_list=faqservice.faq_list_v(faqCategory,value);
+					faq_list=faqservice.faq_list_v(faqCategory,value,String.valueOf(page_start),String.valueOf(page_end));
 				}else {
-					faq_list=faqservice.faq_list(faqCategory);
+					faq_list=faqservice.faq_list(faqCategory,String.valueOf(page_start),String.valueOf(page_end));
 				}
 				model.addAttribute("value", value);
 				model.addAttribute("nowpage", page_number);
@@ -1295,9 +1894,9 @@ public class MyControllerHSH {
 				String faqCategory = "Product";
 				List<FaqDto> faq_list = null;
 				if(StringUtils.hasText(value)) {
-					faq_list=faqservice.faq_list_v(faqCategory,value);
+					faq_list=faqservice.faq_list_v(faqCategory,value,String.valueOf(page_start),String.valueOf(page_end));
 				}else {
-					faq_list=faqservice.faq_list(faqCategory);
+					faq_list=faqservice.faq_list(faqCategory,String.valueOf(page_start),String.valueOf(page_end));
 				}
 				model.addAttribute("value", value);
 				model.addAttribute("nowpage", page_number);
@@ -1369,8 +1968,161 @@ public class MyControllerHSH {
 				}
 				
 			} 
-
-
+			@RequestMapping("/admin/product/product_list")
+			public String productList( @RequestParam(value="page",required=false) String page,
+										@RequestParam(value="value",required=false) String value,
+										@RequestParam(value="category",required=false) String category,
+										@RequestParam(value="display_status",required=false) String display_status,
+										Model model) {
+				if (page == null) {
+					page = "1";
+					}
+					int page_number = Integer.parseInt(page);
+					int page_size = 10;
+					int page_start = (page_number - 1) * page_size + 1;
+					int page_end = page_number * page_size;
+					int block_size = 5;
+					int block_group = (int)Math.ceil((double)page_number/block_size);
+					int block_start = (block_group -1) * block_size +1;
+					int block_end = block_group * block_size;
+					int block_total =0;
+					int count = 0;
+					int total_count = productservice.count();
+				List<ProductDto> productList = null;
+				if(StringUtils.hasText(value) && !StringUtils.hasText(category) && !StringUtils.hasText(display_status)) {
+					System.out.println("검색");
+					productList = productservice.productList_v(value,String.valueOf(page_start),String.valueOf(page_end));
+					count = productservice.count_v(value);
+					block_total = (int)Math.ceil((double)count/page_size);
+				}
+				else if(!StringUtils.hasText(value) && StringUtils.hasText(category) && !StringUtils.hasText(display_status)) {
+					System.out.println("상세(카테고리)검색");
+					productList = productservice.productList_c(category,String.valueOf(page_start),String.valueOf(page_end));
+					count=productservice.count_c(category);
+					block_total = (int)Math.ceil((double)count/page_size);
+				}
+				else if(!StringUtils.hasText(value) && !StringUtils.hasText(category) && StringUtils.hasText(display_status)) {
+					System.out.println("상세(디피)검색");
+					productList = productservice.productList_d(display_status,String.valueOf(page_start),String.valueOf(page_end));
+					count = productservice.count_d(display_status);
+					block_total = (int)Math.ceil((double)count/page_size);
+				}
+				else if(!StringUtils.hasText(value) && StringUtils.hasText(category) && StringUtils.hasText(display_status)) {
+					System.out.println("상세(둘다)검색");
+					productList = productservice.productList_b(category,display_status,String.valueOf(page_start),String.valueOf(page_end));
+					count = productservice.count_b(category,display_status);
+					block_total = (int)Math.ceil((double)count/page_size);
+				}
+				else {
+					System.out.println("상세(전체)검색");
+					productList = productservice.productList(String.valueOf(page_start),String.valueOf(page_end));
+					count = productservice.count();
+					block_total = (int)Math.ceil((double)count/page_size);
+				}
+				if(block_end >= block_total) {
+					block_end = block_total;
+				}
+				model.addAttribute("total_count", total_count);
+				model.addAttribute("count", count);
+				model.addAttribute("value", value);
+				model.addAttribute("nowpage", page_number);
+				 model.addAttribute("block_total", block_total);
+				model.addAttribute("block_start", block_start);
+				model.addAttribute("block_end", block_end);
+				model.addAttribute("mainPage", "product/product_list2.jsp");
+				model.addAttribute("list",productList);
+				return "admin/index";
+			}
+			@RequestMapping("/admin/product/product_detail")
+			public String product_detail(@RequestParam("product_idx") String product_idx,
+											Model model) {
+				ProductDto dto = productservice.dto(product_idx);
+				model.addAttribute("dto", dto);
+				model.addAttribute("mainPage", "product/product_detail.jsp");
+				return "admin/index";
+			}
+			@RequestMapping("/admin/product/product_add")
+			public String productAdd(Model model) {
+				model.addAttribute("mainPage", "product/product_add.jsp");
+				return "admin/index";
+			}
+			@RequestMapping("/admin/product/productAdd")
+			@ResponseBody
+			public String productAdd1(@RequestParam("product_category") String product_category,
+										@RequestParam("product_name") String product_name,
+										@RequestParam("product_comment") String product_comment,
+										@RequestParam("product_price") String product_price,
+										@RequestParam("product_volume") String product_volume,
+										@RequestParam("product_stock") String product_stock,
+										@RequestParam("product_shipping_fee") String product_shipping_fee,
+										@RequestParam(value = "product_fliename", required = false) MultipartFile product_fliename,
+										@RequestParam(value = "product_fliename_detail", required = false) MultipartFile product_fliename_detail,
+										@RequestParam("product_content") String product_content,
+										Model model) {
+				String filename = fileuploadservice.restore(product_fliename);
+				String filename_detail = fileuploadservice.restore(product_fliename_detail);
+				int result = productservice.productAdd(product_category,product_name,product_comment,product_price,product_volume,
+						product_stock,product_shipping_fee,filename,filename_detail,product_content);
+				if(result == 1) {
+					return "<script>alert('상품이 등록되었습니다');window.location.href='/admin/product/product_list';</script>";
+				}else {
+					return "<script>alert('상품이 등록실패되었습니다');history.back(-1);</script>";
+				}
+			}
+			// 선택한 상품 진열로 변경
+			@RequestMapping("/admin/product/updateDisplay")
+			@ResponseBody
+			public String updateDisplay(HttpServletRequest request) {
+				//Array chk = request.getParameter("checkvalues");
+				String chk = request.getParameter("checkvalues");
+//				System.out.println(request.getParameter("checkvalues"));
+				String[] chkList = chk.split(",");
+				
+				int result = 0;
+				for(String check : chkList) {
+					result = productDao.updateDisplay(check);
+				}
+				if(result == 1) {
+					return "<script>alert('상품이 수정되었습니다');window.location.href='/admin/product/product_list';</script>";
+				}else {
+					return "<script>alert('상품이 수정실패되었습니다');history.back(-1);</script>";
+				}
+			}
+			
+			// 선택한 상품 숨김으로 변경
+			@RequestMapping("/admin/product/updateHidden")
+			@ResponseBody
+			public String updateHidden(HttpServletRequest request) {
+				String chk = request.getParameter("checkvalues");
+				String[] chkList = chk.split(",");
+				
+				int result = 0;
+				for(String check : chkList) {
+					result = productDao.updateHidden(check);
+				}
+				if(result == 1) {
+					return "<script>alert('상품이 수정되었습니다');window.location.href='/admin/product/product_list';</script>";
+				}else {
+					return "<script>alert('상품이 수정실패되었습니다');history.back(-1);</script>";
+				}
+			}
+			// 선택한 상품 품절로 변경
+			@RequestMapping("/admin/product/updateSoldOut")
+			@ResponseBody
+			public String updateSoldOut(HttpServletRequest request) {
+				String chk = request.getParameter("checkvalues");
+				String[] chkList = chk.split(",");
+				
+				int result = 0;
+				for(String check : chkList) {
+					result = productDao.updateSoldOut(check);
+				}
+				if(result == 1) {
+					return "<script>alert('상품이 수정되었습니다');window.location.href='/admin/product/product_list';</script>";
+				}else {
+					return "<script>alert('상품이 수정실패되었습니다');history.back(-1);</script>";
+				}
+			
 		
-
+			}
 }

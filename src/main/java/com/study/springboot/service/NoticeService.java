@@ -70,4 +70,8 @@ public class NoticeService {
 		int result = noticeDao.noticeDelete(notice_idx);
 		return result;
 	}
+	public int update_hit(String notice_idx) {
+		int update_hit = noticeDao.update_hit(notice_idx);
+		return update_hit;
+	}
 }

@@ -7,7 +7,11 @@
 <!-- resultType="_int" premitive int -->
 <!-- resultType="int"  Wrapper Class Integer -->    
     
-<!-- 세미콜론, #, 공백 주의 -->
-<mapper namespace="com.study.springboot.dao.IOne2one_replyDao">
-
-</mapper>
+		<!-- 세미콜론, #, 공백 주의 -->
+		<mapper namespace="com.study.springboot.dao.IOne2one_replyDao">
+		
+		<select id="dto" resultType="com.study.springboot.dto.One2one_replyDto">
+		select A.*, B.member_name from one2one_reply A join member B on A.reply_member_idx = B.member_idx where A.reply_one2one_idx =#{param1}
+		</select>
+		
+		</mapper>
