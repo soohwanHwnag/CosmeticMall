@@ -11,8 +11,10 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="/css/common.css">
 	<link rel="stylesheet" href="/css/order/order.css">
+
 	<!-- js -->
 	<script src="/jquery/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="/js/10-11.js" ></script> 
 </head>
 <body>
 	<!-- main -->
@@ -32,6 +34,7 @@
 			</div>
 			<!-- //주문 단계 -->
 			<!-- 장바구니 목록 -->
+			<form action="/order/order" method="post" >
 			<div class="cartList">
 				<table>
 					<colgroup>
@@ -43,7 +46,7 @@
 						<col width="10%">
 					</colgroup>
 					<tr class="table_head">
-						<th><input type="checkbox" id="selectall"></th>
+						<th><input type="checkbox" id="selectall" checked></th>
 						<th>상품명</th>
 						<th>수량</th>
 						<th>판매가</th>
@@ -51,41 +54,46 @@
 						<th>선택</th>
 					</tr>
 					<!-- c:forEach로 반복되는 부분 -->
-					<tr class="table_body">
-						<td><input type="checkbox" name="product_chk" class="product_chk" /></td>
+					<c:forEach var="list" items="${cartList}" varStatus="status">
+						<tr class="table_body">
+						<td><input type="checkbox" name="product_chk" class="product_chk" value="${list.cart_idx}"onclick="javascript:basket.checkItem();" checked/></td>
 						<td class="product">
 							<!-- div 대신 이미지로 -->
-							<div class="product_img">이미지</div>
-							<p class="product_name">{상품명}</p>
+							<div class="product_img"><img src="${list.product_filename}"></div>
+							<p class="product_name">${list.product_name}</p>
 						</td>
 						<td>
 							<!-- producvView와 동일 방식(변경 버튼 없어도 됨) -->
 							<div class="stock_count">
-								<input type="button" class="count_btn" onclick="count('m',this)" value="-">
+								<input type="button" class="count_btn down" name="count_btn" onclick="javascript:basket.changePNum(${status.count});" value="-">
 								<!-- count_num이 주문할 때 주문 수량 -->
-								<input class="count_num" value="1">
-								<input type="button" class="count_btn" onclick="count('p',this)" value="+">
+								<input class="count_num"  name="product_count" id="p_num${status.count}" value="${list.cart_count}" onkeyup="javascript:basket.changePNum(${status.count});">
+								<input type="button" class="count_btn up"  onclick="javascript:basket.changePNum(${status.count});" value="+">
 							</div>
 						</td>
-						<td>12,800원</td><!-- {판매가}원 -->
-						<td>3,000원</td><!-- {배송비}원 -->
+						<td>
+							<input type="text" value="${list.cart_total_price}" name="product_price" id="total_price" readonly>
+							<input type="hidden" value="${list.product_price}" id="product_price">
+						</td><!-- {판매가}원 -->
+						<td><input type="text" value="${list.product_shipping_fee}" name="shipping_fee" class="shipping_fee" readonly></td><!-- {배송비}원 -->
 						<td><button>삭제</button></td>
 					</tr>
+					</c:forEach>
 				</table>
 				<!-- 총 금액 + 삭제 버튼 -->
-				<div class="cartList_bottom">
+			<div class="cartList_bottom">
 					<ul>
 						<li>
 							<span class="text_title">선택 상품 금액</span>
-							<span class="cart_price">12,800원</span><!-- 선택한 상품 판매가 다 더한 값 + 원 -->
+							<span class="cart_price"><input type="text" value="${select_price}" name="select_price" id="sum_p_price"readonly></span><!-- 선택한 상품 판매가 다 더한 값 + 원 -->
 						</li>
 						<li>
 							<span class="text_title">총 배송비</span>
-							<span class="cart_price">3,000원</span><!-- {배송비}원 -->
+							<span class="cart_price"><input type="text" value="${ total_shipping_fee}" name="total_shipping_fee" id="shipping_fee" readonly></span><!-- {배송비}원 -->
 						</li>
 						<li>
 							<span class="text_title">총 주문금액</span>
-							<span class="cart_price">15,800원</span><!-- 선택 상품 + 배송비 -->
+							<span class="cart_price"><input type="text" value="${total_price}" name="total_price" id="sum_p_total" readonly></span><!-- 선택 상품 + 배송비 -->
 						</li>
 					</ul>	
 				</div>
@@ -93,10 +101,11 @@
 				<!-- //총 금액 + 삭제 버튼 -->
 				<!-- 이동 버튼 -->
 				<div class="orderBtn">					
-					<button class="whiteBtn">쇼핑 계속하기</button>
+					<button  type="button" class="whiteBtn">쇼핑 계속하기</button>
 					<button class="grayBtn">주문하기</button>
 				</div>
 			</div>
+			</form>
 			<!-- //장바구니 목록 -->			
 		</div>
 		<!-- //wrap -->
@@ -144,6 +153,43 @@
 			}
 			$(".count_num").attr("value",num);
 		}
+		/* 
+		$(function(){
+			let totalPrice = 0;				// 총 가격
+			let totalShipping_fee = 0;
+			let deliveryPrice = 0;			// 배송비
+			let finalTotalPrice = 0; 		// 최종 가격(총 가격 + 배송비)	
+			
+			$(".table_body").each(function(index, element){
+				
+				// 총 가격
+				totalPrice += parseInt($(element).find("#total_price").val());
+				// 총 
+				totalShipping_fee += parseInt($(element).find(".shipping_fee").val());
+
+			});	
+			
+			/* 배송비 결정 */
+			if(totalShipping_fee >= 30000){
+				deliveryPrice = 0;
+			} else if(totalShipping_fee == 0){
+				deliveryPrice = 0;
+			} else {
+				deliveryPrice = 3000;	
+			}	
+			
+			/* 최종 가격 */
+			finalTotalPrice = totalPrice + deliveryPrice;
+			
+			/* 값 삽입 */
+			// 선택 가격
+			$("#sum_p_price").val(totalPrice);
+			// 총 배송비
+			$("#shipping_fee").val(deliveryPrice);
+			// 총 가격
+			$("#sum_p_total").val(finalTotalPrice);
+			
+		}); */
 	</script>
 	<!-- //스크립트 -->
 </body>

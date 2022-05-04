@@ -6,23 +6,30 @@
 		margin: 0 auto;
 		padding: 0;
 	}
+	.gnbBar{
+		height: auto;
+	}
    .jadamlogo { 
 		float: left; 
-		width:100px;
-		height:30px;
+	}	
+	.jadamlogo img{
+		width: 50%;
 	}
 	    /* 플로팅버튼 */
-		 .toTopScroll {
+	 .toTopScroll {
       position: fixed;
       z-index: 1;
       overflow: hidden;
-      right: 5px;
-      bottom: 5px;
+      right: 50px;
+      bottom: 50px;
       background-color: transparent;
       margin: 0;
       padding: 0;
       cursor: pointer;
     }
+	.toTopScroll img{
+	width: 80px;
+	  }
 
 	ul li{
 		list-style: none;
@@ -47,24 +54,35 @@
 		float:left;
 		width:140px;
 		position:relative;
+	
 	}
 	#dropdown > ul > li > ul {
-		width:130px;
+		width:140px;
 		display:none;
 		position: absolute;
 		font-size:14px;
-		background: white;
+		background: rgb(132, 149, 113);
 		border-radius: 5px;
+		text-align: center;
+		
+	}
+	.drop{
+	padding-left: 0;
 	}
 	#dropdown > ul > li:hover > ul {
 		display:block;
-		
 	}
 	#dropdown > ul > li > ul > li:hover {
-		background: white;
+		background: rgb(73, 90, 54);
 		transition: ease 1s;
 		}
-
+	#dropdown a{
+		text-decoration: none;
+		color: rgb(132, 149, 113);
+	}
+	#dropdown ul li ul a {
+	color: white;
+	}
 /* .navbar {
   position: -webkit-sticky;
   position: sticky;
@@ -109,5 +127,3 @@
   position: sticky;
   top: 0;
 }
-
-		

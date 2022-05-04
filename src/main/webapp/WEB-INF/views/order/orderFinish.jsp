@@ -15,11 +15,6 @@
 	<script src="/jquery/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<!-- header -->
-	<header>
-		<h1>헤더 임시</h1>
-	</header>
-	<!-- //header -->
 	<!-- main -->
 	<main>
 		<!-- wrap -->
@@ -41,26 +36,21 @@
 				<ul>
 					<li>
 						<span>주문번호</span>
-						<span>202201011111</span><!-- {주문번호} -->
+						<span>${order_number}</span><!-- {주문번호} -->
 					</li>
 					<li>
 						<span>결제금액</span>
-						<span>15,800원</span><!-- {총 주문 금액}원 -->
+						<span>${total_price}원</span><!-- {총 주문 금액}원 -->
 					</li>
 				</ul>
 			</div>
 			<div class="orderBtn orderFinishBtn">
 				<button class="whiteBtn">주문내역 확인</button>
-				<button class="grayBtn">메인</button>
+				<button class="grayBtn" onclick="window.location.href='/main'">메인</button>
 			</div>		
 		</div>
 		<!-- //wrap -->
 	</main>
 	<!-- //main -->
-	<!-- footer -->
-	<footer>
-		<h1>푸터 임시</h1>
-	</footer>
-	<!-- //footer -->
 </body>
 </html>

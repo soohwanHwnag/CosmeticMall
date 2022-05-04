@@ -15,11 +15,7 @@
 	<script src="/jquery/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<!-- header -->
-	<header>
-		<h1>헤더 임시</h1>
-	</header>
-	<!-- //header -->
+	
 	<!-- main -->
 	<main>
 		<div class="wrap">
@@ -99,10 +95,6 @@
 		</div>
 	</main>
 	<!-- //main -->
-	<!-- footer -->
-	<footer>
-		<h1>푸터 임시</h1>
-	</footer>
-	<!-- //footer -->
+	
 </body>
 </html>

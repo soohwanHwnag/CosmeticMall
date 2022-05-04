@@ -136,6 +136,7 @@ CREATE TABLE cart(
     cart_idx            number(5) PRIMARY KEY,
     cart_product_idx    number(5) NOT NULL,
     cart_count          number(5),
+  cart_total_price        number(10),
     cart_member_idx     number(5) NOT NULL
 );
 
@@ -169,7 +170,7 @@ CREATE TABLE order_list(
     order_payment_method    varchar2(20),
     order_payment_amount    number(10),
     order_date              DATE DEFAULT sysdate,
-    order_status            varchar2(20),
+    order_status            varchar2(20) DEFAULT "입금대기",
     order_member_idx        number(5) NOT NULL
 );
 

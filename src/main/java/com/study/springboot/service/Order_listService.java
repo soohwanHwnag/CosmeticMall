@@ -215,4 +215,16 @@ public class Order_listService {
 		int result=order_listDao.cancelInsert(order_idx);
 		return result;
 	}
+	
+	public int seq() {
+		int seq = order_listDao.seq();
+		return seq;
+	}
+	
+	public int order(String order_number,String recipientName,String recipientPhone,String member_addr1,String member_addr2,
+						String member_addr3,String delivery_m,String total_shipping_fee,String paymentMethod,String total_price,String member_idx) {
+		int result = order_listDao.order(order_number,recipientName,recipientPhone,member_addr1,member_addr2,
+				 member_addr3,delivery_m,total_shipping_fee,paymentMethod,total_price,member_idx);
+		return result;
+	}
 }

@@ -58,6 +58,9 @@ button{
 	display:flex;
 	justify-content:center;
 }
+.Login_list{
+	padding-left: 0;
+}
 .loginMenu ul li,
 .loginMenu ul li a{
 	font-size:12px;

@@ -23,7 +23,7 @@
 		<div class="wrap">
 			<h3>로그인</h3>
 			<form class="loginForm" action="loginForm" method="post" onsubmit="return checkValue();">
-				<ul>
+				<ul class="Login_list">
 					<li><input placeholder="이메일" name="id"/></li>
 					<li><input placeholder="비밀번호" name="pw"/></li>
 					<li><button type="submit">로그인</button></li>

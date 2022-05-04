@@ -47,11 +47,6 @@
 									<a href="/product/productView" class="product_name">${list.product_name}</a>
 									<p class="product_price">${list.product_price }</p>
 								</div>
-								<div class="product_btn">
-									<!-- button -> location 넣어주기 -->
-									<button>장바구니</button>
-									<button>바로구매</button>
-								</div>
 							</div>
 							</c:forEach>
 				<!-- 페이징 -->

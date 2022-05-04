@@ -24,7 +24,11 @@ main{
 	width:1050px;
 	margin:0 auto;
 }
+input[type="text"] {
+	border: none;
 
+	text-align: center;
+}
 /* order 공용 */
 .wrap h3,
 .infoSection div h3{
@@ -51,6 +55,7 @@ table{
 	border-top:2px solid #bebebe;
 	border-bottom:3px solid #bebebe;
 }
+
 .table_head{
 	height:35px;
 	background-color:#ededed;
@@ -88,6 +93,9 @@ table{
 }
 .table_body td{
 	height:145px;
+}
+.table_body{
+	border-bottom:1px solid  #bebebe;
 }
 .table_body .product{
 	display:flex;
@@ -164,7 +172,7 @@ table{
 /* order */
 .infoSection{
 	width:100%;
-	height:620px;
+	height:650px;
 	display:flex;
 	flex-direction:column;
 	flex-wrap:wrap;
@@ -285,7 +293,7 @@ table{
 	font-size:36px;
 	padding-left:50px;
 	background:url("../../img/order/checkmark.png") no-repeat 320px 20px;
-	background-size:50px 50px;
+	background-size:40px 40px;
 }
 .order_finish p{
 	text-align:center;
@@ -311,4 +319,7 @@ table{
 }
 .orderFinishBtn{
 	margin:45px 0;
+}
+.product_img img{
+	width:100%;
 }

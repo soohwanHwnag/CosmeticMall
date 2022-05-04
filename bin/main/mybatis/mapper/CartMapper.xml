@@ -10,4 +10,24 @@
 <!-- 세미콜론, #, 공백 주의 -->
 <mapper namespace="com.study.springboot.dao.ICartDao">
 
+	<select id="cartList" resultType="com.study.springboot.dto.CartDto">
+		select A.*,B.* from cart A join product B on A.cart_product_idx = B.product_idx where A.cart_member_idx = #{param1}
+	</select>
+	
+	<select id="cartList_order" resultType="com.study.springboot.dto.CartDto">
+		select A.*,B.* from cart A join product B on A.cart_product_idx = B.product_idx where A.cart_member_idx = #{param1} and A.cart_idx=${param2}
+	</select>
+	
+	<insert id="cart_add">
+		INSERT INTO cart (cart_idx, cart_product_idx, cart_count,cart_total_price, cart_member_idx)
+            VALUES (cart_seq.nextval, #{param2}, #{param3},#{param4}, #{param1})
+
+	</insert>
+	<update id="cart_update">
+	update cart set cart_total_price=#{param2} , cart_count=#{param3} where cart_idx = #{param1}
+	</update>
+	
+	<delete id="delete">
+	delete from cart where cart_idx = #{param1}
+	</delete>
 </mapper>

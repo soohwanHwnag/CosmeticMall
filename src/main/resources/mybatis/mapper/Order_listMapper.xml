@@ -295,6 +295,18 @@
     on A.order_idx = C.item_order_idx where member_name like '%' || #{param3} || '%' and order_date between to_date(#{param1}) and to_date(#{param2})+0.99999
     and order_status=#{param4} order by order_date desc
 	</select>
+	
+	<select id="seq" resultType="_int">
+	SELECT order_list_seq.NEXTVAL FROM DUAL
+	</select>
+	
+	<insert id="order">
+	INSERT INTO order_list (order_idx, order_number, order_recipient, order_phone, order_addr1, order_addr2, order_addr3,
+                    order_message, order_shipping_fee, order_payment_method, order_payment_amount, order_member_idx)
+            VALUES (order_list_seq.currval, #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6},
+                   #{param7}, #{param8} , #{param9}, #{param10} ,#{param11})
+	
+	</insert>
 </mapper>    
 
 

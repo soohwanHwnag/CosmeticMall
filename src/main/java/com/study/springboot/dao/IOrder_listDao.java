@@ -83,5 +83,8 @@ public List<Order_listDto> orderList_date1(String orderStartDate, String orderEn
 	
 	public int orderCancel(String order_idx);
 	public int cancelInsert(String order_idx);
+	public int seq();
+	public int order(String order_number,String recipientName,String recipientPhone,String member_addr1,String member_addr2,
+			String member_addr3,String delivery_m,String total_shipping_fee,String paymentMethod,String total_price,String member_idx);
 
 }

@@ -1,46 +1,44 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
-
+    * {
+      margin: 0 auto;
+      padding: 0;
+      /* border: 1px solid black; */
+    }
 
     /* footer */
     .footer {
       width:1200px;
-      border: 1px solid black;
       height: 300px;
       background-color: white;
     }
+    .footerfirst{
+      width: 20%;
+    }
+    .footerfirst img {
+      width: 50%;
+    }
     .footer div a {
-      color: #333333;
+      color:rgb(132, 149, 113);
     }
     .footer div a:hover {
       text-decoration: none;
     }
     .footer div span {
-      color: #333333;
+      color: rgb(132, 149, 113);
     }
     .footer div label {
-      color: #333333;
+      color: rgb(132, 149, 113);
       font-size: 10px;
     }
     .footer div {
       padding-top: 15px;
     }
-    .contents { 
-      font-weight: bold;
-    }
-    .footerfirst {
-      float: left;
-      width: 20%;
-    }
-    .footermiddle {
-      float: left;
-      width: 50%;
-    }
-    .footerlast {
-      float: left;
-      width: 25%;
-    }
-    .lastsapn {
-      margin-top:10px;
+   .footerlast h4{
+     color: rgb(132, 149, 113);
+   }
+    .footerinlines{
+      display: flex;
+      align-items: center;
     }

@@ -16,11 +16,6 @@
 	<script src="/jquery/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<!-- header -->
-	<header>
-		<h1>헤더 임시</h1>
-	</header>
-	<!-- //header -->
 	<!-- main -->
 	<main>
 		<!-- wrap -->
@@ -30,8 +25,7 @@
 				<h3>마이 페이지</h3>
 				<ul>
 					<li>&gt;<a href="/mypage/orderList">주문내역</a></li>
-					<li><a href="#">장바구니</a></li>
-					<li><a href="#">1:1 문의</a></li>
+					<li><a href="/order/cart">장바구니</a></li>
 					<li><a href="/mypage/memberModify">개인정보 수정</a></li>
 					<li><a href="/mypage/passwordModify">비밀번호 변경</a></li>
 					<li><a href="/mypage/memberDelete">회원탈퇴</a></li>
@@ -266,11 +260,6 @@
 		<!-- //wrap -->
 	</main>
 	<!-- //main -->
-	<!-- footer -->
-	<footer>
-		<h1>푸터 임시</h1>
-	</footer>
-	<!-- //footer -->
 	<!-- script -->
 	<script>
 		<!-- 모달 스크립트 - 배송 -->

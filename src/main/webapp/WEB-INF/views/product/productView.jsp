@@ -32,40 +32,53 @@
 							<h3>${dto.product_name }</h3>
 							<form action="cart_add" method="post" onsubmit="return check();" name="cart_add">
 							<ul>
+							<input type="hidden" value="${dto.product_idx}" name="product_idx">
 								<li>
 									<span class="text_title">판매가</span>
-									<span><input type="text" value="${dto.product_price}" class="price"></span>
+									<span><input type="text" value="${dto.product_price}" class="price" readonly ></span>
 								</li>
 								<li>
 									<span class="text_title">용량</span>
-									<span><input type="text" value="${dto.product_volume}"></span>
+									<span><input type="text" value="${dto.product_volume}" readonly></span>
 								</li>
 								<li>
 									<span class="text_title">배송비</span>
-									<span><input type="text" value="${dto.product_shipping_fee}" class="shipping_fee"></span>
+									<span><input type="text" value="${dto.product_shipping_fee}" class="shipping_fee" readonly></span>
 								</li>
 								<li>
 									<span class="text_title">수량</span>
 									<div class="stock_count">
 										<input type="button" class="count_btn" onclick="count('m',this)" value="-">
 										<!-- count_num이 주문할 때 주문 수량 -->
-										<input class="count_num" value="1">
+										<input class="count_num" value="1" name="amount">
 										<input type="button" class="count_btn" onclick="count('p',this)" value="+">
 									</div>
 								</li>
 								<li>
 									<span class="text_title">총 상품 금액</span>
-									<span><input type="text" value="" class="total_price"></span>
+									<span>
+									<input type="text" value="" class="total_price" name="total_price" readonly>
+									</span>
 								</li>
 							</ul>
 						</div>
 						<div class="productView_btn">
 							<button class="whiteBtn">장바구니</button>
-							<button class="grayBtn">바로구매</button>
+							<button class="grayBtn" type="submit" form="paynow">바로구매</button>
 						</div>
 					</div>
 					</form>
 				</div>
+				<form action="paynow" id="paynow" method="post" onsubmit="return paynow();">
+				<input type="hidden" value="${dto.product_idx}" name="product_chk">
+				<input type="hidden" value="${dto.product_price}" name="product_price">
+					<input type="hidden" value="${dto.product_name}" name="product_name">
+				<input type="hidden" value="${dto.product_filename}" name="product_filename">
+				<input type="hidden" value="${dto.product_price}" name="select_price">
+				<input type="hidden" class="count_num" value="1" name="product_count">
+				<input type="hidden" value="${dto.product_shipping_fee}" name="total_shipping_fee">
+				<input type="hidden" value="${dto.product_idx}" name="total_price" class="total_price">
+				</form>
 				<div class="productView_location">
 					<ul>
 						<li><a href="#productView_detail" class="current scroll">상세정보</a></li>
@@ -275,19 +288,21 @@
 		});
 		
 		function check(){
-		<%-- 	var uid = <%=(String)session.getAttribute("member_idx")%>; --%>
 	         if(confirm("장바구니에 추가시키겠습니까?")){
-	          if(uid !=null){
-	        	  return true;
-	          }else{
-	        	  alert("로그인 해주세요");
-	        	  location.href='/login/login';
-	        	  return false;
-	          }
+	         return true;
 	         }else{
 	          return false;
 		}
 		}
+	</script>
+	<script>
+	function paynow(){
+		 if(confirm("바로 주문하시겠습니까?")){
+	         
+	         }else{
+	          return false;
+		}
+	}
 	</script>
 	<!-- //스크립트 -->
 </body>

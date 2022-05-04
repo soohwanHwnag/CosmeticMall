@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class Order_listDto {
 	private int order_idx;
-	private long order_number;
+	private String order_number;
 	private String order_recipient;
 	private String order_phone;
 	private String order_addr1;

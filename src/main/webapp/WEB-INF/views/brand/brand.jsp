@@ -1,24 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
-
-<!DOCTYPE html>
-<html>
-<head>
-   <link rel="stylesheet" type="text/css" href="/css/brand.css"/>
-   <title>자담 JADAM</title>
-</head>
-<body>
-   <div class="wrap">
-      <section class="top">
+  <link rel="stylesheet" type="text/css" href="/css/brand.css"/>
+  <div class="wrap">
+      <div class="top">
          <div class="banner">
-            <video src="jadam.mp4" muted autoplay loop></video>
+            <video src="/img/jadam.mp4" muted autoplay loop></video>
          </div>
-      </section>
-
-      <section class="middle">
-         <div class="middlecontents">
-            <div class="middletext">
+      </div>
+      <section class="middle container">
+         <div class="middlecontents row">
+            <div class="middletext col-6">
                <h2 class="brandtit">자연을 담다</h2>
                <p>천연원료를 사용해 자연 성분을 그대로 담은 '나를 위한 화장품'
                   이제까지 무분별한 화학원료가 함유된 화장품을 사용해 불편했던 피부
@@ -32,7 +24,7 @@
                   
                </p>
             </div>
-            <div class="brandimg">
+            <div class="brandimg col-6">
                <img src="/img/nature.jpg" alt="브랜드 사진2">
             </div>
          </div>
@@ -40,7 +32,7 @@
       <section class="bottom">
          <div class="bottomcontain">
             <img src="/img/naturebag.jpg" alt="">
-            <h1>함께하는 가치 자담</h1>
+            <h4>함께하는 가치 자담</h4>
             <p>자담은 <strong>내 피부를 위한 좋은 선택</strong>과 <strong>지구의 환경</strong>까지 생각하는 미래지향적 회사입니다.
             더 나은 삶을 위해 식물성 원료의 섬유질을 활용하여 화장품 케이스를 제작하였습니다.
             피부를 위한 고민뿐 아니라 다 쓰고나서 지구까지 생각한 자담만의 <strong>남다른 생각.</strong>
@@ -48,8 +40,5 @@
             </p>
          </div>
       </section>
-      
    </div>
    
-</body>
-</html>

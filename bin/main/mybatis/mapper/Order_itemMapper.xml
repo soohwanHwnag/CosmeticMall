@@ -10,4 +10,9 @@
 <!-- 세미콜론, #, 공백 주의 -->
 <mapper namespace="com.study.springboot.dao.IOrder_itemDao">
 
+	<insert id="add">
+		INSERT INTO order_item (item_idx, item_product_idx, item_price, item_count, item_shipping_fee, item_order_idx)
+            VALUES (order_item_seq.nextval, #{param1},#{param2},#{param3},#{param4}, #{param5})
+	
+	</insert>
 </mapper>

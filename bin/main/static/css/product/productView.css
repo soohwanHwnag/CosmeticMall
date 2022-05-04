@@ -133,6 +133,7 @@ main{
 }
 input[type="text"] {
 	border: none;
+	text-align:center;
 }
 /* 리뷰(닫힌 상태+기본 틀) */
 .productView_review .review{

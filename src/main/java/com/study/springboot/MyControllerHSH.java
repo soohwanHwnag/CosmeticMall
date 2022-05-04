@@ -2,6 +2,7 @@ package com.study.springboot;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,12 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.study.springboot.dao.IProductDao;
+import com.study.springboot.dto.CartDto;
 import com.study.springboot.dto.EventDto;
 import com.study.springboot.dto.FaqDto;
 import com.study.springboot.dto.MailDto;
@@ -30,6 +33,7 @@ import com.study.springboot.dto.Order_cancelDto;
 import com.study.springboot.dto.Order_itemDto;
 import com.study.springboot.dto.Order_listDto;
 import com.study.springboot.dto.ProductDto;
+import com.study.springboot.service.CartService;
 import com.study.springboot.service.EventService;
 import com.study.springboot.service.FaqService;
 import com.study.springboot.service.FileUploadService;
@@ -39,6 +43,7 @@ import com.study.springboot.service.NoticeService;
 import com.study.springboot.service.One2oneService;
 import com.study.springboot.service.One2one_replyService;
 import com.study.springboot.service.Order_cancelService;
+import com.study.springboot.service.Order_itemService;
 import com.study.springboot.service.Order_listService;
 import com.study.springboot.service.ProductService;
 
@@ -56,6 +61,8 @@ public class MyControllerHSH {
 	@Autowired
 	Order_listService orderlistservice;
 	@Autowired
+	Order_itemService orderitemservice;
+	@Autowired
 	MemberService memberservice;
 	@Autowired
 	NoticeService noticeservice;
@@ -71,6 +78,8 @@ public class MyControllerHSH {
 	One2one_replyService o2o_replyservice;
 	@Autowired
 	ProductService productservice;
+	@Autowired
+	CartService cartservice;
 
 	@RequestMapping("/")
 	public String root(Model model) {
@@ -545,7 +554,7 @@ public class MyControllerHSH {
 				int result = memberservice.login(id,pw);
 				if (result == 1) {
 					MemberDto memberC = memberservice.memberC(id);
-					req.getSession().setAttribute("member_idx", memberC.getMember_idx());
+					req.getSession().setAttribute("member_idx", String.valueOf(memberC.getMember_idx()));
 					System.out.println(memberC.getMember_idx());
 					String member_grade = memberC.getMember_grade();
 					System.out.println(member_grade);
@@ -623,16 +632,236 @@ public class MyControllerHSH {
 				model.addAttribute("mainPage", "product/productView.jsp");
 				return "index";
 			}
-			@RequestMapping("/product/cart_add")
-			public String cart_add(
+			@RequestMapping("/check/loginCheck")
+			public String loginCheck(
 									HttpServletRequest req,
 									Model model) {
-				model.addAttribute("mainPage", "order/cart.jsp");
+				model.addAttribute("msg", "로그인 후 이용해주시기 바랍니다");
+				model.addAttribute("url", "/login/login");
+				model.addAttribute("mainPage", "check/loginCheck.jsp");
 				return "index";
 			}
+			@RequestMapping("/product/cart_add")
+			@ResponseBody
+			public String cart_add(@RequestParam("product_idx") String product_idx,
+									@RequestParam("amount") String amount,
+									@RequestParam("total_price") String total_price,
+									HttpServletRequest req,
+									Model model) {
+				String member_idx = (String)req.getSession().getAttribute("member_idx");
+				if(!StringUtils.hasText(member_idx)) {
+					return "<script>location.href='/check/loginCheck';</script>";
+					}
+				
+						int result = cartservice.cart_add(member_idx,product_idx,amount,total_price);
+						model.addAttribute("mainPage", "order/cart.jsp");
+						if (result == 1) {
+							return "<script>alert('장바구니 추가되었습니다'); location.href='/order/cart';</script>";
+						} else {
+							return "<script>alert('장바구니 추가실패되었습니다'); history.back(-1);</script>";
+						}
+					
+			}
+			@RequestMapping("/order/cart")
+			public String cart(
+									HttpServletRequest req,
+									Model model) {
+				String member_idx = (String)req.getSession().getAttribute("member_idx");
+				if(!StringUtils.hasText(member_idx)) {
+					model.addAttribute("msg", "로그인 후 이용해주시기 바랍니다");
+					model.addAttribute("url", "/login/login");
+					return "check/loginCheck";		
+					} 
+						List<CartDto> cartList = cartservice.cartList(member_idx);
+						int total_price = 0;
+						int select_price = 0;
+						int shipping_fee =0;
+						int total_shipping_fee=0;
+						
+						for( int i=0; i<cartList.size();i++) {
+							select_price += cartList.get(i).getCart_total_price();
+							shipping_fee += cartList.get(i).getProduct_shipping_fee();
+							if(shipping_fee >= 3000) {
+								total_shipping_fee=3000;
+							}
+							total_price= select_price + total_shipping_fee;
+						}
+						System.out.println(select_price);
+						System.out.println(total_shipping_fee);
+						System.out.println(total_price);
+						model.addAttribute("select_price", select_price);
+						model.addAttribute("total_shipping_fee", total_shipping_fee);
+						model.addAttribute("total_price", total_price);
+						model.addAttribute("cartList", cartList);
+						model.addAttribute("mainPage", "order/cart.jsp");
+						return "index";
+					
+			}
+
+		
+			  @RequestMapping("/product/paynow") 
+			  public String paynow(@RequestParam("product_chk") String check,
+								  @RequestParam("product_price") String product_price,
+								  @RequestParam("product_count") String product_count,
+								  @RequestParam("select_price") String select_price,
+								  @RequestParam("total_shipping_fee") String total_shipping_fee,
+								  @RequestParam("total_price") String total_price,
+								  @RequestParam("product_name") String product_name, 
+								  @RequestParam("product_filename") String product_filename, 
+								  HttpServletRequest req,
+								  Model model) { 
+			String member_idx =(String)req.getSession().getAttribute("member_idx");
+			  if(!StringUtils.hasText(member_idx)) {
+			model.addAttribute("msg", "로그인 후 이용해주시기 바랍니다"); 
+			model.addAttribute("url", "/login/login");
+			return "check/loginCheck"; 
+			}else {
+	
+			  CartDto dto = new CartDto();
+			  dto.setCart_product_idx(Integer.parseInt(check));
+			  dto.setProduct_name(product_name);
+			  dto.setProduct_filename(product_filename);		
+			  dto.setProduct_shipping_fee(Integer.parseInt(total_shipping_fee));	
+			  MemberDto m_dto = memberservice.dto(member_idx);
+			  
+			  model.addAttribute("select_price", select_price);
+			  model.addAttribute("total_shipping_fee", total_shipping_fee);
+			  model.addAttribute("total_price", total_price);
+			  model.addAttribute("cartList", cartList); 
+			 model.addAttribute("dto", m_dto);
+			 model.addAttribute("mainPage", "order/order.jsp");
+			 return "index";
+			   } 
+			  }
+			 
+			@RequestMapping("/order/order")
+			public String order(@RequestParam(value="product_chk", required=false) List<String> check,
+								@RequestParam("product_price") List<String> product_price,
+								@RequestParam("product_count") List<String> product_count,
+								@RequestParam("select_price") String select_price,
+								@RequestParam("total_shipping_fee") String total_shipping_fee,
+								@RequestParam("total_price") String total_price,
+									HttpServletRequest req,
+									Model model) {
+				String member_idx = (String)req.getSession().getAttribute("member_idx");
+				if(!StringUtils.hasText(member_idx)) {
+					model.addAttribute("msg", "로그인 후 이용해주시기 바랍니다");
+					model.addAttribute("url", "/login/login");
+					return "check/loginCheck";		
+					}else {
+						
+						List<CartDto> cartList = new ArrayList<CartDto>();
+						CartDto dto = null;
+						for(int i=0; i<check.size(); i++) {
+							String p_check = check.get(i);
+							String p_price = product_price.get(i);
+							String p_count = product_count.get(i);
+							int result = cartservice.cart_update(p_check,p_price,p_count);
+							dto = cartservice.cartList_order(member_idx ,p_check);	
+							cartList.add(dto);	
+						}
+						MemberDto m_dto = memberservice.dto(member_idx);
+						int o_total_price = 0;
+						int o_select_price = 0;
+						int o_shipping_fee =0;
+						int o_total_shipping_fee=0;
+						
+						for( int i=0; i<cartList.size();i++) {
+							o_select_price += cartList.get(i).getCart_total_price();
+							o_shipping_fee += cartList.get(i).getProduct_shipping_fee();
+							if(o_shipping_fee >= 3000) {
+								o_total_shipping_fee=3000;
+							}
+							o_total_price= o_select_price + o_total_shipping_fee;
+						}
+						System.out.println(o_select_price);
+						System.out.println(o_total_shipping_fee);
+						System.out.println(o_total_price);
+						model.addAttribute("select_price", o_select_price);
+						model.addAttribute("total_shipping_fee", o_total_shipping_fee);
+						model.addAttribute("total_price", o_total_price);
+						model.addAttribute("cartList", cartList);
+						model.addAttribute("dto", m_dto);
+						model.addAttribute("mainPage", "order/order.jsp");
+						return "index";
+					}
+			}
+			@RequestMapping("/order/orderForm")
+			@ResponseBody
+			public String orderForm(@RequestParam("cart_idx") List<String> cart_idx,
+									@RequestParam("product_idx") List<String> product_idx,
+									@RequestParam("cart_count") List<String> cart_count,
+									@RequestParam("cart_total_price") List<String> cart_total_price,
+									@RequestParam("product_shipping_fee") List<String> product_shipping_fee,
+									@RequestParam("recipientName") String recipientName,
+									@RequestParam("recipientPhone") String recipientPhone,
+									@RequestParam("member_addr1") String member_addr1,
+									@RequestParam("member_addr2") String member_addr2,
+									@RequestParam("member_addr3") String member_addr3,
+									@RequestParam("delivery_m") String delivery_m,
+									@RequestParam("total_shipping_fee") String total_shipping_fee,
+									@RequestParam("total_price") String total_price,
+									@RequestParam("paymentMethod") String paymentMethod,
+									HttpServletRequest req,
+									Model model) {
+				String member_idx = (String)req.getSession().getAttribute("member_idx");
+				Date t_date = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+				String d_number= sdf.format(t_date);	
+				String seq = String.valueOf(orderlistservice.seq());
+				String order_number ="s"+d_number+"_"+seq;
+				model.addAttribute("mainPage", "order/orderFinish.jsp");
+				int result = orderlistservice.order(order_number,recipientName,recipientPhone,member_addr1,member_addr2,
+						 member_addr3,delivery_m,total_shipping_fee,paymentMethod,total_price,member_idx);
+				if (result == 1) {
+					for(int i=0; i<cart_idx.size(); i++) {
+						String cart_n = cart_idx.get(i);
+						String product_n = product_idx.get(i);
+						String cart_count_n = cart_count.get(i);
+						String cart_total_price_n = cart_total_price.get(i);
+						String product_shipping_fee_n = product_shipping_fee.get(i);
+						int order_item = orderitemservice.add(product_n,cart_total_price_n,cart_count_n,product_shipping_fee_n,seq);
+						int cart_delete= cartservice.delete(cart_n);
+					}
+					return "<script>alert('주문 되었습니다'); location.href='/order/orderFinish?order_number="+order_number+"&total_price="+total_price+"';</script>";
+				} else {
+					return "<script>alert('주문 실패되었습니다'); history.back(-1);</script>";
+				}
+			}
+			@RequestMapping(value="/order/orderFinish")
+			public String orderFinish(@RequestParam("order_number") String order_number,
+									@RequestParam("total_price") String total_price,
+										Model model) {
+				model.addAttribute("order_number", order_number);
+				model.addAttribute("total_price", total_price);
+				model.addAttribute("mainPage", "order/orderFinish.jsp");
+				return "index";
+			}
+			
 			@RequestMapping("/brand/brand")
 			public String brand(Model model) {
 				model.addAttribute("mainPage", "brand/brand.jsp");
+				return "index";
+			}
+			
+			@RequestMapping("/mypage/orderList")
+			public String orderList_m(Model model) {
+				model.addAttribute("mainPage", "mypage/orderList.jsp");
+				return "index";
+			}
+			@RequestMapping("/mypage/memberModify")
+			public String memberModify_m(Model model) {
+				model.addAttribute("mainPage", "mypage/memberModify.jsp");
+				return "index";
+			}
+			@RequestMapping("/mypage/passwordModify")
+			public String passwordModify_m(Model model) {
+				model.addAttribute("mainPage", "mypage/passwordModify.jsp");
+				return "index";
+			}
+			@RequestMapping("/mypage/memberDelete")
+			public String memberDelete_m(Model model) {
+				model.addAttribute("mainPage", "mypage/memberDelete.jsp");
 				return "index";
 			}
 	
