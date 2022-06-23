@@ -57,7 +57,7 @@
 							<p class="product_name">${list.product_name}</p>
 						</td>
 						<td><input type="text" name="cart_count" value="${list.cart_count}" class="borderN" readonly/></td><!-- 카트에서 넘어온 {수량} -->
-						<td><input type="text" name="cart_total_price" value="${list.cart_total_price}" class="borderN" readonly/></td><!-- {판매가}원 -->
+						<td><input type="text" name="cart_total_price" value="${list.product_price}" class="borderN" readonly/></td><!-- {판매가}원 -->
 						<td><input type="text" name="product_shipping_fee" value="${list.product_shipping_fee}" class="borderN" readonly/></td><!-- {배송비}원 -->
 					</tr>
 					</c:forEach>

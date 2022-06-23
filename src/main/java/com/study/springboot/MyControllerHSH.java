@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -93,6 +92,8 @@ public class MyControllerHSH {
 	}
 	
 //	이벤트 
+	
+	//이벤트 진행중
 	@RequestMapping("/customer/eventList_Y")
 	public String eventList_Y(@RequestParam(value="page", required=false) String page,
 							Model model) {
@@ -131,6 +132,8 @@ public class MyControllerHSH {
 		return "index";
 	}
 	
+	
+	//이벤트 종료
 	@RequestMapping("/customer/eventList_N")
 	public String eventList_N(@RequestParam(value="page", required=false) String page,
 							Model model) {
@@ -168,6 +171,8 @@ public class MyControllerHSH {
 		model.addAttribute("mainPage", "customer/eventList_N.jsp");
 		return "index";
 	}
+	
+	//이벤트 상세보기
 	@RequestMapping("/customer/eventView")
 	public String eventView(@RequestParam("event_idx") String event_idx,
 								Model model) {
@@ -176,6 +181,9 @@ public class MyControllerHSH {
 		model.addAttribute("mainPage", "customer/eventView.jsp");
 		return "index";
 	}
+	
+	//공지사항
+	//공지사랑 리스트
 	@RequestMapping("/customer/noticeList")
 	public String noticeListU (@RequestParam(value="page",required=false) String page,
 								Model model) {
@@ -211,6 +219,8 @@ public class MyControllerHSH {
 	model.addAttribute("mainPage", "customer/noticeList.jsp");
 	return "index";
 }
+	
+	//공지사항 상세보기
 	@RequestMapping("/customer/noticeView")
 	public String noticeViewU (@RequestParam("notice_idx") String notice_idx,
 								Model model) {
@@ -221,6 +231,9 @@ public class MyControllerHSH {
 	return "index";
 	}
 	
+	//faq 
+	
+	// faq 전체 리스트
 	@RequestMapping("/customer/faqList/total")
 	public String faqTotal(@RequestParam(value="page",required=false) String page,
 										@RequestParam(value="faq_value",required=false) String value,
@@ -716,14 +729,17 @@ public class MyControllerHSH {
 			model.addAttribute("url", "/login/login");
 			return "check/loginCheck"; 
 			}else {
-	
+			ArrayList<CartDto> cartList = new ArrayList<CartDto>();
 			  CartDto dto = new CartDto();
 			  dto.setCart_product_idx(Integer.parseInt(check));
 			  dto.setProduct_name(product_name);
 			  dto.setProduct_filename(product_filename);		
 			  dto.setProduct_shipping_fee(Integer.parseInt(total_shipping_fee));	
+			  dto.setCart_count(Integer.parseInt(product_count));
+			  dto.setProduct_price(Integer.parseInt(product_price));
+			  cartList.add(dto);
 			  MemberDto m_dto = memberservice.dto(member_idx);
-			  
+			  System.out.println(cartList.isEmpty());
 			  model.addAttribute("select_price", select_price);
 			  model.addAttribute("total_shipping_fee", total_shipping_fee);
 			  model.addAttribute("total_price", total_price);
@@ -785,6 +801,48 @@ public class MyControllerHSH {
 						model.addAttribute("mainPage", "order/order.jsp");
 						return "index";
 					}
+			}
+			@RequestMapping("/product/orderForm")
+			@ResponseBody
+			public String orderForm_p(@RequestParam("cart_idx") List<String> cart_idx,
+									@RequestParam("product_idx") List<String> product_idx,
+									@RequestParam("cart_count") List<String> cart_count,
+									@RequestParam("cart_total_price") List<String> cart_total_price,
+									@RequestParam("product_shipping_fee") List<String> product_shipping_fee,
+									@RequestParam("recipientName") String recipientName,
+									@RequestParam("recipientPhone") String recipientPhone,
+									@RequestParam("member_addr1") String member_addr1,
+									@RequestParam("member_addr2") String member_addr2,
+									@RequestParam("member_addr3") String member_addr3,
+									@RequestParam("delivery_m") String delivery_m,
+									@RequestParam("total_shipping_fee") String total_shipping_fee,
+									@RequestParam("total_price") String total_price,
+									@RequestParam("paymentMethod") String paymentMethod,
+									HttpServletRequest req,
+									Model model) {
+				String member_idx = (String)req.getSession().getAttribute("member_idx");
+				Date t_date = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+				String d_number= sdf.format(t_date);	
+				String seq = String.valueOf(orderlistservice.seq());
+				String order_number ="s"+d_number+"_"+seq;
+				model.addAttribute("mainPage", "order/orderFinish.jsp");
+				int result = orderlistservice.order(order_number,recipientName,recipientPhone,member_addr1,member_addr2,
+						 member_addr3,delivery_m,total_shipping_fee,paymentMethod,total_price,member_idx);
+				if (result == 1) {
+					for(int i=0; i<cart_idx.size(); i++) {
+						String cart_n = cart_idx.get(i);
+						String product_n = product_idx.get(i);
+						String cart_count_n = cart_count.get(i);
+						String cart_total_price_n = cart_total_price.get(i);
+						String product_shipping_fee_n = product_shipping_fee.get(i);
+						int order_item = orderitemservice.add(product_n,cart_total_price_n,cart_count_n,product_shipping_fee_n,seq);
+						int cart_delete= cartservice.delete(cart_n);
+					}
+					return "<script>alert('주문 되었습니다'); location.href='/order/orderFinish?order_number="+order_number+"&total_price="+total_price+"';</script>";
+				} else {
+					return "<script>alert('주문 실패되었습니다'); history.back(-1);</script>";
+				}
 			}
 			@RequestMapping("/order/orderForm")
 			@ResponseBody
